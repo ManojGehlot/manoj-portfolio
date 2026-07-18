@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WorkSync — Case Study</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14121c; --ink-2:#1e1b2a; --paper:#f4f5f7; --paper-2:#ffffff;
+  --line:#dcdce4; --line-ink:#312d40;
+  --text:#26232f; --muted:#605c6e; --muted-ink:#a49fb5;
+  --accent:#e3357f;         /* decisive magenta — money/decision */
+  --amber:#e0a100; --green:#2fa36b; --slate:#8a90a6; --red:#d64545;
+  --maxw:1080px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--paper); color:var(--text);
+  font-family:"Source Serif 4",Georgia,serif; font-size:18px; line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.dsp{font-family:"Space Grotesk",sans-serif; letter-spacing:-.02em; line-height:1.08}
+.mono{font-family:"Space Mono",monospace}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px}
+a{color:var(--accent)}
+
+/* status-cell signature */
+.cell{display:inline-block; width:11px; height:11px; border-radius:2px; vertical-align:baseline; margin-right:.55em; transform:translateY(1px)}
+.c-a{background:var(--accent)} .c-b{background:var(--amber)} .c-g{background:var(--green)} .c-s{background:var(--slate)}
+.legend{display:flex; gap:18px; flex-wrap:wrap; font-family:"Space Mono",monospace; font-size:12px; letter-spacing:.02em; color:var(--muted)}
+
+.eyebrow{font-family:"Space Mono",monospace; font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent)}
+
+/* ---------- HERO ---------- */
+.hero{background:var(--ink); color:#efedf5; padding:74px 0 0; position:relative; overflow:hidden}
+.hero .wrap{position:relative; z-index:2}
+.hero .eyebrow{color:#f5a7cd}
+.grid-motif{position:absolute; inset:0; opacity:.14; z-index:1;
+  background-image:linear-gradient(var(--line-ink) 1px,transparent 1px),linear-gradient(90deg,var(--line-ink) 1px,transparent 1px);
+  background-size:34px 34px; mask-image:linear-gradient(180deg,transparent,#000 40%,#000 70%,transparent)}
+.hero h1{font-size:clamp(34px,5.6vw,62px); font-weight:600; margin:20px 0 0; max-width:16ch}
+.hero h1 em{font-style:normal; color:var(--accent); position:relative}
+.hero .sub{font-size:20px; color:#c7c3d6; max-width:60ch; margin:22px 0 0}
+.meta{margin:46px 0 0; border-top:1px solid var(--line-ink); display:grid; grid-template-columns:repeat(4,1fr)}
+.meta div{padding:20px 20px 22px 0; border-right:1px solid var(--line-ink)}
+.meta div:last-child{border-right:0}
+.meta .k{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted-ink)}
+.meta .v{font-family:"Space Grotesk",sans-serif; font-size:19px; color:#fff; margin-top:7px}
+.hero-shot{margin:44px auto -70px; max-width:920px; padding:0 28px}
+.hero-shot img{width:100%; border-radius:10px 10px 0 0; box-shadow:0 -2px 0 var(--accent),0 30px 70px rgba(0,0,0,.45); display:block}
+
+/* ---------- SECTIONS ---------- */
+section{padding:92px 0}
+.section-num{font-family:"Space Mono",monospace; font-size:12px; letter-spacing:.14em; color:var(--accent); text-transform:uppercase}
+h2{font-size:clamp(26px,3.4vw,38px); font-weight:600; margin:12px 0 0}
+.lead{font-size:21px; color:var(--muted); max-width:64ch; margin:18px 0 0}
+p{max-width:66ch}
+.pad-top{padding-top:96px}
+
+/* reframe */
+.reframe{background:var(--ink-2); color:#efedf5}
+.reframe h2{color:#fff}
+.flip{display:grid; grid-template-columns:1fr auto 1fr; gap:26px; align-items:center; margin-top:40px}
+.flip .card{border:1px solid var(--line-ink); border-radius:12px; padding:26px 24px; background:#191622}
+.flip .card .tag{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted-ink)}
+.flip .from .tag{color:var(--slate)} .flip .to{border-color:var(--accent)} .flip .to .tag{color:#f5a7cd}
+.flip .card p{font-family:"Space Grotesk",sans-serif; font-size:19px; line-height:1.35; color:#e9e6f2; margin:12px 0 0; max-width:none}
+.flip .arrow{font-family:"Space Grotesk",sans-serif; color:var(--accent); font-size:30px; text-align:center}
+
+/* research cards */
+.rgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:44px}
+.rcard{background:var(--paper-2); border:1px solid var(--line); border-radius:12px; padding:26px 24px; position:relative}
+.rcard .stat{font-family:"Space Grotesk",sans-serif; font-weight:700; font-size:40px; color:var(--accent); line-height:1}
+.rcard .statlab{font-family:"Space Mono",monospace; font-size:11.5px; letter-spacing:.06em; color:var(--muted); text-transform:uppercase; margin-top:6px}
+.rcard .flow{margin-top:18px; border-top:1px solid var(--line); padding-top:16px}
+.rcard .flow b{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--slate); display:block; margin-bottom:2px; margin-top:10px}
+.rcard .flow b:first-child{margin-top:0}
+.rcard .flow span{font-size:16px; line-height:1.45; display:block}
+.rcard .flow .then{color:var(--accent)}
+
+/* principles */
+.pgrid{display:grid; grid-template-columns:repeat(2,1fr); gap:0; margin-top:44px; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--paper-2)}
+.pgrid .p{padding:28px 26px; border-right:1px solid var(--line); border-bottom:1px solid var(--line)}
+.pgrid .p:nth-child(2n){border-right:0}
+.pgrid .p:nth-last-child(-n+2){border-bottom:0}
+.pgrid .p h3{font-size:20px; font-weight:600; margin:12px 0 8px}
+.pgrid .p p{font-size:16px; color:var(--muted); margin:0; max-width:42ch}
+.pnum{font-family:"Space Mono",monospace; font-size:12px; color:var(--accent)}
+
+/* decisions */
+.decision{margin-top:62px; border-top:2px solid var(--ink); padding-top:34px}
+.decision:first-of-type{margin-top:48px}
+.dhead{display:flex; align-items:baseline; gap:16px; flex-wrap:wrap}
+.dhead .dn{font-family:"Space Mono",monospace; font-size:13px; letter-spacing:.1em; color:var(--accent)}
+.dhead h3{font-size:clamp(22px,2.6vw,29px); font-weight:600; margin:0; max-width:22ch}
+.dbody{display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:26px; align-items:start}
+@media(max-width:820px){.dbody{grid-template-columns:1fr}}
+.spine .row{border-top:1px solid var(--line); padding:16px 0}
+.spine .row:first-child{border-top:0; padding-top:0}
+.spine .lab{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--slate); margin-bottom:5px}
+.spine .val{font-size:16.5px; line-height:1.5}
+.spine .val.choice{font-family:"Space Grotesk",sans-serif; font-size:18px; color:var(--ink); font-weight:500}
+.opts{list-style:none; padding:0; margin:0}
+.opts li{font-size:15.5px; color:var(--muted); padding:4px 0 4px 22px; position:relative; max-width:none}
+.opts li::before{content:""; position:absolute; left:0; top:9px; width:9px; height:9px; border-radius:2px; background:var(--slate)}
+.opts li.win{color:var(--text)} .opts li.win::before{background:var(--accent)}
+.shot{background:var(--paper-2); border:1px solid var(--line); border-radius:12px; padding:14px; box-shadow:0 14px 34px rgba(20,18,28,.08)}
+.shot img{width:100%; border-radius:6px; display:block}
+.shot figcaption{font-family:"Space Mono",monospace; font-size:12px; color:var(--muted); margin-top:12px; line-height:1.5}
+.shot figcaption b{color:var(--accent); font-weight:400}
+
+/* signature: allowance deep dive */
+.signature{background:var(--ink); color:#efedf5}
+.signature h2{color:#fff}
+.sig-shot{margin-top:40px; border:1px solid var(--line-ink); border-radius:12px; padding:16px; background:#100e18}
+.sig-shot img{width:100%; border-radius:6px; display:block}
+.annos{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:26px}
+.anno{border-top:2px solid var(--accent); padding-top:14px}
+.anno .n{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.1em; color:#f5a7cd; text-transform:uppercase}
+.anno p{font-size:15.5px; color:#cbc7d8; margin:8px 0 0; max-width:none}
+
+/* outcomes */
+.ogrid{display:grid; grid-template-columns:repeat(2,1fr); gap:22px; margin-top:44px}
+.ocard{background:var(--paper-2); border:1px solid var(--line); border-radius:12px; padding:24px}
+.ocard .lab{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--slate)}
+.ocard p{margin:10px 0 0; font-size:16.5px}
+.ocard .target{color:var(--accent); font-family:"Space Mono",monospace; font-size:13px}
+.honest{margin-top:34px; border-left:3px solid var(--amber); background:#fff8e6; padding:20px 24px; border-radius:0 10px 10px 0}
+.honest .lab{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#9a7400}
+.honest p{margin:8px 0 0; font-size:16.5px; color:#5c4a12}
+
+/* reflection */
+.refl{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:44px}
+.refl .r{border-top:1px solid var(--line); padding-top:18px}
+.refl .r .lab{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent)}
+.refl .r p{font-size:16px; color:var(--muted); margin:8px 0 0}
+
+/* mobile shot band */
+.mband{margin-top:40px; background:var(--paper-2); border:1px solid var(--line); border-radius:12px; padding:22px; text-align:center}
+.mband img{width:100%; max-width:760px; border-radius:6px}
+.mband .cap{font-family:"Space Mono",monospace; font-size:12px; color:var(--muted); margin-top:12px}
+
+/* footer / builder note */
+footer{background:var(--ink); color:#b9b4c9; padding:70px 0 60px}
+footer h3{color:#fff; font-size:24px; font-weight:600; margin:0 0 14px}
+footer p{font-size:15px; color:#a49fb5; max-width:70ch}
+footer .note{margin-top:26px; border:1px solid var(--line-ink); border-radius:10px; padding:20px 22px; font-size:14px; line-height:1.6}
+footer .note b{color:#f5a7cd; font-family:"Space Mono",monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; display:block; margin-bottom:6px}
+.byline{font-family:"Space Mono",monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted-ink); margin-top:30px}
+
+@media(max-width:820px){
+  .meta{grid-template-columns:repeat(2,1fr)} .meta div:nth-child(2){border-right:0}
+  .flip{grid-template-columns:1fr} .flip .arrow{transform:rotate(90deg)}
+  .rgrid,.pgrid,.ogrid,.annos,.refl{grid-template-columns:1fr}
+  .pgrid .p{border-right:0}
+}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
+@media(prefers-reduced-motion:no-preference){
+  .reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1; transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="grid-motif"></div>
+  <div class="wrap">
+    <a href="index.html" style="display:inline-flex;align-items:center;gap:8px;font-family:'Space Mono',monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#c7c3d6;text-decoration:none;margin-bottom:26px">&larr; Manoj Gehlot &middot; Work</a>
+    <div class="eyebrow">Internal workforce &amp; payroll operations tool</div>
+    <h1>Every cell in this grid is <em>money that's wrong</em> until someone makes it right.</h1>
+    <p class="sub">WorkSync is the control surface where an ops team creates projects, tags employees, runs rosters, and processes arrears and allowances. A mistake here isn't a bad pixel — it's an underpaid employee and an audit trail that doesn't hold. This is the story of designing for that stake.</p>
+    <div class="meta">
+      <div><div class="k">My role</div><div class="v">Sole UX/UI designer</div></div>
+      <div><div class="k">Timeline</div><div class="v">8 weeks · end&#8209;to&#8209;end</div></div>
+      <div><div class="k">Scope</div><div class="v">50+ screens · web + mobile</div></div>
+      <div><div class="k">Users</div><div class="v">4 roles · Mgr / LM / TL / HR</div></div>
+    </div>
+  </div>
+  <div class="hero-shot"><img src="images/worksync-dashboard.png" alt="WorkSync dashboard"></div>
+</header>
+
+<!-- REFRAME -->
+<section class="reframe">
+  <div class="wrap">
+    <div class="section-num">The reframe</div>
+    <h2>The old case study described features. This one describes a stake.</h2>
+    <p class="lead" style="color:#bdb8ce">The same project, told two ways. The second is the one a hiring manager remembers.</p>
+    <div class="flip">
+      <div class="card from"><div class="tag">What it looked like</div><p>“An app to manage projects, employees, rosters, arrears and allowances.”</p></div>
+      <div class="arrow">→</div>
+      <div class="card to"><div class="tag">What it actually is</div><p>A high-stakes money workflow where errors are silent until payday — so the whole job is preventing and proving correctness.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTEXT / PROBLEM -->
+<section>
+  <div class="wrap">
+    <div class="section-num">01 · The problem worth solving</div>
+    <h2>Correct pay was running on manual effort and memory.</h2>
+    <p class="lead">Four roles depended on the same brittle process. When it broke, it broke as wrong pay, delayed approvals, and reports no one could trust.</p>
+    <p style="margin-top:26px">Managers created projects and tagged employees; line managers had no window into what those managers had done; team leads chased approvals; HR tried to pull accurate payroll and shift data in real time and couldn't. Arrears and allowance adjustments — money owed, corrected after the fact — lived partly in spreadsheets and manual calculation. The business problem underneath every user complaint was the same: <b>the operation had no single, trustworthy source for pay-affecting actions</b>, so accuracy depended on people not making mistakes under deadline.</p>
+    <div class="legend" style="margin-top:30px">
+      <span><span class="cell c-a"></span>wrong / at&#8209;risk pay</span>
+      <span><span class="cell c-b"></span>pending approval</span>
+      <span><span class="cell c-g"></span>verified</span>
+      <span><span class="cell c-s"></span>no data</span>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH LOAD-BEARING -->
+<section style="background:var(--paper-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="section-num">02 · What the research changed</div>
+    <h2>Twenty interviews, five per role — used to change decisions, not to decorate.</h2>
+    <p class="lead">Each finding below did one job: it moved a specific design choice. That's the only reason it's here.</p>
+    <div class="rgrid">
+      <div class="rcard reveal">
+        <div class="stat">20%</div><div class="statlab">of users hit errors while tagging employees</div>
+        <div class="flow">
+          <b>Assumed</b><span>experts wanted a fast, dense entry form.</span>
+          <b>Learned</b><span>the fast path was exactly where wrong data entered pay.</span>
+          <b class="then">So I did</b><span class="then">a guided flow with a commit gate — see Decision 01.</span>
+        </div>
+      </div>
+      <div class="rcard reveal">
+        <div class="stat">75%</div><div class="statlab">of HR couldn't get accurate payroll data in real time</div>
+        <div class="flow">
+          <b>Assumed</b><span>HR needed more data on screen.</span>
+          <b>Learned</b><span>they needed to <i>verify at a glance</i>, not read more rows.</span>
+          <b class="then">So I did</b><span class="then">a status-colored allowance matrix — see Decision 02.</span>
+        </div>
+      </div>
+      <div class="rcard reveal">
+        <div class="stat">70%</div><div class="statlab">of line managers wanted visibility into managers' actions</div>
+        <div class="flow">
+          <b>Assumed</b><span>one shared view would serve everyone.</span>
+          <b>Learned</b><span>each role needed its own job — and a trail.</span>
+          <b class="then">So I did</b><span class="then">role-shaped surfaces + an approval trail — Decision 03.</span>
+        </div>
+      </div>
+    </div>
+    <p class="mono" style="font-size:13px; color:var(--muted); margin-top:26px">Supporting signal — avg 12&nbsp;min per project creation · 80% found the create flow hard to navigate · 85% wanted a single platform over spreadsheets or a bought tool.</p>
+  </div>
+</section>
+
+<!-- PRINCIPLES -->
+<section>
+  <div class="wrap">
+    <div class="section-num">03 · Principles I actually designed against</div>
+    <h2>Four rules, each a tie-breaker for a money workflow.</h2>
+    <div class="pgrid">
+      <div class="p"><div class="pnum">01</div><h3>Correctness over speed of entry</h3><p>In a flow that feeds pay, prevent the error even if it costs a step.</p></div>
+      <div class="p"><div class="pnum">02</div><h3>Make status visible</h3><p>No one should ever wonder “is this approved, applied, or wrong?”</p></div>
+      <div class="p"><div class="pnum">03</div><h3>Traceability by default</h3><p>Every pay-affecting action carries who, when, and an approval it can be checked against.</p></div>
+      <div class="p"><div class="pnum">04</div><h3>One job per role</h3><p>Give each of the four roles their own surface instead of one crowded view.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- DECISIONS -->
+<section style="background:var(--paper-2); border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="section-num">04 · Product decisions</div>
+    <h2>The part a reviewer reads for: what I chose, and what I gave up.</h2>
+    <p class="lead">Three decisions, each shown as problem → options → choice → trade-off, anchored to the screen that resulted.</p>
+
+    <!-- D1 -->
+    <div class="decision">
+      <div class="dhead"><span class="dn">DECISION 01</span><h3>Tag employees through a guided flow with a commit gate — not one dense form</h3></div>
+      <div class="dbody">
+        <div class="spine">
+          <div class="row"><div class="lab">Problem</div><div class="val">Tagging is where wrong data enters and later corrupts pay. Users were making errors 20% of the time.</div></div>
+          <div class="row"><div class="lab">Options weighed</div>
+            <ul class="opts">
+              <li>One power-form — fastest for experts, but errors commit silently.</li>
+              <li>Inline tagging inside the table — quick, but no review moment.</li>
+              <li class="win">Guided steps: Select project → Select employees → Confirm &amp; submit.</li>
+            </ul>
+          </div>
+          <div class="row"><div class="lab">Choice &amp; why</div><div class="val choice">The guided flow, because the explicit <b>Confirm &amp; Submit</b> step turns a silent error into a caught one before it reaches payroll.</div></div>
+          <div class="row"><div class="lab">Trade-off I accepted</div><div class="val">One extra step for high-volume users — mitigated by pre-filling and keeping each step light.</div></div>
+        </div>
+        <figure class="shot reveal">
+          <img src="images/worksync-tagging-select.png" alt="Employee tagging — select step">
+          <img src="images/worksync-tagging-confirm.png" alt="Employee tagging — confirm and submit" style="margin-top:12px">
+          <figcaption><b>Result.</b> A three-step tag flow ending in a review screen. The commit gate is the design — everything before it is just making the gate easy to reach.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <!-- D2 -->
+    <div class="decision">
+      <div class="dhead"><span class="dn">DECISION 02</span><h3>Represent arrears &amp; allowances as a status-colored matrix — not a list of records</h3></div>
+      <div class="dbody">
+        <div class="spine">
+          <div class="row"><div class="lab">Problem</div><div class="val">Allowance and arrears are per-employee, per-day, with many states. A record list hides whether anyone's pay is wrong until you open each one.</div></div>
+          <div class="row"><div class="lab">Options weighed</div>
+            <ul class="opts">
+              <li>Record table — familiar, but you can't see a month at a glance.</li>
+              <li>Per-employee detail pages — accurate, but buries the pattern in clicks.</li>
+              <li class="win">Employee × day matrix with a color legend + a calculate/process action.</li>
+            </ul>
+          </div>
+          <div class="row"><div class="lab">Choice &amp; why</div><div class="val choice">The matrix, because it turns “is anyone's pay wrong this month?” into a <b>visual scan</b> instead of a query — directly serving the 75% of HR who couldn't verify in real time.</div></div>
+          <div class="row"><div class="lab">Trade-off I accepted</div><div class="val">Density has an onboarding cost — mitigated with a persistent legend and per-cell detail on demand.</div></div>
+        </div>
+        <figure class="shot reveal">
+          <img src="images/worksync-allowance-grid.png" alt="Allowance calculation matrix">
+          <figcaption><b>Result.</b> The allowance calculation surface — the hardest screen in the product. Color <i>is</i> the interface: each cell's state is legible before you read a single number.</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <!-- D3 -->
+    <div class="decision">
+      <div class="dhead"><span class="dn">DECISION 03</span><h3>Build role-shaped surfaces with an approval trail — not one universal view</h3></div>
+      <div class="dbody">
+        <div class="spine">
+          <div class="row"><div class="lab">Problem</div><div class="val">Four roles with four different jobs shared one process — and line managers (70%) were blind to what managers had done.</div></div>
+          <div class="row"><div class="lab">Options weighed</div>
+            <ul class="opts">
+              <li>One dashboard for everyone — cheapest to build, noisiest to use.</li>
+              <li class="win">Role-tailored surfaces + an approval/notification trail across them.</li>
+            </ul>
+          </div>
+          <div class="row"><div class="lab">Choice &amp; why</div><div class="val choice">Role-shaped views, because the approval trail is what <b>gives line managers the visibility they asked for</b> while keeping each role focused on its own job.</div></div>
+          <div class="row"><div class="lab">Trade-off I accepted</div><div class="val">More screens and permission logic — a large share of the 50+ screens — in exchange for far less noise per role.</div></div>
+        </div>
+        <figure class="shot reveal">
+          <img src="images/worksync-roster.png" alt="Roster management view">
+          <img src="images/worksync-payroll-report.png" alt="Payroll report view" style="margin-top:12px">
+          <figcaption><b>Result.</b> Role-specific surfaces — roster management and an HR payroll report — reading from one system so a correction in one place is visible and traceable in another.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIGNATURE: allowance deep dive -->
+<section class="signature">
+  <div class="wrap">
+    <div class="section-num" style="color:#f5a7cd">05 · The screen this project lives or dies on</div>
+    <h2>Designing a grid where every cell is a payment.</h2>
+    <p class="lead" style="color:#bdb8ce">If the allowance matrix is unreadable, WorkSync fails — this is where correctness has to become visible.</p>
+    <figure class="sig-shot reveal"><img src="images/worksync-allowance-grid.png" alt="Allowance matrix, annotated"></figure>
+    <div class="annos">
+      <div class="anno"><div class="n">Scan before read</div><p>Status is carried by color, so a full month reads as a pattern first. The eye finds the wrong cell before it parses the number.</p></div>
+      <div class="anno"><div class="n">Legend as contract</div><p>A fixed legend keeps every color meaning one thing across the whole surface — the vocabulary never shifts under the user.</p></div>
+      <div class="anno"><div class="n">Calculate, then commit</div><p>Processing is a deliberate action at the edge of the grid, not a side effect of editing — money moves only on intent.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section>
+  <div class="wrap">
+    <div class="section-num">06 · Outcomes</div>
+    <h2>What the design was built to change — stated honestly.</h2>
+    <div class="ogrid">
+      <div class="ocard"><div class="lab">User outcome</div><p>Verifying a month of allowances went from opening records one by one to a single colored scan.</p></div>
+      <div class="ocard"><div class="lab">User outcome</div><p>The commit gate gives a place to catch tagging mistakes before they reach pay. <span class="target">Target: reduce the 20% tagging-error baseline.</span></p></div>
+      <div class="ocard"><div class="lab">Business outcome</div><p>The approval trail gave line managers the visibility 70% said was missing — and gave every pay action a record.</p></div>
+      <div class="ocard"><div class="lab">Business outcome</div><p>One system replaced a fragmented, partly-manual process — the single platform 85% said they wanted.</p></div>
+    </div>
+    <div class="honest">
+      <div class="lab">The honest part</div>
+      <p>Post-launch metrics weren't instrumented in this project. Validation was prototype testing with 8–10 users across roles, with strong qualitative response and feature requests folded into a next phase. I've framed impact as targets against real baselines, not as claimed wins — and instrumenting those baselines is the first thing I'd change (below).</p>
+    </div>
+  </div>
+</section>
+
+<!-- REFLECTION -->
+<section style="background:var(--paper-2); border-top:1px solid var(--line)">
+  <div class="wrap">
+    <div class="section-num">07 · If I ran it again</div>
+    <h2>What eight weeks taught me about designing for money.</h2>
+    <div class="refl">
+      <div class="r"><div class="lab">Instrument day one</div><p>Wire the 20% error rate and 12-minute creation time as live metrics, so impact is proof, not intent.</p></div>
+      <div class="r"><div class="lab">Test density earliest</div><p>Put the allowance matrix in front of the lowest-tenure HR users first — that's where its readability is really tested.</p></div>
+      <div class="r"><div class="lab">Cut the artifacts that didn't decide</div><p>Two personas and four empathy maps were more than the decisions needed. I'd keep only the ones that changed a choice.</p></div>
+    </div>
+    <div class="mband reveal"><img src="images/worksync-mobile.png" alt="WorkSync mobile screens"><div class="cap">The same system, carried to mobile — dashboard, navigation, and the create-project flow with its confirmation moment intact.</div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <h3>WorkSync — Employee &amp; payroll operations</h3>
+    <p>An internal tool designed end-to-end in 8 weeks: research across four roles, information architecture, interaction design, a visual system, and prototype validation — reframed here around the decisions and the stakes rather than the screens.</p>
+    <div class="note">
+      <b>Builder's note — read before you publish</b>
+      The decision rationales here are reconstructed from your actual screens and your own stated research. They're defensible because they trace to things you built and numbers you gathered — but before this goes live, confirm each “options weighed” and “trade-off” matches what you really considered, so every line holds up when an interviewer pushes on it. Swap in any real post-launch numbers if you have them.
+    </div>
+    <div class="byline">Case study · WorkSync · Manoj Gehlot</div>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  if(!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+});
+</script>
+</body>
+</html>
