@@ -3,107 +3,118 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manoj Gehlot — Product Designer</title>
-<meta name="description" content="Product designer working on complex, high-stakes enterprise workflows.">
+<title>Manoj Gehlot — Senior Product Designer</title>
+<meta name="description" content="Senior product designer, 9+ years in enterprise SaaS — cybersecurity, workforce platforms, and AI-assisted tools.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#14121c; --ink-2:#1e1b2a; --paper:#f4f5f7; --paper-2:#ffffff;
-  --line:#dcdce4; --line-ink:#312d40;
-  --text:#26232f; --muted:#605c6e; --muted-ink:#a49fb5;
-  --accent:#e3357f; --amber:#e0a100; --green:#2fa36b; --slate:#8a90a6;
-  --maxw:1080px;
+  --ink:#14121c; --paper:#f5f5f3; --paper-2:#ffffff;
+  --line:#e4e3e0; --line-2:#d5d4d0;
+  --text:#221f2a; --muted:#6b6878; --faint:#9a97a6;
+  --accent:#e3357f;
+  --maxw:1000px;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0; background:var(--paper); color:var(--text);
-  font-family:"Source Serif 4",Georgia,serif; font-size:18px; line-height:1.65; -webkit-font-smoothing:antialiased}
-h1,h2,h3,.dsp{font-family:"Space Grotesk",sans-serif; letter-spacing:-.02em; line-height:1.08}
+body{
+  margin:0; background:var(--paper); color:var(--text);
+  font-family:"Space Grotesk",sans-serif; font-size:17px; line-height:1.6;
+  -webkit-font-smoothing:antialiased; letter-spacing:-.005em;
+}
+.serif{font-family:"Source Serif 4",Georgia,serif; letter-spacing:0}
 .mono{font-family:"Space Mono",monospace}
-.wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px}
-a{color:var(--accent); text-decoration:none}
-.cell{display:inline-block; width:11px; height:11px; border-radius:2px; margin-right:.5em; transform:translateY(1px)}
-.c-a{background:var(--accent)} .c-b{background:var(--amber)} .c-g{background:var(--green)} .c-s{background:var(--slate)}
-.eyebrow{font-family:"Space Mono",monospace; font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent)}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 32px}
+a{color:inherit; text-decoration:none}
+.eyebrow{font-family:"Space Mono",monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint)}
 
 /* NAV */
-nav{position:sticky; top:0; z-index:10; background:rgba(244,245,247,.86); backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
-nav .wrap{display:flex; align-items:center; justify-content:space-between; padding-top:16px; padding-bottom:16px}
-.brand{display:flex; align-items:baseline; gap:12px}
-.brand .nm{font-family:"Space Grotesk",sans-serif; font-weight:600; font-size:17px; color:var(--ink); letter-spacing:-.01em}
-.brand .rl{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted)}
-.navlinks{display:flex; gap:26px; font-family:"Space Mono",monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase}
-.navlinks a{color:var(--muted)} .navlinks a:hover{color:var(--accent)}
-@media(max-width:640px){.brand .rl{display:none} .navlinks{gap:18px}}
+nav{position:sticky; top:0; z-index:20; background:color-mix(in srgb, var(--paper) 88%, transparent); backdrop-filter:blur(12px); border-bottom:1px solid var(--line)}
+nav .wrap{display:flex; align-items:center; justify-content:space-between; height:66px}
+nav .nm{font-weight:600; font-size:16px; letter-spacing:-.01em}
+nav .links{display:flex; gap:30px; font-size:14.5px; color:var(--muted)}
+nav .links a{transition:color .18s ease}
+nav .links a:hover{color:var(--ink)}
+@media(max-width:600px){nav .links{gap:20px; font-size:13.5px} nav .links a.hide-sm{display:none}}
 
 /* HERO */
-.hero{padding:96px 0 84px; position:relative; overflow:hidden}
-.hero .cells{display:flex; gap:7px; margin-bottom:26px}
-.hero .cells span{width:14px;height:14px;border-radius:3px}
-.hero h1{font-size:clamp(40px,7vw,82px); font-weight:600; margin:0; max-width:15ch; color:var(--ink)}
-.hero h1 em{font-style:normal; color:var(--accent)}
-.hero .sub{font-size:clamp(19px,2.4vw,23px); color:var(--muted); max-width:56ch; margin:28px 0 0; line-height:1.5}
-.hero .meta{margin-top:38px; font-family:"Space Mono",monospace; font-size:13px; letter-spacing:.02em; color:var(--muted)}
-.hero .meta b{color:var(--ink); font-weight:700}
+.hero{padding:132px 0 118px}
+.hero .eyebrow{margin-bottom:30px}
+.hero h1{
+  font-weight:500; font-size:clamp(36px,5.6vw,62px); line-height:1.06;
+  letter-spacing:-.03em; margin:0; max-width:19ch; color:var(--ink);
+}
+.hero h1 .q{color:var(--accent)}
+.hero .intro{font-family:"Source Serif 4",serif; font-size:clamp(18px,2.2vw,21px); line-height:1.55; color:var(--muted); max-width:56ch; margin:32px 0 0}
+.hero .intro b{color:var(--text); font-weight:500}
+.cta-row{display:flex; gap:16px; align-items:center; margin-top:44px; flex-wrap:wrap}
+.btn{display:inline-flex; align-items:center; gap:8px; font-size:15.5px; font-weight:500; padding:13px 22px; border-radius:8px; transition:transform .18s ease, background .18s ease, border-color .18s ease}
+.btn-primary{background:var(--accent); color:#fff}
+.btn-primary:hover{background:#c8296d}
+.btn-ghost{color:var(--ink); border:1px solid var(--line-2); background:transparent}
+.btn-ghost:hover{border-color:var(--ink)}
+
+/* generic section */
+section{padding:96px 0}
+.sec-label{display:flex; align-items:baseline; justify-content:space-between; border-top:1px solid var(--line); padding-top:22px; margin-bottom:52px}
+.sec-label h2{font-size:15px; font-weight:600; letter-spacing:.01em; margin:0; text-transform:none; color:var(--ink)}
+.sec-label .aside{font-family:"Space Mono",monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint)}
 
 /* WORK */
-.work{padding:20px 0 96px}
-.work .head{display:flex; align-items:baseline; justify-content:space-between; border-top:2px solid var(--ink); padding-top:20px; margin-bottom:8px}
-.work .head h2{font-size:22px; font-weight:600; margin:0}
-.work .head .count{font-family:"Space Mono",monospace; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted)}
+.proj{display:grid; grid-template-columns:minmax(0,1.1fr) 1fr; gap:48px; align-items:center; padding:8px 0 56px}
+.proj + .proj{border-top:1px solid var(--line); padding-top:56px}
+@media(max-width:760px){.proj{grid-template-columns:1fr; gap:22px}}
+.thumb{border:1px solid var(--line); border-radius:10px; overflow:hidden; background:var(--paper-2)}
+.thumb img{width:100%; display:block; transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+a.proj:hover .thumb img{transform:scale(1.02)}
+.pmeta .kv{font-family:"Space Mono",monospace; font-size:12px; letter-spacing:.05em; text-transform:uppercase; color:var(--faint); margin-bottom:16px}
+.pmeta h3{font-size:clamp(24px,3vw,32px); font-weight:600; letter-spacing:-.02em; margin:0; color:var(--ink)}
+.pmeta .challenge{font-family:"Source Serif 4",serif; font-size:18px; line-height:1.5; color:var(--text); margin:16px 0 0; max-width:42ch}
+.pmeta .contrib{font-size:15.5px; line-height:1.55; color:var(--muted); margin:12px 0 0; max-width:44ch}
+.pmeta .view{display:inline-flex; align-items:center; gap:8px; margin-top:22px; font-weight:500; font-size:15px; color:var(--ink); transition:gap .2s ease, color .18s ease}
+a.proj:hover .pmeta .view{gap:14px; color:var(--accent)}
 
-.proj{display:grid; grid-template-columns:1.05fr 1fr; gap:42px; align-items:center; padding:52px 0; border-bottom:1px solid var(--line)}
-.proj:nth-child(even){grid-template-columns:1fr 1.05fr}
-.proj:nth-child(even) .pinfo{order:2}
-@media(max-width:800px){.proj,.proj:nth-child(even){grid-template-columns:1fr; gap:24px} .proj:nth-child(even) .pinfo{order:0}}
-.pinfo .peyebrow{font-family:"Space Mono",monospace; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); display:flex; align-items:center}
-.pinfo h3{font-size:clamp(30px,4vw,44px); font-weight:600; margin:14px 0 0; color:var(--ink)}
-.pinfo p{font-size:19px; color:var(--text); margin:16px 0 0; max-width:46ch; line-height:1.5}
-.pinfo .tags{font-family:"Space Mono",monospace; font-size:12px; color:var(--muted); margin-top:20px; letter-spacing:.02em}
-.pinfo .go{display:inline-flex; align-items:center; gap:9px; margin-top:24px; font-family:"Space Grotesk",sans-serif; font-weight:500; font-size:16px; color:var(--ink); border-bottom:2px solid var(--accent); padding-bottom:3px; transition:gap .2s ease}
-.pinfo .go:hover{gap:15px; color:var(--accent)}
-.pthumb{border:1px solid var(--line); border-radius:12px; overflow:hidden; box-shadow:0 20px 50px rgba(20,18,28,.10); background:var(--paper-2)}
-.pthumb img{width:100%; display:block}
-
-/* placeholder projects */
-.proj.ph{opacity:1}
-.proj.ph .pthumb{border:2px dashed var(--line); box-shadow:none; aspect-ratio:16/11; display:flex; align-items:center; justify-content:center; background:repeating-linear-gradient(45deg,#fff,#fff 12px,#fafafb 12px,#fafafb 24px)}
-.proj.ph .pthumb span{font-family:"Space Mono",monospace; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--slate)}
-.proj.ph .pinfo h3{color:var(--slate)}
-.proj.ph .pinfo p{color:var(--muted)}
-.proj.ph .pinfo .go{color:var(--slate); border-color:var(--line); cursor:default}
+/* placeholder project — quiet, premium, not loud */
+.proj.soon{cursor:default}
+.proj.soon .thumb{aspect-ratio:16/10; display:flex; align-items:center; justify-content:center; border-style:dashed; border-color:var(--line-2)}
+.proj.soon .thumb .ph{font-family:"Space Mono",monospace; font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint)}
+.proj.soon h3{color:var(--faint)}
+.proj.soon .challenge,.proj.soon .contrib{color:var(--muted)}
+.tag-soon{display:inline-block; font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); border:1px solid var(--line-2); border-radius:20px; padding:3px 11px; margin-top:20px}
 
 /* ABOUT */
-.about{background:var(--paper-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:92px 0}
-.about .grid{display:grid; grid-template-columns:1fr 1.6fr; gap:56px}
-@media(max-width:800px){.about .grid{grid-template-columns:1fr; gap:24px}}
-.about .eyebrow{margin-bottom:14px}
-.about h2{font-size:clamp(26px,3vw,34px); font-weight:600; margin:0; max-width:14ch}
-.about p{font-size:19px; line-height:1.6; margin:0 0 18px}
-.about p:last-child{margin-bottom:0}
-.about .principles{margin-top:26px; display:flex; gap:20px; flex-wrap:wrap; font-family:"Space Mono",monospace; font-size:13px; color:var(--muted)}
+.about .body{display:grid; grid-template-columns:1fr 1.7fr; gap:56px}
+@media(max-width:760px){.about .body{grid-template-columns:1fr; gap:22px}}
+.about h3{font-size:clamp(22px,2.6vw,28px); font-weight:500; letter-spacing:-.02em; line-height:1.18; margin:0; max-width:16ch; color:var(--ink)}
+.about p{font-family:"Source Serif 4",serif; font-size:18.5px; line-height:1.62; color:var(--text); margin:0}
+.about p + p{margin-top:18px}
 
-/* CONTACT */
-.contact{background:var(--ink); color:#efedf5; padding:100px 0; position:relative; overflow:hidden}
-.contact .grid-motif{position:absolute; inset:0; opacity:.12;
-  background-image:linear-gradient(var(--line-ink) 1px,transparent 1px),linear-gradient(90deg,var(--line-ink) 1px,transparent 1px);
-  background-size:34px 34px; mask-image:linear-gradient(180deg,transparent,#000 50%,transparent)}
-.contact .wrap{position:relative; z-index:2}
-.contact .eyebrow{color:#f5a7cd}
-.contact h2{font-size:clamp(32px,5vw,58px); font-weight:600; color:#fff; margin:16px 0 0; max-width:18ch}
-.contact h2 em{font-style:normal; color:var(--accent)}
-.contact .cta{display:inline-block; margin-top:34px; font-family:"Space Grotesk",sans-serif; font-weight:600; font-size:20px; color:var(--ink); background:var(--accent); padding:16px 30px; border-radius:8px}
-.contact .cta:hover{background:#fff}
-.contact .links{margin-top:34px; display:flex; gap:26px; font-family:"Space Mono",monospace; font-size:13px; letter-spacing:.06em; text-transform:uppercase}
-.contact .links a{color:var(--muted-ink)} .contact .links a:hover{color:#fff}
-.foot{border-top:1px solid var(--line-ink); margin-top:64px; padding-top:22px; font-family:"Space Mono",monospace; font-size:12px; color:var(--muted-ink); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px}
+/* EXPERTISE */
+.caps{display:flex; flex-wrap:wrap; gap:12px}
+.cap{font-size:15px; color:var(--text); border:1px solid var(--line-2); border-radius:8px; padding:11px 16px; background:var(--paper-2); transition:border-color .18s ease}
+.cap:hover{border-color:var(--ink)}
+
+/* CTA */
+.close{padding:104px 0 108px; border-top:1px solid var(--line)}
+.close h2{font-family:"Source Serif 4",serif; font-weight:400; font-size:clamp(26px,3.6vw,40px); line-height:1.2; letter-spacing:-.01em; margin:0; max-width:20ch; color:var(--ink)}
+.close h2 em{font-style:normal; color:var(--accent)}
+.close .links{display:flex; gap:14px; flex-wrap:wrap; margin-top:36px}
+.close .links a{font-size:15.5px; font-weight:500; padding:12px 20px; border-radius:8px; border:1px solid var(--line-2); transition:border-color .18s ease, color .18s ease}
+.close .links a.mail{background:var(--ink); color:#fff; border-color:var(--ink)}
+.close .links a.mail:hover{background:#000}
+.close .links a:hover{border-color:var(--ink)}
+
+/* FOOTER */
+footer{border-top:1px solid var(--line); padding:34px 0 46px}
+footer .wrap{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px}
+footer .nm{font-weight:600; font-size:15px}
+footer .cr{font-family:"Space Mono",monospace; font-size:12px; color:var(--faint); letter-spacing:.03em}
 
 :focus-visible{outline:2px solid var(--accent); outline-offset:3px}
 @media(prefers-reduced-motion:no-preference){
-  .reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease,transform .6s ease}
-  .reveal.in{opacity:1; transform:none}
+  .rv{opacity:0; transform:translateY(10px); transition:opacity .7s ease, transform .7s ease}
+  .rv.in{opacity:1; transform:none}
 }
 </style>
 </head>
@@ -111,105 +122,129 @@ nav .wrap{display:flex; align-items:center; justify-content:space-between; paddi
 
 <nav>
   <div class="wrap">
-    <div class="brand"><span class="nm">Manoj Gehlot</span><span class="rl">Product Designer</span></div>
-    <div class="navlinks"><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div>
+    <a href="#top" class="nm">Manoj Gehlot</a>
+    <div class="links">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="resume/Manoj_Gehlot_Resume.pdf" class="hide-sm" download>Résumé</a>
+      <a href="#contact">Contact</a>
+    </div>
   </div>
 </nav>
+
+<a id="top"></a>
 
 <!-- HERO -->
 <header class="hero">
   <div class="wrap">
-    <div class="cells"><span class="c-a"></span><span class="c-b"></span><span class="c-g"></span><span class="c-s"></span></div>
-    <!-- POSITIONING: edit this one line to say what you do. Keep it specific. -->
-    <h1>I design the complex workflows most products <em>route around</em>.</h1>
-    <p class="sub">Product designer working on high-stakes, expert-user systems — the screens where a wrong click is a wrong payment, not a bad pixel. I turn tangled operations into surfaces people can trust under deadline.</p>
-    <p class="meta"><b>Available for</b> senior / lead product design roles &nbsp;·&nbsp; <b>Focus</b> enterprise SaaS &amp; operational tools</p>
+    <div class="eyebrow">Senior Product Designer · Enterprise SaaS</div>
+    <h1>Enterprise products are complex. My work is making them usable <span class="q">without making them weaker.</span></h1>
+    <p class="intro">I'm <b>Manoj Gehlot</b>, a senior product designer with <b>9+ years</b> across enterprise SaaS — cybersecurity, workforce platforms, and AI-assisted tools — and the design systems that hold them together.</p>
+    <div class="cta-row">
+      <a href="#work" class="btn btn-primary">View case studies →</a>
+      <a href="resume/Manoj_Gehlot_Resume.pdf" class="btn btn-ghost" download>Download résumé</a>
+    </div>
   </div>
 </header>
 
-<!-- WORK -->
-<section class="work" id="work">
+<!-- FEATURED WORK -->
+<section id="work">
   <div class="wrap">
-    <div class="head"><h2>Selected work</h2><span class="count">03 case studies</span></div>
+    <div class="sec-label"><h2>Selected work</h2><span class="aside">Enterprise SaaS</span></div>
 
-    <!-- PROJECT 01 — WorkSync (real, live) -->
-    <article class="proj reveal">
-      <div class="pinfo">
-        <div class="peyebrow"><span class="cell c-a"></span>Enterprise · Payroll &amp; workforce ops</div>
+    <!-- PROJECT 01 — WorkSync (real) -->
+    <a href="worksync.html" class="proj rv">
+      <div class="thumb"><img src="images/worksync-allowance-grid.png" alt="WorkSync allowance calculation matrix"></div>
+      <div class="pmeta">
+        <div class="kv">Workforce &amp; payroll ops · Sole UX/UI designer</div>
         <h3>WorkSync</h3>
-        <p>Designing a high-stakes money workflow where errors stay silent until payday — reframed around the decisions and the stakes, not the screens.</p>
-        <div class="tags">UX &amp; product thinking · IA · Design system · Research · 8 weeks</div>
-        <a class="go" href="worksync.html">Read case study &rarr;</a>
+        <p class="challenge">A pay-affecting workflow where mistakes stayed invisible until payday.</p>
+        <p class="contrib">Reframed it around correctness and decisions, and designed the control surface four roles now work from.</p>
+        <span class="view">View case study →</span>
       </div>
-      <div class="pthumb"><img src="images/worksync-allowance-grid.png" alt="WorkSync allowance calculation matrix"></div>
-    </article>
+    </a>
 
-    <!-- PROJECT 02 — placeholder. Swap in your second project. -->
-    <article class="proj ph reveal">
-      <div class="pinfo">
-        <div class="peyebrow"><span class="cell c-b"></span>Your second project</div>
+    <!-- PROJECT 02 — placeholder (quiet). Swap in a cybersecurity or AI product. -->
+    <div class="proj soon rv">
+      <div class="thumb"><span class="ph">Thumbnail</span></div>
+      <div class="pmeta">
+        <div class="kv">[Industry] · [Your role]</div>
         <h3>Project 02</h3>
-        <p>Pick something that shows a <i>different</i> muscle from WorkSync — another domain, platform, or problem type. Lead the card with the problem and the outcome, not the UI.</p>
-        <div class="tags">role · scope · timeline</div>
-        <span class="go">Add case study &rarr;</span>
+        <p class="challenge">[One sentence: the hard problem — ideally a different domain from WorkSync, e.g. cybersecurity or AI.]</p>
+        <p class="contrib">[One sentence: what you did about it.]</p>
+        <span class="tag-soon">Case study in progress</span>
       </div>
-      <div class="pthumb"><span>Add thumbnail</span></div>
-    </article>
+    </div>
 
-    <!-- PROJECT 03 — placeholder -->
-    <article class="proj ph reveal">
-      <div class="pinfo">
-        <div class="peyebrow"><span class="cell c-g"></span>Your third project</div>
+    <!-- PROJECT 03 — placeholder (quiet) -->
+    <div class="proj soon rv">
+      <div class="thumb"><span class="ph">Thumbnail</span></div>
+      <div class="pmeta">
+        <div class="kv">[Industry] · [Your role]</div>
         <h3>Project 03</h3>
-        <p>Round out the picture. Three genuinely deep case studies beat six shallow ones — depth of thinking is the signal senior reviewers read for.</p>
-        <div class="tags">role · scope · timeline</div>
-        <span class="go">Add case study &rarr;</span>
+        <p class="challenge">[One sentence: the hard problem.]</p>
+        <p class="contrib">[One sentence: your contribution.]</p>
+        <span class="tag-soon">Case study in progress</span>
       </div>
-      <div class="pthumb"><span>Add thumbnail</span></div>
-    </article>
+    </div>
   </div>
 </section>
 
 <!-- ABOUT -->
-<section class="about" id="about">
+<section id="about" class="about">
   <div class="wrap">
-    <div class="grid">
+    <div class="sec-label"><h2>About</h2></div>
+    <div class="body">
+      <h3>I design the parts of a product that carry consequences.</h3>
       <div>
-        <div class="eyebrow">About</div>
-        <h2>Designer for the hard, unglamorous middle of a product.</h2>
-      </div>
-      <div>
-        <!-- Edit freely — keep it short and specific. Bracketed bits are yours to fill. -->
-        <p>I'm Manoj, a product designer who's drawn to the parts of a system that carry real consequences: money, approvals, compliance, operations. I like problems where the right design is measured in errors prevented, not screens shipped.</p>
-        <p>[One or two lines on your background — years of experience, the kind of teams you've worked with, or what you're looking for next. Say it plainly; recruiters read this second, right after the work.]</p>
-        <div class="principles"><span><span class="cell c-a"></span>Correctness over decoration</span><span><span class="cell c-b"></span>Research that changes decisions</span><span><span class="cell c-g"></span>Systems, not screens</span></div>
+        <p>Money, approvals, security, operations — the areas where a wrong screen becomes a real cost. Those are the problems I'm drawn to, and where careful design earns its keep.</p>
+        <p>My decisions start from the business problem and the people doing the work under deadline, not from a layout. Over 9+ years in enterprise SaaS I've learned that the best enterprise design is usually the least visible: it removes friction and error without asking anyone to notice.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <div class="grid-motif"></div>
+<!-- EXPERTISE -->
+<section id="expertise">
   <div class="wrap">
-    <div class="eyebrow">Contact</div>
-    <h2>Have a problem worth <em>thinking hard</em> about?</h2>
-    <!-- Replace the email + links below with your real ones. -->
-    <a class="cta" href="mailto:you@email.com">Email me &rarr;</a>
-    <div class="links">
-      <a href="#">LinkedIn</a>
-      <a href="https://www.behance.net/" target="_blank" rel="noopener">Behance</a>
-      <a href="mailto:you@email.com">you@email.com</a>
+    <div class="sec-label"><h2>Capabilities</h2></div>
+    <div class="caps">
+      <span class="cap">Enterprise UX</span>
+      <span class="cap">Product Strategy</span>
+      <span class="cap">Complex Workflow Design</span>
+      <span class="cap">Information Architecture</span>
+      <span class="cap">Interaction Design</span>
+      <span class="cap">Design Systems</span>
+      <span class="cap">AI Product Experiences</span>
+      <span class="cap">Cross-functional Collaboration</span>
     </div>
-    <div class="foot"><span>© 2026 Manoj Gehlot</span><span>Designed &amp; built from scratch</span></div>
   </div>
 </section>
+
+<!-- CLOSING CTA -->
+<section id="contact" class="close">
+  <div class="wrap">
+    <h2>Building a product where the hard part is the <em>real</em> part? Let's talk.</h2>
+    <div class="links">
+      <a href="mailto:manojgehlot294@gmail.com" class="mail">Email me →</a>
+      <a href="https://www.linkedin.com/in/manoj-gehlot-63430311a" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="resume/Manoj_Gehlot_Resume.pdf" download>Résumé</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="nm">Manoj Gehlot</span>
+    <span class="cr">© 2026 · Senior Product Designer</span>
+  </div>
+</footer>
 
 <script>
 document.addEventListener('DOMContentLoaded',function(){
   if(!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14});
-  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
 });
 </script>
 </body>
