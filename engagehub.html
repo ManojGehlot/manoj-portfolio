@@ -41,9 +41,8 @@ a{color:var(--link)}
 .hero h1{font-size:clamp(30px,4.8vw,52px); font-weight:600; margin:18px 0 0; max-width:20ch}
 .hero h1 em{font-style:normal; color:var(--accent)}
 .hero .sub{font-size:19px; color:#c7c3d6; max-width:62ch; margin:22px 0 0}
-.meta{margin:40px 0 0; border-top:1px solid var(--line-ink); display:grid; grid-template-columns:repeat(4,1fr)}
-.meta div{padding:20px 18px 22px 0; border-right:1px solid var(--line-ink)}
-.meta div:last-child{border-right:0}
+.meta{margin:40px 0 0; padding-top:24px; border-top:1px solid var(--line-ink); display:grid; grid-template-columns:repeat(4,1fr); gap:28px}
+.meta div{padding:0}
 .meta .k{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted-ink)}
 .meta .v{font-family:"Space Grotesk",sans-serif; font-size:16px; color:#fff; margin-top:7px}
 .hero-shot{margin:40px auto -66px; max-width:960px; padding:0 28px}
@@ -147,10 +146,17 @@ footer .fnav a{color:#d6d2e2; text-decoration:none} footer .fnav a:hover{color:#
 footer .byline{margin-top:26px; font-family:"Space Mono",monospace; font-size:12px; color:var(--muted-ink)}
 
 @media(max-width:820px){
-  .meta{grid-template-columns:repeat(2,1fr)} .meta div:nth-child(2){border-right:0}
+  .meta{grid-template-columns:repeat(2,1fr); gap:22px 28px}
   .flip{grid-template-columns:1fr} .flip .arrow{transform:rotate(90deg)}
   .rgrid,.pgrid,.dbody,.annos,.tour,.ogrid,.refl{grid-template-columns:1fr}
   .pgrid .p{border-right:0}
+}
+@media(max-width:480px){
+  section{padding:64px 0}
+  .wrap{padding:0 20px}
+  .meta{grid-template-columns:1fr; gap:16px}
+  .hero-shot{margin:32px auto -40px; padding:0 20px}
+  .dhead h3,.pmeta h3{max-width:none}
 }
 :focus-visible{outline:3px solid var(--accent); outline-offset:3px}
 @media(prefers-reduced-motion:no-preference){
@@ -169,11 +175,11 @@ footer .byline{margin-top:26px; font-family:"Space Mono",monospace; font-size:12
       <a class="res" href="resume/Manoj_Gehlot_Resume.pdf" download>Résumé &darr;</a>
     </nav>
     <p class="eyebrow">Employee experience platform · 25,000 employees</p>
-    <h1>Engagement you can't see is a guess. I designed the portal that made connection <em>visible — and usable by everyone.</em></h1>
-    <p class="sub">EngageHub brings work, life, wellbeing, events, recognition and feedback into one place for a global, largely remote workforce — and turns everyday participation into signal HR can act on. Accessibility was designed in from the first screen, not bolted on at the end.</p>
+    <h1>Helping 25,000 people feel more connected at work — <em>and giving HR a way to see if it was working.</em></h1>
+    <p class="sub">EngageHub pulls work, life, wellbeing, events and feedback into one place for a mostly-remote, global workforce. Most of the work was making it easy to take part — and making those everyday actions tell HR something useful. Accessibility shaped decisions from the first screen; it wasn't a pass at the end.</p>
     <div class="meta">
       <div><div class="k">My role</div><div class="v">Product designer · end&#8209;to&#8209;end</div></div>
-      <div><div class="k">Timeline</div><div class="v">4 weeks · research → prototype</div></div>
+      <div><div class="k">Timeline</div><div class="v">8–10 weeks · research → prototype</div></div>
       <div><div class="k">Scope</div><div class="v">Web + mobile · 4 user groups</div></div>
       <div><div class="k">Users</div><div class="v">25,000+ employees, globally</div></div>
     </div>
@@ -181,27 +187,15 @@ footer .byline{margin-top:26px; font-family:"Space Mono",monospace; font-size:12
   <div class="hero-shot"><img src="images/engagehub-home.png" alt="EngageHub employee home dashboard: a welcome banner, a thought of the day, a colour-and-label category legend, a seven-day event calendar with Join and Reminder actions, and a mood check-in row."></div>
 </header>
 
-<!-- REFRAME -->
-<section class="reframe">
-  <div class="wrap">
-    <p class="section-num">The reframe</p>
-    <h2>An engagement portal isn't a feature list. It's whether people feel it — and whether you can tell.</h2>
-    <div class="flip">
-      <div class="card from"><p class="tag">What it looked like</p><p>“A portal with events, quizzes, a social feed, surveys and feedback.”</p></div>
-      <div class="arrow" aria-hidden="true">→</div>
-      <div class="card to"><p class="tag">What it actually is</p><p>The difference between hoping 25,000 people are engaged and being able to see it — for remote staff and for people who rely on assistive tech, too.</p></div>
-    </div>
-  </div>
-</section>
 
 <!-- PROBLEM -->
 <main>
 <section>
   <div class="wrap">
     <p class="section-num">01 · The problem worth solving</p>
-    <h2>A 25,000-person company was losing its connective tissue — and couldn't measure the loss.</h2>
+    <h2>A 25,000-person company wanted people more engaged — and had no real way to tell if they were.</h2>
     <p class="lead">Much of the workforce was remote. Engagement ran on manual effort, and no one had the data to fix it.</p>
-    <p style="margin-top:26px">Remote employees didn't know what was happening. HR managed engagement and events through manual processes, with limited insight into participation and little feedback to act on. Communication was scattered across tools. The business problem underneath every complaint was the same: <strong>there was no single, trustworthy place where engagement happened and could be measured</strong> — so the company was running on a guess. Four groups depended on the answer, each with a different job: HR needed data and event tooling; employees needed connection and easy ways to take part; managers needed visibility into their teams; and remote employees needed to stop feeling like an afterthought.</p>
+    <p style="margin-top:26px">A lot of the company worked remotely, and they were the ones most out of the loop. HR ran engagement and events by hand, without much sense of who was taking part or what people actually thought, and the tools were scattered. <strong>There was no single place where this happened and could be seen</strong> — so engagement was mostly guesswork. Four groups needed different things: HR wanted data and a way to run events; employees wanted to feel connected and take part without friction; managers wanted a read on their teams; and remote staff just wanted to stop feeling like an afterthought.</p>
   </div>
 </section>
 
@@ -256,7 +250,7 @@ footer .byline{margin-top:26px; font-family:"Space Mono",monospace; font-size:12
   <div class="wrap">
     <p class="section-num">04 · Product decisions</p>
     <h2>What I chose, and what I traded away.</h2>
-    <p class="lead">Three decisions, each shown problem → options → choice → trade-off, anchored to the screen it produced.</p>
+    <p class="lead">Three of the calls that shaped it — what I was weighing, what I picked, and what I gave up.</p>
 
     <!-- D1 -->
     <article class="decision">
@@ -413,7 +407,7 @@ footer .byline{margin-top:26px; font-family:"Space Mono",monospace; font-size:12
 <section>
   <div class="wrap">
     <p class="section-num">08 · If I ran it again</p>
-    <h2>What four weeks taught me.</h2>
+    <h2>What I'd do differently.</h2>
     <div class="refl">
       <div class="r"><div class="lab">Instrument earlier</div><p>Wire participation metrics into the flows from day one, so impact is provable per feature, not just at the platform level.</p></div>
       <div class="r"><div class="lab">Tokenise the taxonomy</div><p>The colour + label category system should be design tokens from the start, so it stays consistent as the platform grows.</p></div>
@@ -426,7 +420,7 @@ footer .byline{margin-top:26px; font-family:"Space Mono",monospace; font-size:12
 <footer>
   <div class="wrap">
     <h3>EngageHub — Employee experience platform</h3>
-    <p>Designed end-to-end for a 25,000-person, largely remote workforce: research across four roles, a findable information architecture, a moderated social layer, and an accessible design system — reframed here around the decisions and the stakes.</p>
+    <p>Designed end-to-end for a 25,000-person, largely remote workforce: research across four roles, a findable information architecture, a moderated social layer, and an accessible design system — told here through the decisions that mattered most.</p>
     <nav class="fnav" aria-label="Site">
       <a href="index.html">← All work</a>
       <a href="worksync.html">WorkSync case study</a>

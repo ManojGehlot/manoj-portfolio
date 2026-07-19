@@ -45,9 +45,8 @@ a{color:var(--accent)}
 .hero h1{font-size:clamp(34px,5.6vw,62px); font-weight:600; margin:20px 0 0; max-width:16ch}
 .hero h1 em{font-style:normal; color:var(--accent); position:relative}
 .hero .sub{font-size:20px; color:#c7c3d6; max-width:60ch; margin:22px 0 0}
-.meta{margin:46px 0 0; border-top:1px solid var(--line-ink); display:grid; grid-template-columns:repeat(4,1fr)}
-.meta div{padding:20px 20px 22px 0; border-right:1px solid var(--line-ink)}
-.meta div:last-child{border-right:0}
+.meta{margin:46px 0 0; padding-top:24px; border-top:1px solid var(--line-ink); display:grid; grid-template-columns:repeat(4,1fr); gap:28px}
+.meta div{padding:0}
 .meta .k{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted-ink)}
 .meta .v{font-family:"Space Grotesk",sans-serif; font-size:19px; color:#fff; margin-top:7px}
 .hero-shot{margin:44px auto -70px; max-width:920px; padding:0 28px}
@@ -153,10 +152,16 @@ footer .note b{color:#f5a7cd; font-family:"Space Mono",monospace; font-size:12px
 .byline{font-family:"Space Mono",monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted-ink); margin-top:30px}
 
 @media(max-width:820px){
-  .meta{grid-template-columns:repeat(2,1fr)} .meta div:nth-child(2){border-right:0}
+  .meta{grid-template-columns:repeat(2,1fr); gap:22px 28px}
   .flip{grid-template-columns:1fr} .flip .arrow{transform:rotate(90deg)}
   .rgrid,.pgrid,.ogrid,.annos,.refl{grid-template-columns:1fr}
   .pgrid .p{border-right:0}
+}
+@media(max-width:480px){
+  section{padding:64px 0}
+  .wrap{padding:0 20px}
+  .meta{grid-template-columns:1fr; gap:16px}
+  .hero-shot{margin:32px auto -40px; padding:0 20px}
 }
 :focus-visible{outline:2px solid var(--accent); outline-offset:3px}
 @media(prefers-reduced-motion:no-preference){
@@ -185,22 +190,9 @@ footer .note b{color:#f5a7cd; font-family:"Space Mono",monospace; font-size:12px
       <div><div class="k">Users</div><div class="v">4 roles · Mgr / LM / TL / HR</div></div>
     </div>
   </div>
-  <div class="hero-shot"><img src="images/worksync-dashboard.png" alt="WorkSync dashboard"></div>
+  <div class="hero-shot"><img src="images/worksync-allowance-grid.png" alt="WorkSync allowance calculation grid — each employee row shows a month of colour-coded shift cells (morning, afternoon, night), work-hour exception flags and already-processed days, above a shift-rate table."></div>
 </header>
 
-<!-- REFRAME -->
-<section class="reframe">
-  <div class="wrap">
-    <div class="section-num">The reframe</div>
-    <h2>The old case study described features. This one describes a stake.</h2>
-    <p class="lead" style="color:#bdb8ce">The same project, told two ways. The second is the one a hiring manager remembers.</p>
-    <div class="flip">
-      <div class="card from"><div class="tag">What it looked like</div><p>“An app to manage projects, employees, rosters, arrears and allowances.”</p></div>
-      <div class="arrow">→</div>
-      <div class="card to"><div class="tag">What it actually is</div><p>A high-stakes money workflow where errors are silent until payday — so the whole job is preventing and proving correctness.</p></div>
-    </div>
-  </div>
-</section>
 
 <!-- CONTEXT / PROBLEM -->
 <section>
@@ -292,8 +284,8 @@ footer .note b{color:#f5a7cd; font-family:"Space Mono",monospace; font-size:12px
           <div class="row"><div class="lab">Trade-off I accepted</div><div class="val">One extra step for high-volume users — mitigated by pre-filling and keeping each step light.</div></div>
         </div>
         <figure class="shot reveal">
-          <img src="images/worksync-tagging-select.png" alt="Employee tagging — select step">
-          <img src="images/worksync-tagging-confirm.png" alt="Employee tagging — confirm and submit" style="margin-top:12px">
+          <img src="images/worksync-tagging-select.png" alt="Employee tagging, step one of a three-step wizard: a searchable project list on the left, the selected project's details and a date range on the right, and Select Project / Select Employee / Confirm & Submit across the top.">
+          <img src="images/worksync-tagging-confirm.png" alt="Employee tagging, final step: the list of employees being tagged, each with an ID, designation and editable start and end dates, ready to review before Submit." style="margin-top:12px">
           <figcaption><b>Result.</b> A three-step tag flow ending in a review screen. The commit gate is the design — everything before it is just making the gate easy to reach.</figcaption>
         </figure>
       </div>
@@ -316,8 +308,8 @@ footer .note b{color:#f5a7cd; font-family:"Space Mono",monospace; font-size:12px
           <div class="row"><div class="lab">Trade-off I accepted</div><div class="val">Density has an onboarding cost — mitigated with a persistent legend and per-cell detail on demand.</div></div>
         </div>
         <figure class="shot reveal">
-          <img src="images/worksync-allowance-grid.png" alt="Allowance calculation matrix">
-          <figcaption><b>Result.</b> The allowance calculation surface — the hardest screen in the product. Color <i>is</i> the interface: each cell's state is legible before you read a single number.</figcaption>
+          <img src="images/worksync-allowance-grid.png" alt="The allowance calculation grid: a month of colour-coded shift cells per employee, with red work-hour exception flags and grey already-processed days.">
+          <figcaption><b>Result.</b> The allowance calculation surface — the hardest screen in the product. Colour carries the state: shift type, work-hour exceptions and already-processed days read at a glance, and Review Exceptions clears the edge cases before anything reaches payroll.</figcaption>
         </figure>
       </div>
     </div>
@@ -338,9 +330,9 @@ footer .note b{color:#f5a7cd; font-family:"Space Mono",monospace; font-size:12px
           <div class="row"><div class="lab">Trade-off I accepted</div><div class="val">More screens and permission logic — a large share of the 50+ screens — in exchange for far less noise per role.</div></div>
         </div>
         <figure class="shot reveal">
-          <img src="images/worksync-roster.png" alt="Roster management view">
-          <img src="images/worksync-payroll-report.png" alt="Payroll report view" style="margin-top:12px">
-          <figcaption><b>Result.</b> Role-specific surfaces — roster management and an HR payroll report — reading from one system so a correction in one place is visible and traceable in another.</figcaption>
+          <img src="images/worksync-roster.png" alt="Roster: a weekly grid of colour-coded shifts per employee, with per-row Copy to actions, Bulk Copy and Save Roster, and a shift legend.">
+          <img src="images/worksync-approval-trail.png" alt="A project request's approval trail: a four-step chain — initiator, line manager, HRBP, org head — showing who approved, when, and which step is still pending." style="margin-top:12px">
+          <figcaption><b>Result.</b> Role-shaped surfaces reading from one system — a scheduler's roster, and on every pay-affecting request a four-step approval trail that records who approved, when, and what's still pending. Fix something in one place and it stays traceable everywhere.</figcaption>
         </figure>
       </div>
     </div>
@@ -353,7 +345,7 @@ footer .note b{color:#f5a7cd; font-family:"Space Mono",monospace; font-size:12px
     <div class="section-num" style="color:#f5a7cd">05 · The screen this project lives or dies on</div>
     <h2>Designing a grid where every cell is a payment.</h2>
     <p class="lead" style="color:#bdb8ce">If the allowance matrix is unreadable, WorkSync fails — this is where correctness has to become visible.</p>
-    <figure class="sig-shot reveal"><img src="images/worksync-allowance-grid.png" alt="Allowance matrix, annotated"></figure>
+    <figure class="sig-shot reveal"><img src="images/worksync-allowance-detail.png" alt="Close-up of the allowance grid: the colour legend and several rows of shift cells, including red work-hour exception flags — showing how state is readable from colour alone, backed by a label."></figure>
     <div class="annos">
       <div class="anno"><div class="n">Scan before read</div><p>Status is carried by color, so a full month reads as a pattern first. The eye finds the wrong cell before it parses the number.</p></div>
       <div class="anno"><div class="n">Legend as contract</div><p>A fixed legend keeps every color meaning one thing across the whole surface — the vocabulary never shifts under the user.</p></div>
@@ -390,7 +382,6 @@ footer .note b{color:#f5a7cd; font-family:"Space Mono",monospace; font-size:12px
       <div class="r"><div class="lab">Test density earliest</div><p>Put the allowance matrix in front of the lowest-tenure HR users first — that's where its readability is really tested.</p></div>
       <div class="r"><div class="lab">Cut the artifacts that didn't decide</div><p>Two personas and four empathy maps were more than the decisions needed. I'd keep only the ones that changed a choice.</p></div>
     </div>
-    <div class="mband reveal"><img src="images/worksync-mobile.png" alt="WorkSync mobile screens"><div class="cap">The same system, carried to mobile — dashboard, navigation, and the create-project flow with its confirmation moment intact.</div></div>
   </div>
 </section>
 
@@ -398,7 +389,7 @@ footer .note b{color:#f5a7cd; font-family:"Space Mono",monospace; font-size:12px
 <footer>
   <div class="wrap">
     <h3>WorkSync — Employee &amp; payroll operations</h3>
-    <p>An internal tool designed end-to-end in 8 weeks: research across four roles, information architecture, interaction design, a visual system, and prototype validation — reframed here around the decisions and the stakes rather than the screens.</p>
+    <p>An internal tool designed end-to-end in 8 weeks: research across four roles, information architecture, interaction design, a visual system, and prototype validation. I've told it here through the decisions that mattered most.</p>
     <div class="byline">Case study · WorkSync · Manoj Gehlot</div>
   </div>
 </footer>
