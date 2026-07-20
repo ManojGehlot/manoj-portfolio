@@ -1,0 +1,1313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WorkSync — Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   WorkSync — Design System
+   Extracted from the Adobe XD source; single source of truth
+   for color, type, spacing and every repeatable component.
+   ============================================================ */
+
+/* ---------- Design tokens ---------- */
+:root{
+  /* Brand */
+  --brand:#ED0988;          /* primary magenta */
+  --brand-deep:#B82370;
+  --brand-700:#8E1A5A;
+  --brand-050:#FDE7F3;
+  --pink-light:#EF91C1;
+
+  /* Accents / status */
+  --gold:#FDB515;
+  --green:#29A251;
+  --green-050:#E4F4EA;
+  --red:#C63F42;
+  --red-050:#FBE9E9;
+  --amber-050:#FEF3D9;
+
+  /* Ink / neutrals */
+  --ink:#131318;            /* header / footer near-black */
+  --ink-2:#2D2B43;          /* banner navy */
+  --text:#1d1d24;
+  --text-muted:#6b6b76;
+  --text-faint:#9a9aa4;
+  --line:#e7e7ec;
+  --line-strong:#d7d7de;
+
+  --gray-50:#F9F9F9;
+  --gray-100:#F3F3F3;
+  --gray-200:#E7E7EA;
+  --gray-300:#dcdce1;
+  --surface:#ffffff;
+  --app-bg:#f4f5f7;
+
+  /* Shape */
+  --r-sm:6px;
+  --r-md:10px;
+  --r-lg:14px;
+  --r-xl:20px;
+  --r-pill:999px;
+
+  /* Elevation */
+  --shadow-sm:0 1px 2px rgba(20,20,30,.06),0 1px 3px rgba(20,20,30,.05);
+  --shadow-md:0 4px 14px rgba(20,20,30,.08);
+  --shadow-lg:0 18px 48px rgba(20,20,30,.18);
+  --shadow-brand:0 8px 22px rgba(237,9,136,.28);
+
+  /* Layout */
+  --sidebar-w:96px;
+  --header-h:60px;
+  --footer-h:34px;
+
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+
+/* ---------- Reset ---------- */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  font-family:"Montserrat",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  color:var(--text);
+  background:var(--app-bg);
+  font-size:14px;
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4,h5,p,figure{margin:0}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer}
+svg{width:18px;height:18px;flex-shrink:0}
+img{max-width:100%;display:block}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+
+/* ============================================================
+   APP SHELL  (header / sidebar / footer injected by app.js)
+   ============================================================ */
+.app{min-height:100vh}
+
+/* Header */
+.ws-header{
+  position:fixed;top:0;left:0;right:0;height:var(--header-h);z-index:60;
+  background:var(--ink);color:#fff;
+  display:flex;align-items:center;gap:24px;
+  padding:0 26px 0 22px;
+}
+.ws-logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;letter-spacing:.2px}
+.ws-logo .mark{
+  width:30px;height:30px;border-radius:8px;display:grid;place-items:center;
+  background:linear-gradient(150deg,var(--brand),var(--brand-700));
+  font-weight:800;color:#fff;font-size:16px;box-shadow:0 2px 8px rgba(237,9,136,.5)
+}
+.ws-header .spacer{flex:1}
+.ws-header .icon-btn{
+  width:38px;height:38px;border-radius:50%;border:0;background:transparent;color:#cfcfd6;
+  display:grid;place-items:center;position:relative;transition:background .15s
+}
+.ws-header .icon-btn:hover{background:rgba(255,255,255,.09);color:#fff}
+.ws-header .icon-btn .dot{position:absolute;top:8px;right:9px;width:7px;height:7px;border-radius:50%;background:var(--brand);border:2px solid var(--ink)}
+.ws-user{display:flex;align-items:center;gap:11px;padding-left:20px;border-left:1px solid rgba(255,255,255,.14)}
+.ws-user .avatar{
+  width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:12px;color:#fff;
+  background:linear-gradient(150deg,var(--brand),var(--brand-700))
+}
+.ws-user .who small{display:block;color:#b9b9c2;font-size:10.5px;line-height:1;margin-bottom:3px;font-weight:500}
+.ws-user .who strong{font-size:12.5px;font-weight:700}
+
+/* Sidebar */
+.ws-side{
+  position:fixed;top:var(--header-h);bottom:0;left:0;width:var(--sidebar-w);z-index:55;
+  background:var(--surface);border-right:1px solid var(--line);
+  display:flex;flex-direction:column;padding:16px 0;gap:2px;overflow:visible
+}
+.nav-item{position:relative}
+.nav-item>.nav-link{
+  width:70px;margin:0 auto;padding:12px 4px;border-radius:var(--r-md);
+  display:flex;flex-direction:column;align-items:center;gap:7px;
+  color:var(--text-muted);font-size:10.5px;font-weight:600;text-align:center;line-height:1.2;
+  transition:background .15s,color .15s;cursor:pointer;border:0;background:transparent
+}
+.nav-item>.nav-link svg{width:22px;height:22px}
+.nav-item>.nav-link:hover{background:var(--gray-100);color:var(--text)}
+.nav-item.active>.nav-link{
+  background:linear-gradient(160deg,var(--brand),var(--brand-700));
+  color:#fff;box-shadow:var(--shadow-brand)
+}
+/* Flyout submenu */
+.nav-flyout{
+  position:absolute;left:calc(100% - 6px);top:0;min-width:210px;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);
+  box-shadow:var(--shadow-lg);padding:8px;opacity:0;visibility:hidden;transform:translateX(6px);
+  transition:.16s var(--ease);z-index:70
+}
+.nav-item:hover .nav-flyout{opacity:1;visibility:visible;transform:translateX(0)}
+.nav-flyout .fly-head{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--text-faint);padding:6px 10px 4px;font-weight:700}
+.nav-flyout a{
+  display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:var(--r-sm);
+  font-size:12.5px;font-weight:600;color:var(--text);transition:background .12s
+}
+.nav-flyout a:hover{background:var(--brand-050);color:var(--brand-deep)}
+.nav-flyout a.current{color:var(--brand-deep)}
+.nav-flyout a .di{width:15px;color:var(--text-faint)}
+.nav-flyout a:hover .di{color:var(--brand)}
+
+/* Footer */
+.ws-footer{
+  position:fixed;left:0;right:0;bottom:0;height:var(--footer-h);z-index:40;
+  background:var(--ink);color:#8a8a95;font-size:11px;
+  display:flex;align-items:center;justify-content:center;letter-spacing:.3px
+}
+
+/* Main content region */
+.ws-main{
+  padding:calc(var(--header-h) + 22px) 30px calc(var(--footer-h) + 26px) calc(var(--sidebar-w) + 30px);
+  min-height:100vh;max-width:1680px
+}
+
+/* Page head / breadcrumb */
+.page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:20px}
+.page-head h1{font-size:22px;font-weight:700;letter-spacing:-.2px}
+.crumb{font-size:12px;color:var(--text-faint);margin-top:4px;font-weight:500;text-transform:capitalize}
+.crumb b{color:var(--text-muted)}
+
+/* ============================================================
+   COMPONENTS
+   ============================================================ */
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  height:40px;padding:0 18px;border-radius:var(--r-md);border:1px solid transparent;
+  font-size:13px;font-weight:600;letter-spacing:.1px;transition:.15s var(--ease);white-space:nowrap;background:none
+}
+.btn svg{width:16px;height:16px}
+.btn-primary{background:linear-gradient(160deg,var(--brand),var(--brand-deep));color:#fff;box-shadow:var(--shadow-brand)}
+.btn-primary:hover{filter:brightness(1.05);transform:translateY(-1px)}
+.btn-primary:active{transform:translateY(0)}
+.btn-ghost{background:var(--surface);border-color:var(--line-strong);color:var(--text)}
+.btn-ghost:hover{border-color:var(--brand);color:var(--brand-deep);background:var(--brand-050)}
+.btn-subtle{background:var(--gray-100);color:var(--text)}
+.btn-subtle:hover{background:var(--gray-200)}
+.btn-danger{background:var(--red);color:#fff}
+.btn-danger:hover{filter:brightness(1.05)}
+.btn-sm{height:32px;padding:0 13px;font-size:12px;border-radius:var(--r-sm)}
+.btn-lg{height:46px;padding:0 26px;font-size:14px}
+.btn[disabled]{opacity:.5;pointer-events:none}
+.btn-link{background:none;border:0;color:var(--brand-deep);font-weight:600;padding:0;height:auto}
+.btn-link:hover{text-decoration:underline}
+
+/* Cards */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--shadow-sm)}
+.card-pad{padding:22px}
+
+/* Badges / status pills */
+.badge{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 11px;border-radius:var(--r-pill);font-size:11px;font-weight:700;letter-spacing:.2px}
+.badge .bdot{width:6px;height:6px;border-radius:50%;background:currentColor}
+.badge-green{background:var(--green-050);color:#1f7d45}
+.badge-amber{background:var(--amber-050);color:#9a6a06}
+.badge-red{background:var(--red-050);color:#a53236}
+.badge-gray{background:var(--gray-100);color:var(--text-muted)}
+.badge-pink{background:var(--brand-050);color:var(--brand-deep)}
+
+/* Inputs & forms */
+.field{display:flex;flex-direction:column;gap:7px}
+.field>label{font-size:12px;font-weight:600;color:var(--text-muted)}
+.field>label .req{color:var(--brand)}
+.input,.select,.textarea{
+  width:100%;height:42px;padding:0 13px;border:1px solid var(--line-strong);border-radius:var(--r-md);
+  background:var(--surface);font:inherit;font-size:13px;color:var(--text);transition:.15s
+}
+.textarea{height:auto;min-height:88px;padding:11px 13px;resize:vertical}
+.input::placeholder,.textarea::placeholder{color:var(--text-faint)}
+.input:focus,.select:focus,.textarea:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(237,9,136,.12)}
+.select{appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236b6b76' stroke-width='2.4'><path d='M6 9l6 6 6-6'/></svg>");background-repeat:no-repeat;background-position:right 12px center;padding-right:34px}
+.input-icon{position:relative}
+.input-icon svg{position:absolute;left:13px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:var(--text-faint)}
+.input-icon .input{padding-left:38px}
+.form-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px 24px}
+.form-grid .col-2{grid-column:span 2}
+.form-grid .col-3{grid-column:span 3}
+
+/* Toggle chips (yes/no, radio-ish) */
+.chip-group{display:inline-flex;gap:8px}
+.chip{height:34px;padding:0 16px;border-radius:var(--r-pill);border:1px solid var(--line-strong);background:var(--surface);font-size:12.5px;font-weight:600;color:var(--text-muted);transition:.15s}
+.chip.on,.chip:hover{border-color:var(--brand);color:var(--brand-deep);background:var(--brand-050)}
+.chip.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+
+/* Tabs / segmented */
+.segmented{display:inline-flex;background:var(--gray-100);border-radius:var(--r-md);padding:3px}
+.segmented button{border:0;background:transparent;height:32px;padding:0 14px;border-radius:8px;font-size:12.5px;font-weight:600;color:var(--text-muted)}
+.segmented button.on{background:var(--surface);color:var(--brand-deep);box-shadow:var(--shadow-sm)}
+
+.viewtoggle{display:inline-flex;gap:4px}
+.viewtoggle button{width:38px;height:38px;border-radius:8px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;color:var(--text-muted)}
+.viewtoggle button.on{background:var(--brand-050);border-color:var(--brand);color:var(--brand-deep)}
+
+/* Tables */
+.table-wrap{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow-sm)}
+table.data{width:100%;border-collapse:collapse;font-size:12.5px}
+table.data thead th{
+  text-align:left;padding:14px 16px;font-size:11px;text-transform:uppercase;letter-spacing:.5px;
+  color:var(--text-muted);background:var(--gray-50);border-bottom:1px solid var(--line);font-weight:700;white-space:nowrap
+}
+table.data tbody td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:middle}
+table.data tbody tr:last-child td{border-bottom:0}
+table.data tbody tr{transition:background .12s}
+table.data tbody tr:hover{background:var(--gray-50)}
+table.data .strong{font-weight:700;color:var(--text)}
+table.data .muted{color:var(--text-faint)}
+.tbl-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px;border-bottom:1px solid var(--line)}
+.pagination{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;font-size:12px;color:var(--text-muted)}
+.pagination .pages{display:flex;gap:6px}
+.pagination .pages button{width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:var(--surface);font-size:12px;font-weight:600;color:var(--text-muted)}
+.pagination .pages button.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+.pagination .pages button:disabled{opacity:.4}
+
+/* avatar cluster */
+.avatar-xs{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:10px;font-weight:700;color:#fff;background:var(--brand-deep)}
+
+/* Stat banner (project management hero) */
+.hero-banner{
+  border-radius:var(--r-xl);padding:26px 30px;color:#fff;position:relative;overflow:hidden;
+  background:linear-gradient(100deg,var(--ink-2) 0%,#3a2547 42%,var(--brand-700) 100%);
+  display:flex;align-items:center;gap:30px
+}
+.hero-banner::after{content:"";position:absolute;right:-40px;top:-60px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(237,9,136,.5),transparent 68%)}
+.hero-banner h2{font-size:24px;font-weight:700;flex:1;position:relative;z-index:1}
+.hero-stats{display:flex;gap:34px;position:relative;z-index:1}
+.hero-stats .stat b{display:block;font-size:26px;font-weight:800;line-height:1}
+.hero-stats .stat span{font-size:11.5px;color:rgba(255,255,255,.8);font-weight:500}
+.hero-banner .btn-primary{position:relative;z-index:1;background:#fff;color:var(--brand-deep);box-shadow:0 6px 18px rgba(0,0,0,.25)}
+.hero-banner .btn-primary:hover{background:#fff;filter:none}
+
+/* Project card (grid view) */
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:18px}
+.proj-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px;box-shadow:var(--shadow-sm);position:relative;transition:.15s}
+.proj-card:hover{box-shadow:var(--shadow-md);border-color:var(--line-strong);transform:translateY(-2px)}
+.proj-card.inactive{background:var(--gray-50)}
+.proj-card .pc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:14px}
+.proj-card .pc-name{font-size:15px;font-weight:700}
+.proj-card .pc-code{font-size:11.5px;color:var(--text-faint);font-weight:600;margin-top:2px}
+.proj-meta{display:grid;grid-template-columns:1fr 1fr;gap:12px 16px}
+.proj-meta .m label{display:block;font-size:10.5px;color:var(--text-faint);font-weight:600;margin-bottom:2px;text-transform:uppercase;letter-spacing:.3px}
+.proj-meta .m span{font-size:12.5px;font-weight:600}
+.kebab{width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;color:var(--text-muted);flex-shrink:0}
+.kebab:hover{background:var(--gray-100);color:var(--text)}
+
+/* Context menu */
+.ctx-menu{
+  position:absolute;min-width:200px;background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r-md);box-shadow:var(--shadow-lg);padding:6px;z-index:80;
+}
+.ctx-menu button{
+  width:100%;display:flex;align-items:center;gap:10px;padding:9px 11px;border:0;background:none;
+  border-radius:var(--r-sm);font-size:12.5px;font-weight:600;color:var(--text);text-align:left;transition:background .12s
+}
+.ctx-menu button:hover{background:var(--brand-050);color:var(--brand-deep)}
+.ctx-menu button svg{width:15px;height:15px;color:var(--text-faint)}
+.ctx-menu button:hover svg{color:var(--brand)}
+.ctx-menu .sep{height:1px;background:var(--line);margin:5px 0}
+.ctx-menu button.danger{color:var(--red)}
+.ctx-menu button.danger svg{color:var(--red)}
+
+/* Modal / dialog */
+.overlay{position:fixed;inset:0;background:rgba(15,14,22,.62);backdrop-filter:blur(2px);z-index:100;display:grid;place-items:center;padding:24px;opacity:0;pointer-events:none;transition:opacity .2s}
+.overlay.show{opacity:1;pointer-events:auto}
+.modal{background:var(--surface);border-radius:var(--r-lg);box-shadow:var(--shadow-lg);width:min(460px,100%);padding:30px 28px;text-align:center;transform:translateY(10px) scale(.98);transition:.22s var(--ease)}
+.overlay.show .modal{transform:none}
+.modal.wide{width:min(620px,100%);text-align:left}
+.modal .m-icon{width:66px;height:66px;border-radius:50%;display:grid;place-items:center;margin:2px auto 16px}
+.modal .m-icon.ok{background:var(--green-050);color:var(--green)}
+.modal .m-icon.warn{background:var(--red-050);color:var(--red)}
+.modal .m-icon svg{width:34px;height:34px}
+.modal h3{font-size:18px;font-weight:700;margin-bottom:8px}
+.modal p{color:var(--text-muted);font-size:13px;margin-bottom:22px}
+.modal .m-actions{display:flex;gap:12px;justify-content:center}
+.modal.wide .m-actions{justify-content:flex-end}
+.modal .m-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border:0;background:none;color:var(--text-faint);border-radius:8px}
+.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.modal-head h3{font-size:16px}
+
+/* Toast */
+.toast-host{position:fixed;bottom:52px;right:24px;z-index:200;display:flex;flex-direction:column;gap:10px}
+.toast{display:flex;align-items:center;gap:11px;background:var(--ink);color:#fff;padding:13px 17px;border-radius:var(--r-md);box-shadow:var(--shadow-lg);font-size:13px;font-weight:600;transform:translateX(20px);opacity:0;transition:.25s var(--ease)}
+.toast.show{transform:none;opacity:1}
+.toast .ti{width:20px;height:20px;color:var(--green)}
+.toast.warn .ti{color:var(--gold)}
+
+/* Wizard stepper */
+.stepper{display:flex;align-items:center;gap:0;margin-bottom:26px}
+.stepper .step{display:flex;align-items:center;gap:11px;color:var(--text-faint)}
+.stepper .step .num{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:12.5px;font-weight:700;background:var(--gray-100);color:var(--text-muted);border:2px solid transparent}
+.stepper .step .lbl{font-size:13px;font-weight:600}
+.stepper .step.active .num{background:var(--brand);color:#fff}
+.stepper .step.active .lbl{color:var(--text)}
+.stepper .step.done .num{background:var(--green);color:#fff}
+.stepper .step.done .lbl{color:var(--text)}
+.stepper .bar{flex:1;height:2px;background:var(--line);margin:0 16px;border-radius:2px}
+.stepper .bar.filled{background:var(--green)}
+
+/* Project summary strip (used in tagging flows) */
+.proj-summary{display:flex;flex-wrap:wrap;gap:26px;padding:18px 22px;background:var(--gray-50);border:1px solid var(--line);border-radius:var(--r-md)}
+.proj-summary .ps{min-width:120px}
+.proj-summary .ps label{display:block;font-size:10.5px;color:var(--text-faint);font-weight:600;text-transform:uppercase;letter-spacing:.3px;margin-bottom:3px}
+.proj-summary .ps span{font-size:13px;font-weight:700}
+
+/* Legend (roster) */
+.legend{display:flex;flex-wrap:wrap;gap:16px;align-items:center;font-size:11.5px;color:var(--text-muted);font-weight:600}
+.legend .lg{display:flex;align-items:center;gap:7px}
+.legend .sw{width:14px;height:14px;border-radius:4px}
+
+/* Roster grid */
+.roster{width:100%;border-collapse:separate;border-spacing:0;font-size:12px}
+.roster th,.roster td{border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+.roster thead th{background:var(--gray-50);padding:10px 8px;font-size:11px;color:var(--text-muted);font-weight:700;position:sticky;top:0}
+.roster .emp{padding:10px 12px;min-width:210px;text-align:left;position:sticky;left:0;background:var(--surface);z-index:2}
+.roster .emp .eid{font-size:10.5px;color:var(--text-faint);font-weight:600}
+.roster .emp .enm{font-weight:700;font-size:12.5px}
+.roster .emp .eproj{font-size:10.5px;color:var(--brand-deep);font-weight:600;margin-top:2px}
+.roster td.cell{padding:6px;text-align:center;min-width:118px}
+.shift-chip{border-radius:6px;padding:6px 4px;font-size:10.5px;font-weight:700;line-height:1.2;color:#fff}
+.shift-gs{background:#6b7280}
+.shift-morning{background:#38a169}
+.shift-afternoon{background:#3b82c4}
+.shift-night{background:#7c5cbf}
+.shift-wo{background:#e5e7eb;color:#6b7280}
+.shift-h{background:#fdb515;color:#5b4400}
+.shift-l{background:#f0a4c4;color:#7a1450}
+.shift-empty{background:var(--gray-50);color:var(--text-faint)}
+
+/* Allowance matrix */
+.matrix{border-collapse:separate;border-spacing:0;font-size:11px;width:100%}
+.matrix th,.matrix td{border-bottom:1px solid var(--line);border-right:1px solid var(--line);text-align:center}
+.matrix thead th{background:var(--gray-50);padding:7px 4px;font-weight:700;color:var(--text-muted);min-width:30px}
+.matrix .emp{position:sticky;left:0;background:var(--surface);text-align:left;padding:9px 12px;min-width:200px;z-index:2}
+.matrix td.mc{padding:0;height:34px}
+.matrix .mcell{width:100%;height:34px}
+
+/* Utilities */
+.row{display:flex;align-items:center;gap:12px}
+.between{display:flex;align-items:center;justify-content:space-between;gap:14px}
+.wrap{flex-wrap:wrap}
+.mt-8{margin-top:8px}.mt-16{margin-top:16px}.mt-24{margin-top:24px}
+.mb-16{margin-bottom:16px}.mb-24{margin-bottom:24px}
+.muted{color:var(--text-muted)}.faint{color:var(--text-faint)}
+.hint{font-size:11.5px;color:var(--text-faint)}
+.grow{flex:1}
+.center{text-align:center}
+.hidden{display:none!important}
+.empty-state{text-align:center;padding:70px 20px;color:var(--text-muted)}
+.empty-state .ei{width:64px;height:64px;border-radius:50%;background:var(--gray-100);display:grid;place-items:center;margin:0 auto 16px;color:var(--text-faint)}
+.empty-state h3{font-size:16px;margin-bottom:6px;color:var(--text)}
+
+/* Section title */
+.sec-title{font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:9px}
+.sec-title .t-ic{color:var(--brand)}
+
+/* responsive */
+@media (max-width:900px){
+  .ws-main{padding-left:calc(var(--sidebar-w) + 16px);padding-right:16px}
+  .form-grid{grid-template-columns:1fr}
+  .form-grid .col-2,.form-grid .col-3{grid-column:span 1}
+  .hero-banner{flex-direction:column;align-items:flex-start}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/* ---- Page-specific styles (consolidated from individual screens) ---- */
+
+/* Home */
+.welcome{background:linear-gradient(100deg,var(--ink-2),var(--brand-700));border-radius:var(--r-xl);padding:34px 36px;color:#fff;position:relative;overflow:hidden;margin-bottom:26px}
+.welcome::after{content:"";position:absolute;right:-30px;bottom:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(237,9,136,.45),transparent 70%)}
+.welcome h2{font-size:26px;font-weight:800;margin-bottom:6px;position:relative;z-index:1}
+.welcome p{color:rgba(255,255,255,.82);max-width:520px;position:relative;z-index:1}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px 20px;box-shadow:var(--shadow-sm)}
+.kpi .k-ic{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;margin-bottom:12px;color:#fff}
+.kpi .k-ic svg{width:22px;height:22px}
+.kpi b{font-size:26px;font-weight:800;display:block;line-height:1}
+.kpi span{font-size:12px;color:var(--text-muted);font-weight:600}
+.mods{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.mod{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;box-shadow:var(--shadow-sm);transition:.15s;cursor:pointer;display:block}
+.mod:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:var(--brand)}
+.mod .m-ic{width:44px;height:44px;border-radius:12px;background:var(--brand-050);color:var(--brand-deep);display:grid;place-items:center;margin-bottom:14px}
+.mod .m-ic svg{width:22px;height:22px}
+.mod h3{font-size:15px;margin-bottom:5px}
+.mod p{font-size:12.5px;color:var(--text-muted);line-height:1.5}
+.mod .go{margin-top:12px;font-size:12px;font-weight:700;color:var(--brand-deep);display:flex;align-items:center;gap:4px}
+
+/* Projects */
+.pm-toolbar{display:flex;align-items:center;gap:14px;margin:22px 0 18px}
+.filter-pop{position:absolute;top:46px;left:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--shadow-lg);padding:10px;min-width:230px;z-index:30}
+.filter-pop label{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer}
+.filter-pop label:hover{background:var(--gray-100)}
+.filter-pop input{accent-color:var(--brand);width:16px;height:16px}
+.filter-pop .fp-actions{display:flex;gap:8px;border-top:1px solid var(--line);margin-top:6px;padding-top:10px}
+.list-row{display:grid;grid-template-columns:1.4fr .8fr .8fr 1.2fr .9fr .9fr auto auto;gap:16px;align-items:center;padding:16px;border-bottom:1px solid var(--line)}
+.list-row:last-child{border-bottom:0}
+.list-row:hover{background:var(--gray-50)}
+.list-row label{display:block;font-size:10px;color:var(--text-faint);text-transform:uppercase;letter-spacing:.3px;font-weight:600;margin-bottom:2px}
+.list-row .v{font-size:12.5px;font-weight:600}
+
+/* Forms */
+.form-section+.form-section{margin-top:26px;padding-top:26px;border-top:1px solid var(--line)}
+.form-actions{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:26px;padding-top:22px;border-top:1px solid var(--line)}
+.tag-q{display:flex;align-items:center;gap:16px}
+
+/* Wizards */
+.pick-list{display:flex;flex-direction:column;gap:8px;max-height:420px;overflow:auto;padding-right:4px}
+.pick{display:flex;align-items:center;gap:14px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-md);cursor:pointer;transition:.12s}
+.pick:hover{border-color:var(--brand);background:var(--brand-050)}
+.pick.sel{border-color:var(--brand);background:var(--brand-050);box-shadow:0 0 0 1px var(--brand) inset}
+.pick .cbx{width:20px;height:20px;border-radius:6px;border:2px solid var(--line-strong);display:grid;place-items:center;color:#fff;flex-shrink:0}
+.pick.sel .cbx{background:var(--brand);border-color:var(--brand)}
+.pick .cbx svg{width:13px;height:13px;opacity:0}
+.pick.sel .cbx svg{opacity:1}
+.pick .nm{font-weight:700;font-size:13.5px}
+.pick .sub{font-size:11.5px;color:var(--text-muted)}
+.wiz-actions{display:flex;justify-content:space-between;margin-top:24px;padding-top:20px;border-top:1px solid var(--line)}
+
+/* Roster */
+.roster-toolbar{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.roster-scroll{overflow:auto;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);box-shadow:var(--shadow-sm)}
+.legend-bar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-top:16px;flex-wrap:wrap}
+
+/* Allowance */
+.rate-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px}
+.rate{border:1px solid var(--line);border-radius:var(--r-md);padding:14px 16px;background:var(--surface);box-shadow:var(--shadow-sm)}
+.rate .rt{width:34px;height:6px;border-radius:3px;margin-bottom:10px}
+.rate h4{font-size:13px}
+.rate .tm{font-size:11.5px;color:var(--text-muted)}
+.rate .amt{font-size:13px;font-weight:700;color:var(--brand-deep);margin-top:6px}
+.allowance-toolbar{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.matrix-scroll{overflow:auto;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);box-shadow:var(--shadow-sm)}
+.note{background:var(--amber-050);border:1px solid #f5deae;color:#8a5f06;border-radius:var(--r-md);padding:11px 15px;font-size:12.5px;font-weight:600;margin-top:16px;display:flex;gap:9px;align-items:center}
+.note svg{width:18px;height:18px}
+
+/* Reports */
+.report-filters{display:grid;grid-template-columns:repeat(4,1fr) auto;gap:14px;align-items:end;margin-bottom:20px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px;box-shadow:var(--shadow-sm)}
+.totals{display:flex;gap:30px;padding:16px;background:var(--gray-50);border-top:1px solid var(--line)}
+.totals .tt label{font-size:11px;color:var(--text-muted);font-weight:600;display:block}
+.totals .tt b{font-size:15px;color:var(--brand-deep)}
+
+/* Tickets */
+.tk-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}
+.tk-kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:16px 18px;box-shadow:var(--shadow-sm)}
+.tk-kpi b{font-size:24px;font-weight:800;display:block;line-height:1}
+.tk-kpi span{font-size:12px;color:var(--text-muted);font-weight:600}
+.prio{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:12px}
+.prio .pd{width:8px;height:8px;border-radius:50%}
+
+/* Style guide */
+.sg-hero{background:linear-gradient(100deg,var(--ink-2),var(--brand-700));border-radius:var(--r-xl);padding:34px 36px;color:#fff;margin-bottom:28px;position:relative;overflow:hidden}
+.sg-hero::after{content:"";position:absolute;right:-40px;top:-70px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(237,9,136,.45),transparent 70%)}
+.sg-hero .lg{display:flex;align-items:center;gap:12px;font-size:22px;font-weight:800;margin-bottom:10px;position:relative;z-index:1}
+.sg-hero .lg .mark{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(150deg,var(--brand),var(--brand-700));font-weight:800;font-size:22px;box-shadow:0 4px 14px rgba(0,0,0,.3)}
+.sg-hero p{max-width:560px;color:rgba(255,255,255,.85);position:relative;z-index:1}
+.sg-section{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:26px;margin-bottom:22px;box-shadow:var(--shadow-sm)}
+.sg-section>h2{font-size:16px;margin-bottom:4px}
+.sg-section>.desc{font-size:12.5px;color:var(--text-muted);margin-bottom:20px}
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.sw-card{border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden}
+.sw-card .chip{height:74px;border-radius:0;border:0}
+.sw-card .meta{padding:10px 12px}
+.sw-card .meta b{font-size:12.5px;display:block}
+.sw-card .meta code{font-size:11px;color:var(--text-muted);font-family:ui-monospace,Menlo,monospace}
+.type-row{display:flex;align-items:baseline;gap:20px;padding:12px 0;border-bottom:1px solid var(--line)}
+.type-row:last-child{border-bottom:0}
+.type-row .lbl{width:130px;font-size:11px;color:var(--text-muted);font-weight:600;flex-shrink:0}
+.demo-grid{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.comp-block{margin-bottom:22px}
+.comp-block>h4{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-faint);margin-bottom:12px;font-weight:700}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:800px){.two-col{grid-template-columns:1fr}}
+/* Role switcher + notifications */
+.role-switch{display:flex;align-items:center;gap:7px;height:38px;padding:0 13px;border-radius:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#e9e9ef;font-size:12.5px;font-weight:600;cursor:pointer;transition:background .15s}
+.role-switch b{color:#fff;font-weight:700}
+.role-switch:hover{background:rgba(255,255,255,.15)}
+.role-switch .rs-dot{width:7px;height:7px;border-radius:50%;background:var(--brand)}
+.role-switch svg{width:15px;height:15px;opacity:.8}
+.role-menu{position:absolute;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-lg);padding:6px;min-width:230px;z-index:130}
+.role-menu .rm-head{font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--text-faint);font-weight:700;padding:8px 10px 6px}
+.role-menu button{width:100%;display:flex;align-items:center;gap:11px;padding:9px 10px;border:0;background:none;border-radius:8px;font-size:13px;font-weight:600;color:var(--text);text-align:left}
+.role-menu button:hover{background:var(--brand-050)}
+.role-menu button.on{background:var(--brand-050)}
+.role-menu button .rl{display:flex;flex-direction:column;line-height:1.25;flex:1}
+.role-menu button small{font-weight:500;color:var(--text-faint);font-size:10.5px}
+.role-menu button .rc{color:var(--brand);width:16px;height:16px}
+.role-menu .ravatar{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;color:#fff;background:linear-gradient(150deg,var(--brand),var(--brand-700));flex-shrink:0}
+.notif-panel{position:absolute;width:320px;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow-lg);z-index:130;overflow:hidden}
+.notif-panel .np-head{padding:13px 16px;font-weight:700;font-size:13px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.notif-item{display:flex;gap:11px;padding:12px 16px;border-bottom:1px solid var(--line);align-items:center}
+.notif-item:last-child{border-bottom:0}
+.notif-item .ni-ic{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;flex-shrink:0}
+.notif-item .ni-ic svg{width:17px;height:17px}
+.notif-item p{font-size:12.5px;font-weight:600;margin:0;line-height:1.35}
+.notif-item span{font-size:11px;color:var(--text-faint)}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+/* Sample data — mirrors the names, codes and values in the XD mockups. */
+const DATA = {
+  projects:[
+    {name:'Mobile Development & Design', code:'PRCODE003413', start:'06/03/23', end:'06/03/26', bu:'Technology Services Man..', ou:'GO-IT', lead:'John Doe, 3 more', tagged:10, status:'tagged'},
+    {name:'Data Dynamics', code:'PRCODE003410', start:'06/03/23', end:'06/03/26', bu:'Technology Services Man..', ou:'GO-IT', lead:'John Doe, 3 more', tagged:0, status:'untagged'},
+    {name:'Net Ninjas', code:'PRCODE003409', start:'06/03/23', end:'06/03/26', bu:'Technology Services Man..', ou:'GO-IT', lead:'John Doe, 3 more', tagged:0, status:'inactive'},
+    {name:'Cloud Connect', code:'PRCODE003408', start:'06/03/23', end:'06/03/26', bu:'Technology Services Man..', ou:'GO-IT', lead:'John Doe, 3 more', tagged:12, status:'inactive'},
+    {name:'Creative Graphics Generate', code:'PRCODE003405', start:'04/01/23', end:'04/01/26', bu:'Technology Services Man..', ou:'GO-IT', lead:'Jowel Dwens, 2 more', tagged:8, status:'tagged'},
+    {name:'Blockchain Brawlers', code:'PRCODE003402', start:'02/15/23', end:'02/15/25', bu:'Technology Services Man..', ou:'GO-IT', lead:'Shawn Givens, 1 more', tagged:6, status:'tagged'},
+    {name:'Logic Labs', code:'PRCODE003399', start:'01/10/23', end:'01/10/26', bu:'Business Operations', ou:'GO-BO', lead:'John Doe, 4 more', tagged:14, status:'tagged'},
+    {name:'Software Superstar', code:'PRCODE003396', start:'03/22/23', end:'03/22/25', bu:'Technology Services Man..', ou:'GO-IT', lead:'John Doe, 2 more', tagged:0, status:'untagged'},
+    {name:'Code Commandos', code:'PRCODE003393', start:'05/05/23', end:'05/05/26', bu:'Technology Services Man..', ou:'GO-IT', lead:'Jowel Dwens', tagged:9, status:'tagged'},
+  ],
+  employees:[
+    {id:'179205', name:'Kabir Shah', role:'Technical & Business Operations Analyst', status:'untagged'},
+    {id:'179260', name:'Ananya Iyer', role:'Technical & Business Operations Analyst', status:'untagged'},
+    {id:'546778', name:"Vivek Nair", role:'Technical Architect', status:'tagged'},
+    {id:'348970', name:'Sara Fernandes', role:'Software Engineer', status:'pending'},
+    {id:'769043', name:'Dev Patel', role:'Automation SRE', status:'untagged'},
+    {id:'165894', name:'Meera Joshi', role:'Business Analyst', status:'tagged'},
+    {id:'187243', name:'Aryan Sethi', role:'QA Engineer', status:'pending'},
+    {id:'125689', name:'Priya Menon', role:'DevOps Engineer', status:'untagged'},
+  ],
+  requests:[
+    {rid:'PRTG00000000656', code:'PRCODE000680', name:'Beyond the Frame', date:'20 May 2023', status:'pending'},
+    {rid:'PRTG00000000655', code:'PRCODE000679', name:'Ethereal Experiences', date:'01 May 2023', status:'pending'},
+    {rid:'PRTG00000000654', code:'PRCODE000678', name:'Dreamland Designs', date:'15 Apr 2023', status:'pending'},
+    {rid:'PRTG00000000653', code:'PRCODE000676', name:'Technicolor Ventures', date:'21 Dec 2022', status:'pending'},
+    {rid:'PRTG00000000652', code:'PRCODE000675', name:'Spectrum Solutions', date:'10 Oct 2022', status:'approved'},
+    {rid:'PRTG00000000651', code:'PRCODE000674', name:'Luminous Labs', date:'01 Jan 2021', status:'approved'},
+    {rid:'PRTG00000000650', code:'PRCODE000673', name:'Nexus Innovations', date:'01 Jan 2021', status:'rejected'},
+    {rid:'PRTG00000000649', code:'PRCODE000672', name:'Creative Catalysts', date:'01 Dec 2021', status:'approved'},
+    {rid:'PRTG00000000648', code:'PRCODE000671', name:'Artistry Assembly', date:'01 Dec 2021', status:'rejected'},
+    {rid:'PRTG00000000647', code:'PRCODE000670', name:'Enchanted Echoes', date:'01 Dec 2021', status:'rejected'},
+  ],
+  empRequests:[
+    {id:'179205', name:'Kabir Shah', project:'Mobile Development & Design', date:'24 Apr 2023', status:'pending', type:'Tag'},
+    {id:'179260', name:'Ananya Iyer', project:'Mobile Development & Design', date:'24 Apr 2023', status:'pending', type:'Tag'},
+    {id:'546778', name:"Vivek Nair", project:'Logic Labs', date:'18 Apr 2023', status:'approved', type:'Tag'},
+    {id:'348970', name:'Sara Fernandes', project:'Cloud Connect', date:'11 Apr 2023', status:'pending', type:'Untag'},
+    {id:'769043', name:'Dev Patel', project:'Data Dynamics', date:'02 Apr 2023', status:'rejected', type:'Tag'},
+    {id:'165894', name:'Meera Joshi', project:'Blockchain Brawlers', date:'28 Mar 2023', status:'approved', type:'Tag'},
+  ],
+  roster:[
+    {id:'183393', name:'Riya Kapoor', project:'Data Dynamics'},
+    {id:'198087', name:'Karan Bhatia', project:'Net Ninjas'},
+    {id:'194978', name:'Isha Reddy', project:'Data Dynamics'},
+    {id:'165985', name:'Nikhil Rao', project:'Creative Graphics Generate'},
+    {id:'165932', name:'Tara Dsouza', project:'Blockchain Brawlers'},
+    {id:'110045', name:'Farhan Ali', project:'Code Commandos'},
+    {id:'91135',  name:'Aditya Verma', project:'Logic Labs'},
+    {id:'165894', name:'Sneha Pillai', project:'Software Superstar'},
+    {id:'139846', name:'Rahul Chandran', project:'Software Superstar'},
+    {id:'187243', name:'Manish Sinha', project:'Cloud Connect'},
+    {id:'125689', name:'Pooja Menon', project:'Cloud Connect'},
+  ],
+  payroll:[
+    {id:'546778', name:"Vivek Nair", cls:'Technical Architect', days:'4', role:'IT & Infrastructure', shift:'0500-0759', project:'Digital Workplace', div:'IT -IT', entity:'Company', allowance:'400', s1:'Rohan Malhotra', s2:'Neha Gupta', processed:false},
+    {id:'34897',  name:'Sara Fernandes', cls:'Technical & Business Operations Analyst', days:'45', role:'Tech & Business Ops', shift:'1300-1759', project:'Digital Workplace', div:'IT -IT', entity:'Company', allowance:'600', s1:'Neha Gupta', s2:'Arjun Mehta', processed:false},
+    {id:'769043', name:'Kabir Shah', cls:'Automation SRE', days:'76', role:'IT & Infra, Software Engg', shift:'1300-1759', project:'Payroll Modernization', div:'IT -IT', entity:'Company', allowance:'450', s1:'Arjun Mehta', s2:'Rohan Malhotra', processed:false},
+  ],
+  shiftRates:[
+    {name:'Morning Shift', time:'0500-0759', rate:'INR 250 per shift'},
+    {name:'Afternoon Shift', time:'1300-1759', rate:'INR 250 per shift'},
+    {name:'Night Shift', time:'1800-0459', rate:'INR 400 per shift'},
+  ]
+};
+
+/* ============================================================
+   WorkSync — single-file prototype runtime
+   Hash-routed SPA. All screens live in one file so it runs by
+   simply opening the HTML — no separate pages to go missing.
+   ============================================================ */
+const WS = (() => {
+
+/* ---------- Icons ---------- */
+const I = {
+  home:'<path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/>',
+  projects:'<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 4v16"/>',
+  tag:'<path d="M20.6 13.4 12 22l-9-9V3h10z"/><circle cx="7.5" cy="7.5" r="1.4"/>',
+  roster:'<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/>',
+  shift:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  reports:'<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
+  tickets:'<path d="M3 8a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4z"/>',
+  bell:'<path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  search:'<circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/>',
+  filter:'<path d="M3 5h18l-7 8v6l-4 2v-8z"/>',
+  grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+  list:'<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',
+  edit:'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
+  tagAdd:'<path d="M20.6 13.4 12 22l-9-9V3h10z"/><path d="M16 5h5M18.5 2.5v5"/>',
+  tagOff:'<path d="M20.6 13.4 12 22l-9-9V3h10z"/><path d="m4 4 16 16"/>',
+  move:'<path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20"/>',
+  view:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  check:'<path d="M20 6 9 17l-5-5"/>',
+  x:'<path d="M18 6 6 18M6 6l12 12"/>',
+  chevL:'<path d="m15 18-6-6 6-6"/>', chevR:'<path d="m9 18 6-6-6-6"/>', chevD:'<path d="m6 9 6 6 6-6"/>',
+  calendar:'<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/>',
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  alert:'<path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/>',
+  users:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13A4 4 0 0 1 16 11"/>',
+  download:'<path d="M12 3v12M7 10l5 5 5-5M5 21h14"/>',
+  briefcase:'<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>',
+  inbox:'<path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.5 5h13l3.5 7v6a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-6z"/>',
+  dots:'<circle cx="12" cy="5" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="19" r="1.6"/>',
+};
+const icon=(n,cls='')=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"${cls?` class="${cls}"`:''}>${I[n]||''}</svg>`;
+
+/* ---------- Navigation model (hash routes) ---------- */
+const NAV=[
+  {id:'home',label:'Home',icon:'home',href:'#/home',
+   fly:{head:'Home',links:[['#/projects','All Projects','projects'],['#/create-project','Create Project','plus'],['#/project-requests','Project Requests','inbox']]}},
+  {id:'projects',label:'Project\nMgmt',icon:'projects',href:'#/projects',
+   fly:{head:'Project Management',links:[['#/projects','All Projects','projects'],['#/create-project','Create Project','plus'],['#/project-requests','Project Requests','inbox'],['#/movements','Movements','move']]}},
+  {id:'tagging',label:'Employee\nTagging',icon:'tag',href:'#/tag-employees',
+   fly:{head:'Employee Tagging',links:[['#/tag-employees','Tag Employees','tagAdd'],['#/untag-employees','Untag Employees','tagOff'],['#/employee-requests','Employee Request','inbox']]}},
+  {id:'roster',label:'Roaster',icon:'roster',href:'#/roster',
+   fly:{head:'Roaster',links:[['#/roster','Roster Schedule','calendar']]}},
+  {id:'shift',label:'Shift\nMgmt',icon:'shift',href:'#/allowance',
+   fly:{head:'Shift Management',links:[['#/allowance','Allowance','shift'],['#/arrears','Arrears','clock']]}},
+  {id:'reports',label:'Reports',icon:'reports',href:'#/reports',
+   fly:{head:'Reports',links:[['#/reports','Payroll','reports'],['#/reports?tab=shift','Shift based reports','reports'],['#/reports?tab=hr','HR','users'],['#/reports?tab=technical','Technical','briefcase']]}},
+  {id:'tickets',label:'Tickets',icon:'tickets',href:'#/tickets',
+   fly:{head:'Tickets',links:[['#/tickets','My Tickets','tickets'],['#/tickets','Raise a Ticket','plus']]}},
+];
+
+/* ---------- Roles / personas ---------- */
+const ROLES={
+  manager :{label:'Manager',  user:'Rohan Malhotra', initials:'RM', modules:['home','projects','tagging','roster','tickets']},
+  hr      :{label:'HR / HRBP', user:'Neha Gupta',     initials:'NG', modules:['home','projects','tagging','reports','tickets']},
+  finance :{label:'Finance',   user:'Arjun Mehta',    initials:'AM', modules:['home','shift','reports','tickets']},
+  employee:{label:'Employee',  user:'Riya Kapoor',    initials:'RK', modules:['home','roster','tickets']},
+};
+let role='manager';
+function setRole(r){ if(!ROLES[r])return; role=r; route(); toast(`Viewing as ${ROLES[r].label}`); }
+
+function roleMenu(anchor){
+  document.querySelectorAll('.pop-menu').forEach(m=>m.remove());
+  const m=document.createElement('div'); m.className='role-menu pop-menu';
+  m.innerHTML='<div class="rm-head">Switch persona</div>'+Object.entries(ROLES).map(([k,r])=>
+    `<button data-r="${k}" class="${k===role?'on':''}"><span class="ravatar">${r.initials}</span><span class="rl">${r.user}<small>${r.label}</small></span>${k===role?icon('check','rc'):''}</button>`).join('');
+  document.body.appendChild(m);
+  const rc=anchor.getBoundingClientRect();
+  m.style.top=(rc.bottom+8+scrollY)+'px'; m.style.left=(rc.left+scrollX)+'px';
+  m.querySelectorAll('button').forEach(b=>b.onclick=()=>{m.remove();setRole(b.dataset.r);});
+  const close=e=>{if(!m.contains(e.target)&&!anchor.contains(e.target)){m.remove();document.removeEventListener('click',close);}};
+  setTimeout(()=>document.addEventListener('click',close),0);
+}
+const NOTIFS={
+  manager:[['inbox','var(--brand)','3 project requests awaiting HR approval','2h ago'],['tag','#29A251','Kabir Shah accepted tagging to Logic Labs','5h ago'],['roster','#FDB515','Roster for Week 2023/22 needs review','1d ago']],
+  hr:[['inbox','var(--brand)','4 tagging requests pending your approval','1h ago'],['users','#29A251','2 new employees added to directory','4h ago'],['inbox','#FDB515','Untag request from Cloud Connect','1d ago']],
+  finance:[['shift','var(--brand)','Allowance for July 2023 ready to calculate','30m ago'],['clock','#FDB515','3 arrears entries pending submission','3h ago'],['reports','#29A251','Payroll report for May generated','1d ago']],
+  employee:[['roster','var(--brand)','Your shift on Tue changed to Afternoon','1h ago'],['tickets','#29A251','Ticket TKT-004798 was resolved','6h ago'],['tag','#FDB515','You were tagged to Mobile Development','2d ago']],
+};
+function notifs(anchor){
+  document.querySelectorAll('.pop-menu').forEach(m=>m.remove());
+  const items=NOTIFS[role]||NOTIFS.manager;
+  const m=document.createElement('div'); m.className='notif-panel pop-menu';
+  m.innerHTML=`<div class="np-head">Notifications <span class="badge badge-pink">${items.length} new</span></div>`+
+    items.map(([ic,c,txt,t])=>`<div class="notif-item"><div class="ni-ic" style="background:${c}1f;color:${c}">${icon(ic)}</div><div><p>${txt}</p><span>${t}</span></div></div>`).join('')+
+    `<div class="notif-item" style="justify-content:center"><a class="btn-link" onclick="WS.toast('Marked all as read');document.querySelectorAll('.pop-menu').forEach(x=>x.remove());return false;">Mark all as read</a></div>`;
+  document.body.appendChild(m);
+  const rc=anchor.getBoundingClientRect();
+  m.style.top=(rc.bottom+8+scrollY)+'px'; m.style.left=Math.max(8,rc.right-320+scrollX)+'px';
+  const close=e=>{if(!m.contains(e.target)&&!anchor.contains(e.target)){m.remove();document.removeEventListener('click',close);}};
+  setTimeout(()=>document.addEventListener('click',close),0);
+}
+
+/* ---------- Shell ---------- */
+function shell(active, title, crumb, viewHtml){
+  const R=ROLES[role];
+  const nav=NAV.filter(n=>R.modules.includes(n.id)).map(n=>{
+    const links=n.fly.links.map(([h,t,ic])=>`<a href="${h}">${icon(ic,'di')}${t}</a>`).join('');
+    return `<div class="nav-item${n.id===active?' active':''}">
+      <a class="nav-link" href="${n.href}">${icon(n.icon)}<span>${n.label.replace('\n','<br>')}</span></a>
+      <div class="nav-flyout"><div class="fly-head">${n.fly.head}</div>${links}</div></div>`;
+  }).join('');
+  const c=(crumb||[]).map((x,i)=> i?`<b> / </b>${x}`:`<b>${x}</b>`).join('');
+  return `<header class="ws-header">
+      <a class="ws-logo" href="#/home"><span class="mark">W</span> WorkSync</a>
+      <div class="spacer"></div>
+      <div class="role-switch" title="Switch persona" onclick="WS.roleMenu(this)"><span class="rs-dot"></span>Viewing as <b>${R.label}</b>${icon('chevD')}</div>
+      <button class="icon-btn" title="Notifications" onclick="WS.notifs(this)">${icon('bell')}<span class="dot"></span></button>
+      <div class="ws-user"><div class="avatar">${R.initials}</div><div class="who"><small>Welcome!</small><strong>${R.user}</strong></div></div>
+    </header>
+    <aside class="ws-side">${nav}</aside>
+    <main class="ws-main">
+      ${title?`<div class="page-head"><div><h1>${title}</h1><div class="crumb">${c}</div></div><div id="ph-actions"></div></div>`:''}
+      <div id="view">${viewHtml}</div>
+    </main>
+    <footer class="ws-footer">All Rights Reserved 2023 · WorkSync</footer>`;
+}
+function headActions(html){const a=document.getElementById('ph-actions');if(a)a.innerHTML=html;}
+
+/* ---------- Modals / toast / menu ---------- */
+let overlayEl, closeTimer;
+function ensureOverlay(){if(!overlayEl){overlayEl=document.createElement('div');overlayEl.className='overlay';overlayEl.addEventListener('click',e=>{if(e.target===overlayEl)closeModal();});document.body.appendChild(overlayEl);}return overlayEl;}
+function openModal(html){clearTimeout(closeTimer);const o=ensureOverlay();o.innerHTML=html;requestAnimationFrame(()=>o.classList.add('show'));}
+function closeModal(){if(overlayEl){clearTimeout(closeTimer);overlayEl.classList.remove('show');closeTimer=setTimeout(()=>{overlayEl.innerHTML='';},200);}}
+function success(title,msg,{cta='Done',onClose}={}){
+  openModal(`<div class="modal"><button class="m-close" onclick="WS.closeModal()">${icon('x')}</button>
+    <div class="m-icon ok">${icon('check')}</div><h3>${title}</h3><p>${msg||''}</p>
+    <div class="m-actions"><button class="btn btn-primary" id="wsOkBtn">${cta}</button></div></div>`);
+  document.getElementById('wsOkBtn').onclick=()=>{closeModal();onClose&&onClose();};
+}
+function confirmDialog({title,msg,confirmText='Confirm',danger=false,onConfirm}={}){
+  openModal(`<div class="modal"><button class="m-close" onclick="WS.closeModal()">${icon('x')}</button>
+    <div class="m-icon warn">${icon('alert')}</div><h3>${title}</h3><p>${msg||''}</p>
+    <div class="m-actions"><button class="btn btn-ghost" onclick="WS.closeModal()">Cancel</button>
+    <button class="btn ${danger?'btn-danger':'btn-primary'}" id="wsCf">${confirmText}</button></div></div>`);
+  document.getElementById('wsCf').onclick=()=>{closeModal();onConfirm&&onConfirm();};
+}
+function toast(msg,kind='ok'){
+  let host=document.querySelector('.toast-host');
+  if(!host){host=document.createElement('div');host.className='toast-host';document.body.appendChild(host);}
+  const t=document.createElement('div');t.className='toast'+(kind==='warn'?' warn':'');
+  t.innerHTML=`${icon(kind==='warn'?'alert':'check','ti')}<span>${msg}</span>`;
+  host.appendChild(t);requestAnimationFrame(()=>t.classList.add('show'));
+  setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),300);},2800);
+}
+function contextMenu(anchor,items){
+  document.querySelectorAll('.ctx-menu').forEach(m=>m.remove());
+  const menu=document.createElement('div');menu.className='ctx-menu';
+  menu.innerHTML=items.map(it=>it==='-'?'<div class="sep"></div>':`<button class="${it.danger?'danger':''}">${icon(it.icon)||''}${it.label}</button>`).join('');
+  document.body.appendChild(menu);
+  const r=anchor.getBoundingClientRect();
+  menu.style.top=(r.bottom+6+window.scrollY)+'px';
+  let left=r.right-200+window.scrollX;if(left<8)left=8;menu.style.left=left+'px';
+  Array.from(menu.querySelectorAll('button')).forEach((b,i)=>{const it=items.filter(x=>x!=='-')[i];b.onclick=()=>{menu.remove();it.onClick&&it.onClick();};});
+  const close=e=>{if(!menu.contains(e.target)){menu.remove();document.removeEventListener('click',close);}};
+  setTimeout(()=>document.addEventListener('click',close),0);
+}
+
+/* ---------- Router ---------- */
+const views={};
+function go(hash){ if(location.hash===hash) route(); else location.hash=hash; }
+function parseHash(){
+  let h=location.hash.replace(/^#\/?/,'');
+  if(!h)h='home';
+  const [path,qs]=h.split('?');
+  const params={};(qs||'').split('&').forEach(kv=>{if(kv){const[k,v]=kv.split('=');params[k]=decodeURIComponent(v||'');}});
+  return {path,params};
+}
+function route(){
+  document.querySelectorAll('.pop-menu,.ctx-menu').forEach(m=>m.remove());
+  if(overlayEl){overlayEl.classList.remove('show');overlayEl.innerHTML='';}
+  const {path,params}=parseHash();
+  const v=views[path]||views.home;
+  const def=v(params);
+  document.getElementById('app').innerHTML=shell(def.active,def.title,def.crumb,def.html);
+  window.scrollTo(0,0);
+  if(def.setup)def.setup(params);
+  closeModal();
+}
+
+const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;};
+const qs=(s,r=document)=>r.querySelector(s);
+const qsa=(s,r=document)=>[...r.querySelectorAll(s)];
+
+function start(){
+  window.addEventListener('hashchange',route);
+  route();
+}
+
+return {icon,NAV,ROLES,setRole,roleMenu,notifs,getRole:()=>role,go,route,start,views,shell,headActions,openModal,closeModal,success,confirm:confirmDialog,toast,contextMenu,el,qs,qsa};
+})();
+
+/* ============================================================
+   VIEWS
+   ============================================================ */
+const B = {
+  status:s=>({tagged:'<span class="badge badge-green"><span class="bdot"></span>Tagged</span>',
+    untagged:'<span class="badge badge-amber"><span class="bdot"></span>Untagged</span>',
+    inactive:'<span class="badge badge-gray"><span class="bdot"></span>Inactive</span>'}[s]),
+  reqBadge:s=>({pending:'badge-amber',approved:'badge-green',rejected:'badge-red'}[s]),
+  cap:s=>s[0].toUpperCase()+s.slice(1)
+};
+
+/* ---- HOME ---- */
+WS.views.home=()=>({active:'home',title:'Home',crumb:['Home'],
+  html:`
+  <div class="welcome"><h2 id="welcomeH"></h2><p id="welcomeP"></p></div>
+  <div class="kpis" id="kpis"></div>
+  <div class="sec-title"><span class="t-ic">${WS.icon('grid')}</span> Quick actions</div>
+  <div class="mods" id="mods"></div>`,
+  setup(){
+    const role=WS.getRole(), R=WS.ROLES[role], first=R.user.split(' ')[0];
+    const cfg={
+      manager:{
+        hello:`Good morning, ${first} 👋`,
+        sub:"Here's what's happening across your projects, team and rosters today.",
+        kpis:[{ic:'projects',c:'#ED0988',n:32,l:'Created Projects'},{ic:'check',c:'#29A251',n:22,l:'Active Projects'},{ic:'inbox',c:'#FDB515',n:10,l:'My Pending Requests'},{ic:'users',c:'#7c5cbf',n:148,l:'Tagged Employees'}],
+        mods:[{ic:'plus',t:'Create Project',d:'Start a new project and set up shift tracking.',h:'#/create-project'},{ic:'tag',t:'Tag Employees',d:'Assign your team members to a project.',h:'#/tag-employees'},{ic:'roster',t:'Plan Roster',d:'Build weekly & monthly shift rosters for your team.',h:'#/roster'},{ic:'move',t:'Movements & Backtagging',d:'Track employee movement across projects.',h:'#/movements'},{ic:'inbox',t:'Project Requests',d:'See the status of requests you have raised.',h:'#/project-requests'},{ic:'tickets',t:'Raise a Ticket',d:'Report an issue to the support team.',h:'#/tickets'}]
+      },
+      hr:{
+        hello:`Welcome, ${first}`,
+        sub:'Approvals and people operations that need your attention today.',
+        kpis:[{ic:'inbox',c:'#ED0988',n:7,l:'Pending Approvals'},{ic:'tag',c:'#FDB515',n:4,l:'Tagging Requests'},{ic:'users',c:'#7c5cbf',n:148,l:'Active Employees'},{ic:'check',c:'#29A251',n:31,l:'Approved This Week'}],
+        mods:[{ic:'inbox',t:'Project Requests',d:'Review and approve project tagging requests.',h:'#/project-requests'},{ic:'inbox',t:'Employee Requests',d:'Approve employee tag & untag requests.',h:'#/employee-requests'},{ic:'tag',t:'Tag Employees',d:'Tag or untag employees on behalf of managers.',h:'#/tag-employees'},{ic:'reports',t:'HR Report',d:'Headcount, roles and supervisor mapping.',h:'#/reports?tab=hr'},{ic:'tickets',t:'Tickets',d:'Track people-related support tickets.',h:'#/tickets'}]
+      },
+      finance:{
+        hello:`Welcome, ${first}`,
+        sub:'Shift allowances, arrears and payroll for this cycle.',
+        kpis:[{ic:'shift',c:'#ED0988',n:'12,750',l:'Allowance (INR)'},{ic:'clock',c:'#FDB515',n:3,l:'Pending Arrears'},{ic:'users',c:'#7c5cbf',n:9,l:'Employees in Cycle'},{ic:'check',c:'#29A251',n:'May',l:'Last Payroll Run'}],
+        mods:[{ic:'shift',t:'Calculate Allowance',d:'Run shift-allowance calculation for the month.',h:'#/allowance'},{ic:'clock',t:'Arrears',d:'Review and submit arrears for payroll.',h:'#/arrears'},{ic:'reports',t:'Payroll Report',d:'Generate the monthly payroll report.',h:'#/reports'},{ic:'reports',t:'Shift-based Report',d:'Shift days and coverage by employee.',h:'#/reports?tab=shift'},{ic:'tickets',t:'Tickets',d:'Track finance-related support tickets.',h:'#/tickets'}]
+      },
+      employee:{
+        hello:`Hi, ${first} 👋`,
+        sub:'Your shifts, requests and tickets at a glance.',
+        kpis:[{ic:'roster',c:'#ED0988',n:5,l:'Shifts This Week'},{ic:'shift',c:'#7c5cbf',n:1,l:'Night Shifts'},{ic:'inbox',c:'#FDB515',n:1,l:'Open Requests'},{ic:'tickets',c:'#29A251',n:2,l:'My Tickets'}],
+        mods:[{ic:'roster',t:'My Roster',d:'View your weekly & monthly shift schedule.',h:'#/roster'},{ic:'tickets',t:'Raise a Ticket',d:'Report an issue with your roster or allowance.',h:'#/tickets'},{ic:'inbox',t:'My Requests',d:'Track the status of your tagging requests.',h:'#/employee-requests'}]
+      }
+    }[role];
+    WS.qs('#welcomeH').textContent=cfg.hello;
+    WS.qs('#welcomeP').textContent=cfg.sub;
+    WS.qs('#kpis').innerHTML=cfg.kpis.map(k=>`<div class="kpi"><div class="k-ic" style="background:${k.c}">${WS.icon(k.ic)}</div><b>${k.n}</b><span>${k.l}</span></div>`).join('');
+    WS.qs('#mods').innerHTML=cfg.mods.map(m=>`<a class="mod" href="${m.h}"><div class="m-ic">${WS.icon(m.ic)}</div><h3>${m.t}</h3><p>${m.d}</p><div class="go">Open ${WS.icon('chevR')}</div></a>`).join('');
+  }
+});
+
+/* ---- PROJECTS ---- */
+WS.views.projects=()=>({active:'projects',title:'Project Management',crumb:['Project Management','All Projects'],
+  html:`
+  <div class="hero-banner"><h2>Project Management</h2>
+    <div class="hero-stats"><div class="stat"><b>32</b><span>Created Projects</span></div><div class="stat"><b>22</b><span>Active Projects</span></div><div class="stat"><b>10</b><span>Inactive Projects</span></div></div>
+    <a class="btn btn-primary" href="#/create-project">Create Project</a></div>
+  <div class="pm-toolbar">
+    <div class="input-icon" style="width:300px">${WS.icon('search')}<input class="input" placeholder="Search project / PRCODE" id="search"></div>
+    <div style="position:relative"><button class="btn btn-ghost" id="filterBtn">Filter</button>
+      <div class="filter-pop hidden" id="filterPop">
+        <label><input type="checkbox" value="all" checked> All projects</label>
+        <label><input type="checkbox" value="active"> Active projects</label>
+        <label><input type="checkbox" value="inactive"> Inactive projects</label>
+        <label><input type="checkbox" value="tagged"> Tagged projects</label>
+        <label><input type="checkbox" value="untagged"> Untagged projects</label>
+        <div class="fp-actions"><button class="btn btn-subtle btn-sm grow" id="fReset">Reset</button><button class="btn btn-primary btn-sm grow" id="fDone">Done</button></div>
+      </div></div>
+    <div class="grow"></div>
+    <div class="viewtoggle"><button id="vGrid" class="on" title="Grid view">${WS.icon('grid')}</button><button id="vList" title="List view">${WS.icon('list')}</button></div>
+  </div>
+  <div id="content"></div>`,
+  setup(){
+    let view='grid',filters=['all'],term='';
+    const menuFor=p=>[
+      {icon:'edit',label:'Edit Project',onClick:()=>WS.go('#/create-project?edit='+encodeURIComponent(p.name))},
+      {icon:'tagAdd',label:'Project Tag',onClick:()=>WS.go('#/project-tagging?p='+encodeURIComponent(p.name))},
+      {icon:'edit',label:'Edit Project Tagging',onClick:()=>WS.go('#/project-tagging?p='+encodeURIComponent(p.name))},
+      {icon:'move',label:'Movements & Backtagging',onClick:()=>WS.go('#/movements?p='+encodeURIComponent(p.name))},'-',
+      {icon:'tagOff',label:'Project Untag',danger:true,onClick:()=>WS.confirm({title:'Untag this project?',msg:`"${p.name}" and all tagged employees will be untagged from shift tracking.`,confirmText:'Untag Project',danger:true,onConfirm:()=>WS.success('Project Untagged','The project has been untagged successfully.')})}];
+    const filtered=()=>DATA.projects.filter(p=>{
+      const t=!term||(p.name+p.code).toLowerCase().includes(term.toLowerCase());
+      let f=filters.includes('all');
+      if(!f){if(filters.includes('tagged')&&p.status==='tagged')f=true;if(filters.includes('untagged')&&p.status==='untagged')f=true;if(filters.includes('inactive')&&p.status==='inactive')f=true;if(filters.includes('active')&&p.status!=='inactive')f=true;}
+      return t&&f;});
+    function render(){
+      const list=filtered(),c=WS.qs('#content');
+      if(!list.length){c.innerHTML=`<div class="empty-state"><div class="ei">${WS.icon('search')}</div><h3>No projects found</h3><p>Try a different search term or filter.</p></div>`;return;}
+      if(view==='grid'){
+        c.innerHTML='<div class="proj-grid">'+list.map((p,i)=>`
+          <div class="proj-card ${p.status==='inactive'?'inactive':''}"><div class="pc-top"><div><div class="pc-name">${p.name}</div><div class="pc-code">${p.code}</div></div><div class="row" style="gap:8px">${B.status(p.status)}<button class="kebab" data-i="${i}">${WS.icon('dots')}</button></div></div>
+          <div class="proj-meta"><div class="m"><label>Start Date</label><span>${p.start}</span></div><div class="m"><label>End Date</label><span>${p.end}</span></div><div class="m"><label>Business Unit</label><span>${p.bu}</span></div><div class="m"><label>Org Unit</label><span>${p.ou}</span></div><div class="m"><label>Team Lead</label><span>${p.lead}</span></div><div class="m"><label>Tagged Employees</label><span>${p.tagged}</span></div></div></div>`).join('')+'</div>';
+      } else {
+        c.innerHTML='<div class="table-wrap">'+list.map((p,i)=>`
+          <div class="list-row"><div><div class="v">${p.name}</div><div class="pc-code">${p.code}</div></div><div><label>Start</label><div class="v">${p.start}</div></div><div><label>End</label><div class="v">${p.end}</div></div><div><label>Business Unit</label><div class="v">${p.bu}</div></div><div><label>Team Lead</label><div class="v">${p.lead}</div></div><div><label>Tagged</label><div class="v">${p.tagged}</div></div><div>${B.status(p.status)}</div><button class="kebab" data-i="${i}">${WS.icon('dots')}</button></div>`).join('')+'</div>';
+      }
+      c.querySelectorAll('.kebab').forEach(b=>b.onclick=e=>{e.stopPropagation();WS.contextMenu(b,menuFor(list[+b.dataset.i]));});
+    }
+    render();
+    WS.qs('#vGrid').onclick=()=>{view='grid';WS.qs('#vGrid').classList.add('on');WS.qs('#vList').classList.remove('on');render();};
+    WS.qs('#vList').onclick=()=>{view='list';WS.qs('#vList').classList.add('on');WS.qs('#vGrid').classList.remove('on');render();};
+    WS.qs('#search').oninput=e=>{term=e.target.value;render();};
+    const fb=WS.qs('#filterBtn'),fp=WS.qs('#filterPop');
+    fb.onclick=()=>fp.classList.toggle('hidden');
+    document.addEventListener('click',e=>{if(!fp.contains(e.target)&&e.target!==fb)fp.classList.add('hidden');});
+    fp.querySelectorAll('input').forEach(inp=>inp.onchange=()=>{if(inp.value==='all'&&inp.checked){fp.querySelectorAll('input').forEach(x=>{if(x.value!=='all')x.checked=false;});}else if(inp.value!=='all'&&inp.checked){fp.querySelector('input[value=all]').checked=false;}});
+    WS.qs('#fReset').onclick=()=>{fp.querySelectorAll('input').forEach(x=>x.checked=x.value==='all');};
+    WS.qs('#fDone').onclick=()=>{filters=[...fp.querySelectorAll('input:checked')].map(x=>x.value);if(!filters.length)filters=['all'];fp.classList.add('hidden');render();};
+  }
+});
+
+/* ---- CREATE / EDIT PROJECT ---- */
+WS.views['create-project']=(params)=>{
+  const editName=params.edit;
+  return {active:'projects',title:editName?'Edit Project':'Create Project',crumb:editName?['Project Management','Edit Project']:['Project Management','Create Project'],
+  html:`<div class="card card-pad form-card" style="max-width:1080px">
+    <div class="between mb-24"><h2 style="font-size:17px">Project Details</h2><span class="badge badge-pink">${editName?'Editing':'New Project'}</span></div>
+    <div class="form-section"><div class="form-grid">
+      <div class="field col-1"><label>Project Name <span class="req">*</span></label><input class="input" id="pname" placeholder="Project ABC" value="${editName||''}"></div>
+      <div class="field"><label>Project Start Date <span class="req">*</span></label><input class="input" value="15 May 2023" onfocus="this.type='date'"></div>
+      <div class="field"><label>Project End Date <span class="req">*</span></label><input class="input" value="15 May 2026" onfocus="this.type='date'"></div>
+      <div class="field"><label>Business Unit</label><select class="select"><option>Technology Services Management</option><option>Business Operations</option><option>IT &amp; Infrastructure</option></select></div>
+      <div class="field"><label>Organization Unit</label><select class="select"><option>GO-IT</option><option>GO-BO</option></select></div>
+      <div class="field"><label>Select Team Lead (optional)</label><select class="select"><option>John Doe</option><option>Jowel Dwens</option><option>Shawn Givens</option></select></div>
+      <div class="field col-3"><label>Description (optional)</label><textarea class="textarea" placeholder="Please describe about the project"></textarea></div>
+    </div></div>
+    <div class="form-section"><div class="sec-title">Organization Levels</div><div class="form-grid">
+      ${[1,2,3,4,5].map(n=>`<div class="field"><label>Organization Level ${n}</label><input class="input" value="XYZ"></div>`).join('')}
+    </div></div>
+    <div class="form-section"><div class="tag-q"><strong style="font-size:14px">Do you want to do project tagging?</strong>
+      <div class="chip-group" id="tagChips"><button class="chip on" data-v="yes">Yes</button><button class="chip" data-v="no">No</button></div></div></div>
+    <div class="form-actions"><a class="btn btn-ghost" href="#/projects">Cancel</a><button class="btn btn-primary btn-lg" id="submitBtn">Submit and Proceed</button></div>
+  </div>`,
+  setup(){
+    let doTag='yes';
+    WS.qsa('#tagChips .chip').forEach(c=>c.onclick=()=>{WS.qsa('#tagChips .chip').forEach(x=>x.classList.remove('on'));c.classList.add('on');doTag=c.dataset.v;WS.qs('#submitBtn').textContent=doTag==='yes'?'Submit and Proceed':'Create Project';});
+    WS.qs('#submitBtn').onclick=()=>{
+      const name=WS.qs('#pname').value.trim();
+      if(!name){WS.toast('Please enter a project name','warn');WS.qs('#pname').focus();return;}
+      if(editName){WS.success('Project Updated','Your changes to the project have been saved successfully.',{cta:'Back to Projects',onClose:()=>WS.go('#/projects')});return;}
+      if(doTag==='yes')WS.success('Project Created Successfully','Your project is successfully created with Project ID "PRCODE003415". You can now begin with project tagging.',{cta:'Continue Project Tagging',onClose:()=>WS.go('#/project-tagging?p='+encodeURIComponent(name))});
+      else WS.success('Project Created Successfully',`Your project "${name}" is successfully created with Project ID "PRCODE003415".`,{cta:'Back to Projects',onClose:()=>WS.go('#/projects')});
+    };
+  }};
+};
+
+/* ---- PROJECT TAGGING ---- */
+WS.views['project-tagging']=(params)=>{
+  const p=DATA.projects.find(x=>x.name===params.p)||DATA.projects[0];
+  return {active:'projects',title:'Project Tagging',crumb:['Project Management','Create Project','Project Tagging'],
+  html:`
+  <div class="proj-summary mb-24">${summaryStrip(p)}</div>
+  <div class="card card-pad" style="max-width:1080px">
+    <div class="between mb-16"><div class="sec-title" style="margin:0">Project Tagging · Shift schedule</div><span class="badge badge-green"><span class="bdot"></span>Tagged</span></div>
+    <p class="hint mb-24">* Effective start and end dates define the duration for which the project will be a 'Shift project'.</p>
+    <div class="form-grid">
+      <div class="field"><label>Effective Start Date <span class="req">*</span></label><input class="input" placeholder="Select Date" onfocus="this.type='date'"></div>
+      <div class="field"><label>Effective End Date <span class="req">*</span></label><input class="input" placeholder="Select Date" onfocus="this.type='date'"></div>
+      <div class="field"><label>Select Shift</label><select class="select"><option>All Shift</option><option>Morning Shift (0500-0759)</option><option>Afternoon Shift (1300-1759)</option><option>Night Shift (1800-0459)</option></select></div>
+      <div class="field col-3"><label>Remarks (optional)</label><textarea class="textarea" placeholder="Enter here"></textarea></div>
+    </div>
+    <div class="form-actions" style="display:flex;justify-content:flex-end;gap:12px"><a class="btn btn-ghost" href="#/projects">Cancel</a><button class="btn btn-primary" id="submit">Submit</button></div>
+  </div>`,
+  setup(){WS.qs('#submit').onclick=()=>WS.success('Project Tagged Successfully','The project is now a shift project for the selected duration. You can continue by tagging employees.',{cta:'Tag Employees',onClose:()=>WS.go('#/tag-employees?p='+encodeURIComponent(p.name))});}};
+};
+function summaryStrip(p,extra){
+  return `<div class="ps"><label>Project</label><span>${p.name}</span></div>
+  <div class="ps"><label>Code</label><span>${p.code}</span></div>
+  <div class="ps"><label>Start Date</label><span>${p.start}</span></div>
+  <div class="ps"><label>End Date</label><span>${p.end}</span></div>
+  <div class="ps"><label>Org Unit</label><span>${p.ou}</span></div>
+  <div class="ps"><label>Team Lead</label><span>${p.lead}</span></div>${extra||''}`;
+}
+
+/* ---- TAG EMPLOYEES (wizard) ---- */
+WS.views['tag-employees']=(params)=>{
+  const p=DATA.projects.find(x=>x.name===params.p)||DATA.projects[0];
+  return {active:'tagging',title:'Employee Tagging',crumb:['Employee Tagging','Tag Employees'],
+  html:`<div class="proj-summary mb-24">${summaryStrip(p)}</div>
+  <div class="card card-pad" style="max-width:1080px"><div class="stepper" id="stepper"></div><div id="stepBody"></div>
+    <div class="wiz-actions"><button class="btn btn-ghost" id="prevBtn">Previous</button><button class="btn btn-primary" id="nextBtn">Next</button></div></div>`,
+  setup(){
+    const steps=['Select Project','Select Employee','Confirm & Submit'];
+    let step=0,selectedProject=p.name,selected=new Set();
+    const drawStepper=()=>WS.qs('#stepper').innerHTML=steps.map((s,i)=>{const cls=i<step?'done':i===step?'active':'';return `<div class="step ${cls}"><div class="num">${i<step?WS.icon('check'):(i+1)}</div><div class="lbl">${s}</div></div>`+(i<steps.length-1?`<div class="bar ${i<step?'filled':''}"></div>`:'');}).join('');
+    function render(){
+      drawStepper();
+      const body=WS.qs('#stepBody'),next=WS.qs('#nextBtn');
+      WS.qs('#prevBtn').style.visibility=step===0?'hidden':'visible';
+      if(step===0){next.textContent='Next';
+        body.innerHTML=`<div class="row mb-16" style="gap:12px"><div class="input-icon grow">${WS.icon('search')}<input class="input" placeholder="Search project / PRCODE" id="projSearch"></div><select class="select" style="width:180px"><option>All Projects</option></select></div><div class="pick-list" id="projList"></div>`;
+        const draw=(t='')=>{WS.qs('#projList').innerHTML=DATA.projects.filter(x=>(x.name+x.code).toLowerCase().includes(t.toLowerCase())).map(x=>`<div class="pick ${x.name===selectedProject?'sel':''}" data-n="${x.name}"><div class="cbx">${WS.icon('check')}</div><div><div class="nm">${x.name}</div><div class="sub">${x.code} · ${x.ou}</div></div></div>`).join('');WS.qsa('#projList .pick').forEach(elx=>elx.onclick=()=>{selectedProject=elx.dataset.n;draw(WS.qs('#projSearch').value);});};
+        draw();WS.qs('#projSearch').oninput=e=>draw(e.target.value);
+      }
+      if(step===1){next.textContent='Next';
+        body.innerHTML=`<div class="row mb-16" style="gap:12px"><div class="input-icon grow">${WS.icon('search')}<input class="input" placeholder="Search employee" id="empSearch"></div><div class="segmented"><button class="on" data-f="all">All</button><button data-f="untagged">Untagged</button><button data-f="pending">Pending</button><button data-f="tagged">Tagged</button></div></div><div class="pick-list" id="empList"></div>`;
+        let f='all';
+        const draw=(t='')=>{WS.qs('#empList').innerHTML=DATA.employees.filter(e=>f==='all'||e.status===f).filter(e=>(e.name+e.id).toLowerCase().includes(t.toLowerCase())).map(e=>`<div class="pick ${selected.has(e.id)?'sel':''}" data-id="${e.id}"><div class="cbx">${WS.icon('check')}</div><div class="grow"><div class="nm">${e.name}</div><div class="sub">${e.id} · ${e.role}</div></div><span class="badge badge-${e.status==='tagged'?'green':e.status==='pending'?'amber':'gray'}">${e.status}</span></div>`).join('');WS.qsa('#empList .pick').forEach(elx=>elx.onclick=()=>{const id=elx.dataset.id;selected.has(id)?selected.delete(id):selected.add(id);draw(WS.qs('#empSearch').value);});};
+        draw();WS.qs('#empSearch').oninput=e=>draw(e.target.value);
+        WS.qsa('.segmented button').forEach(b=>b.onclick=()=>{WS.qsa('.segmented button').forEach(x=>x.classList.remove('on'));b.classList.add('on');f=b.dataset.f;draw(WS.qs('#empSearch').value);});
+      }
+      if(step===2){next.textContent='Confirm & Submit';
+        const chosen=DATA.employees.filter(e=>selected.has(e.id));
+        body.innerHTML=`<div class="form-grid mb-24"><div class="field"><label>Effective Start Date <span class="req">*</span></label><input class="input" type="date" value="2023-08-08"></div><div class="field"><label>Effective End Date <span class="req">*</span></label><input class="input" type="date" value="2024-08-08"></div><div class="field"><label>Selected Shift</label><select class="select"><option>All Shift</option><option>Morning</option><option>Afternoon</option><option>Night</option></select></div></div>
+        <div class="sec-title">Selected employees (${chosen.length})</div>
+        ${chosen.length?`<div class="table-wrap"><table class="data"><thead><tr><th>ID</th><th>Name</th><th>Role</th><th>Start Date</th><th>End Date</th></tr></thead><tbody>${chosen.map(e=>`<tr><td class="strong">${e.id}</td><td>${e.name}</td><td class="muted">${e.role}</td><td>08/08/2023</td><td>08/08/2024</td></tr>`).join('')}</tbody></table></div>`:`<div class="empty-state"><div class="ei">${WS.icon('users')}</div><h3>No employees selected</h3><p>Go back to step 2 to select employees.</p></div>`}`;
+      }
+    }
+    WS.qs('#nextBtn').onclick=()=>{if(step===1&&selected.size===0){WS.toast('Select at least one employee','warn');return;}if(step<2){step++;render();return;}WS.success('Employee Tagged Successfully',`${selected.size} employee(s) have been tagged to "${selectedProject}" for the selected duration.`,{cta:'Back to Projects',onClose:()=>WS.go('#/projects')});};
+    WS.qs('#prevBtn').onclick=()=>{if(step>0){step--;render();}};
+    render();
+  }};
+};
+
+/* ---- UNTAG EMPLOYEES (wizard) ---- */
+WS.views['untag-employees']=()=>({active:'tagging',title:'Employee Untagging',crumb:['Employee Tagging','Untag Employees'],
+  html:`<div class="card card-pad" style="max-width:1000px"><div class="stepper" id="stepper"></div><div id="stepBody"></div>
+    <div class="wiz-actions"><button class="btn btn-ghost" id="prevBtn">Previous</button><button class="btn btn-danger" id="nextBtn">Next</button></div></div>`,
+  setup(){
+    const steps=['Select Project','Select Employee','Confirm Untag'];
+    let step=0,selProject=DATA.projects.find(p=>p.tagged>0).name,selected=new Set();
+    const drawStepper=()=>WS.qs('#stepper').innerHTML=steps.map((s,i)=>{const cls=i<step?'done':i===step?'active':'';return `<div class="step ${cls}"><div class="num">${i<step?WS.icon('check'):(i+1)}</div><div class="lbl">${s}</div></div>`+(i<steps.length-1?`<div class="bar ${i<step?'filled':''}"></div>`:'');}).join('');
+    function render(){
+      drawStepper();const body=WS.qs('#stepBody');WS.qs('#prevBtn').style.visibility=step===0?'hidden':'visible';const next=WS.qs('#nextBtn');
+      if(step===0){next.textContent='Next';
+        body.innerHTML=`<div class="input-icon mb-16">${WS.icon('search')}<input class="input" placeholder="Search tagged project" id="q"></div><div class="pick-list" id="l"></div>`;
+        const draw=(t='')=>{WS.qs('#l').innerHTML=DATA.projects.filter(x=>x.tagged>0).filter(x=>(x.name+x.code).toLowerCase().includes(t.toLowerCase())).map(x=>`<div class="pick ${x.name===selProject?'sel':''}" data-n="${x.name}"><div class="cbx">${WS.icon('check')}</div><div class="grow"><div class="nm">${x.name}</div><div class="sub">${x.code} · ${x.tagged} tagged employees</div></div></div>`).join('');WS.qsa('#l .pick').forEach(elx=>elx.onclick=()=>{selProject=elx.dataset.n;draw(WS.qs('#q').value);});};
+        draw();WS.qs('#q').oninput=e=>draw(e.target.value);
+      }
+      if(step===1){next.textContent='Next';
+        body.innerHTML=`<div class="input-icon mb-16">${WS.icon('search')}<input class="input" placeholder="Search employee" id="q"></div><div class="pick-list" id="l"></div>`;
+        const draw=(t='')=>{WS.qs('#l').innerHTML=DATA.employees.filter(e=>(e.name+e.id).toLowerCase().includes(t.toLowerCase())).map(e=>`<div class="pick ${selected.has(e.id)?'sel':''}" data-id="${e.id}"><div class="cbx">${WS.icon('check')}</div><div class="grow"><div class="nm">${e.name}</div><div class="sub">${e.id} · ${e.role}</div></div></div>`).join('');WS.qsa('#l .pick').forEach(elx=>elx.onclick=()=>{const id=elx.dataset.id;selected.has(id)?selected.delete(id):selected.add(id);draw(WS.qs('#q').value);});};
+        draw();WS.qs('#q').oninput=e=>draw(e.target.value);
+      }
+      if(step===2){next.textContent='Untag Employees';
+        const chosen=DATA.employees.filter(e=>selected.has(e.id));
+        body.innerHTML=`<div class="proj-summary mb-24"><div class="ps"><label>Project</label><span>${selProject}</span></div><div class="ps"><label>Employees to untag</label><span>${chosen.length}</span></div></div><div class="field mb-24" style="max-width:420px"><label>Remarks (optional)</label><textarea class="textarea" placeholder="Reason for untagging"></textarea></div>${chosen.length?`<div class="table-wrap"><table class="data"><thead><tr><th>ID</th><th>Name</th><th>Role</th></tr></thead><tbody>${chosen.map(e=>`<tr><td class="strong">${e.id}</td><td>${e.name}</td><td class="muted">${e.role}</td></tr>`).join('')}</tbody></table></div>`:`<div class="empty-state"><div class="ei">${WS.icon('users')}</div><h3>No employees selected</h3></div>`}`;
+      }
+    }
+    WS.qs('#nextBtn').onclick=()=>{if(step===1&&selected.size===0){WS.toast('Select at least one employee','warn');return;}if(step<2){step++;render();return;}WS.confirm({title:'Are you sure?',msg:`${selected.size} employee(s) will be untagged from "${selProject}". Their shift tracking for this project will stop.`,confirmText:'Yes, Untag',danger:true,onConfirm:()=>WS.success('Employee Untagged Successfully',`${selected.size} employee(s) have been untagged from ${selProject}.`,{cta:'Back to Projects',onClose:()=>WS.go('#/projects')})});};
+    WS.qs('#prevBtn').onclick=()=>{if(step>0){step--;render();}};
+    render();
+  }
+});
+
+/* ---- PROJECT REQUESTS ---- */
+WS.views['project-requests']=()=>({active:'projects',title:'Project Requests',crumb:['Project Management','Project Requests'],
+  html:`<div class="table-wrap"><div class="tbl-toolbar">
+    <div class="row" style="gap:12px"><div class="input-icon" style="width:280px">${WS.icon('search')}<input class="input" placeholder="Search project requests" id="search"></div>
+    <select class="select" style="width:170px"><option>Tag requests</option><option>Untag requests</option></select></div>
+    <div class="segmented" id="tabs"><button class="on" data-t="pending">Pending for Approval</button><button data-t="history">Request History</button></div></div>
+    <table class="data"><thead><tr><th>Request ID</th><th>Project Code</th><th>Project Name</th><th>Tagged Date</th><th>Status</th><th style="text-align:right">Action</th></tr></thead><tbody id="rows"></tbody></table>
+    <div class="pagination"><span>Showing 10 out of 35 entries</span><div class="pages"><button id="pl"></button><button class="on">1</button><button>2</button><button>3</button><button>4</button><button>5</button><button id="pr"></button></div></div></div>`,
+  setup(){
+    WS.qs('#pl').innerHTML=WS.icon('chevL');WS.qs('#pr').innerHTML=WS.icon('chevR');
+    let tab='pending',term='';
+    const list=()=>DATA.requests.filter(r=>{const t=!term||(r.name+r.code+r.rid).toLowerCase().includes(term.toLowerCase());return t&&(tab==='pending'?r.status==='pending':r.status!=='pending');});
+    function render(){
+      const rows=list();
+      WS.qs('#rows').innerHTML=rows.length?rows.map((r,i)=>`<tr><td class="strong">${r.rid}</td><td>${r.code}</td><td>${r.name}</td><td class="muted">${r.date}</td><td><span class="badge ${B.reqBadge(r.status)}"><span class="bdot"></span>${B.cap(r.status)}</span></td><td style="text-align:right"><button class="btn btn-link" data-i="${i}">View</button></td></tr>`).join(''):`<tr><td colspan="6"><div class="empty-state"><div class="ei">${WS.icon('inbox')}</div><h3>No requests here</h3><p>You're all caught up.</p></div></td></tr>`;
+      WS.qsa('#rows .btn-link').forEach(b=>b.onclick=()=>openDetail(rows[+b.dataset.i]));
+    }
+    function openDetail(r){
+      const pending=r.status==='pending';
+      WS.openModal(`<div class="modal wide"><button class="m-close" onclick="WS.closeModal()">${WS.icon('x')}</button><div class="modal-head"><h3>Request ${r.rid}</h3><span class="badge ${B.reqBadge(r.status)}"><span class="bdot"></span>${B.cap(r.status)}</span></div>
+      <div class="proj-summary" style="background:var(--gray-50)"><div class="ps"><label>Project</label><span>${r.name}</span></div><div class="ps"><label>Project Code</label><span>${r.code}</span></div><div class="ps"><label>Requested Date</label><span>${r.date}</span></div><div class="ps"><label>Request Type</label><span>Project Tag</span></div><div class="ps"><label>Raised By</label><span>${WS.ROLES.manager.user}</span></div></div>
+      <div class="m-actions" style="margin-top:22px">${pending?`<button class="btn btn-danger" id="rej">Reject</button><button class="btn btn-primary" id="reqApprove">Approve</button>`:`<button class="btn btn-ghost" onclick="WS.closeModal()">Close</button>`}</div></div>`);
+      if(pending){WS.qs('#reqApprove').onclick=()=>{r.status='approved';WS.closeModal();WS.success('Request Approved','The project tagging request has been approved successfully.',{onClose:render});};WS.qs('#rej').onclick=()=>{WS.closeModal();WS.confirm({title:'Reject this request?',msg:'The requester will be notified that this project request was rejected.',confirmText:'Reject Request',danger:true,onConfirm:()=>{r.status='rejected';WS.success('Request Rejected','The project request has been rejected.',{onClose:render});}});};}
+    }
+    WS.qsa('#tabs button').forEach(b=>b.onclick=()=>{WS.qsa('#tabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');tab=b.dataset.t;render();});
+    WS.qs('#search').oninput=e=>{term=e.target.value;render();};
+    render();
+  }
+});
+
+/* ---- EMPLOYEE REQUESTS ---- */
+WS.views['employee-requests']=()=>({active:'tagging',title:'Employee Requests',crumb:['Employee Tagging','Employee Request'],
+  html:`<div class="table-wrap"><div class="tbl-toolbar"><div class="input-icon" style="width:280px">${WS.icon('search')}<input class="input" placeholder="Search employee" id="search"></div>
+    <div class="segmented" id="tabs"><button class="on" data-t="pending">Pending for Approval</button><button data-t="history">Request History</button></div></div>
+    <table class="data"><thead><tr><th>Emp ID</th><th>Employee Name</th><th>Project</th><th>Request Type</th><th>Request Date</th><th>Status</th><th style="text-align:right">Action</th></tr></thead><tbody id="rows"></tbody></table>
+    <div class="pagination"><span>Showing 6 out of 18 entries</span><div class="pages"><button id="pl"></button><button class="on">1</button><button>2</button><button>3</button><button id="pr"></button></div></div></div>`,
+  setup(){
+    WS.qs('#pl').innerHTML=WS.icon('chevL');WS.qs('#pr').innerHTML=WS.icon('chevR');
+    let tab='pending',term='';
+    const list=()=>DATA.empRequests.filter(r=>{const t=!term||(r.name+r.id+r.project).toLowerCase().includes(term.toLowerCase());return t&&(tab==='pending'?r.status==='pending':r.status!=='pending');});
+    function render(){
+      const rows=list();
+      WS.qs('#rows').innerHTML=rows.length?rows.map((r,i)=>`<tr><td class="strong">${r.id}</td><td>${r.name}</td><td>${r.project}</td><td><span class="badge ${r.type==='Untag'?'badge-gray':'badge-pink'}">${r.type}</span></td><td class="muted">${r.date}</td><td><span class="badge ${B.reqBadge(r.status)}"><span class="bdot"></span>${B.cap(r.status)}</span></td><td style="text-align:right">${r.status==='pending'?`<button class="btn btn-sm btn-danger" data-i="${i}" data-a="rej">Reject</button> <button class="btn btn-sm btn-primary" data-i="${i}" data-a="app">Approve</button>`:`<button class="btn btn-link" data-i="${i}" data-a="view">View</button>`}</td></tr>`).join(''):`<tr><td colspan="7"><div class="empty-state"><div class="ei">${WS.icon('inbox')}</div><h3>No requests here</h3><p>You're all caught up.</p></div></td></tr>`;
+      WS.qsa('#rows button').forEach(b=>b.onclick=()=>{const r=rows[+b.dataset.i],a=b.dataset.a;if(a==='app'){r.status='approved';WS.success('Request Approved',`${r.name} has been tagged to ${r.project}.`,{onClose:render});}if(a==='rej'){WS.confirm({title:'Reject request?',msg:`Reject ${r.type.toLowerCase()} request for ${r.name}?`,confirmText:'Reject',danger:true,onConfirm:()=>{r.status='rejected';WS.success('Request Rejected','The employee request has been rejected.',{onClose:render});}});}if(a==='view')WS.openModal(`<div class="modal wide"><button class="m-close" onclick="WS.closeModal()">${WS.icon('x')}</button><div class="modal-head"><h3>${r.name}</h3><span class="badge ${B.reqBadge(r.status)}"><span class="bdot"></span>${B.cap(r.status)}</span></div><div class="proj-summary" style="background:var(--gray-50)"><div class="ps"><label>Emp ID</label><span>${r.id}</span></div><div class="ps"><label>Project</label><span>${r.project}</span></div><div class="ps"><label>Request Type</label><span>${r.type}</span></div><div class="ps"><label>Requested Date</label><span>${r.date}</span></div><div class="ps"><label>Raised By</label><span>${r.name}</span></div></div><div class="m-actions" style="margin-top:22px"><button class="btn btn-ghost" onclick="WS.closeModal()">Close</button></div></div>`);});
+    }
+    WS.qsa('#tabs button').forEach(b=>b.onclick=()=>{WS.qsa('#tabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');tab=b.dataset.t;render();});
+    WS.qs('#search').oninput=e=>{term=e.target.value;render();};
+    render();
+  }
+});
+
+/* ---- MOVEMENTS ---- */
+WS.views.movements=(params)=>{
+  const p=DATA.projects.find(x=>x.name===params.p)||DATA.projects[0];
+  return {active:'projects',title:'Movements & Backtagging',crumb:['Project Management','Movements'],
+  html:`<div class="proj-summary mb-24"><div class="ps"><label>Project</label><span>${p.name}</span></div><div class="ps"><label>Code</label><span>${p.code}</span></div><div class="ps"><label>Start Date</label><span>${p.start}</span></div><div class="ps"><label>End Date</label><span>${p.end}</span></div><div class="ps"><label>Org Unit</label><span>${p.ou}</span></div><div class="ps"><label>Currently Tagged</label><span>${p.tagged}</span></div></div>
+  <div class="table-wrap"><div class="tbl-toolbar"><div class="row" style="gap:12px"><div class="input-icon" style="width:280px">${WS.icon('search')}<input class="input" placeholder="Search employee" id="search"></div>
+    <select class="select" style="width:170px" id="typeSel"><option value="all">All movements</option><option value="Tagged">Tagged</option><option value="Untagged">Untagged</option><option value="Back-tagged">Back-tagged</option></select></div>
+    <button class="btn btn-primary btn-sm" id="backtag">Back-tag Employee</button></div>
+    <table class="data"><thead><tr><th>Emp ID</th><th>Employee Name</th><th>Movement</th><th>Effective Start</th><th>Effective End</th><th>Recorded On</th><th>Remarks</th></tr></thead><tbody id="rows"></tbody></table>
+    <div class="pagination"><span id="count"></span><div class="pages"><button id="pl"></button><button class="on">1</button><button>2</button><button id="pr"></button></div></div></div>`,
+  setup(){
+    WS.qs('#pl').innerHTML=WS.icon('chevL');WS.qs('#pr').innerHTML=WS.icon('chevR');
+    const types=['Tagged','Untagged','Back-tagged'];
+    const movements=DATA.employees.map((e,i)=>({id:e.id,name:e.name,type:types[i%3],start:['05/22/2023','04/18/2023','06/01/2023','03/30/2023'][i%4],end:i%3===1?['05/22/2024','04/18/2024'][i%2]:'—',recorded:['24 Apr 2023','18 Apr 2023','02 Apr 2023','28 Mar 2023'][i%4],remarks:['Initial tagging','Project rotation','Corrected effective date','Returned to project','—'][i%5]}));
+    let term='',type='all';
+    const badge=t=>({'Tagged':'badge-green','Untagged':'badge-gray','Back-tagged':'badge-pink'}[t]);
+    const list=()=>movements.filter(m=>{const t=!term||(m.name+m.id).toLowerCase().includes(term.toLowerCase());return t&&(type==='all'||m.type===type);});
+    function render(){const rows=list();WS.qs('#count').textContent=`Showing ${rows.length} movement record${rows.length!==1?'s':''}`;WS.qs('#rows').innerHTML=rows.length?rows.map(m=>`<tr><td class="strong">${m.id}</td><td>${m.name}</td><td><span class="badge ${badge(m.type)}"><span class="bdot"></span>${m.type}</span></td><td>${m.start}</td><td class="${m.end==='—'?'muted':''}">${m.end}</td><td class="muted">${m.recorded}</td><td class="muted">${m.remarks}</td></tr>`).join(''):`<tr><td colspan="7"><div class="empty-state"><div class="ei">${WS.icon('move')}</div><h3>No movement records</h3></div></td></tr>`;}
+    render();
+    WS.qs('#search').oninput=e=>{term=e.target.value;render();};
+    WS.qs('#typeSel').onchange=e=>{type=e.target.value;render();};
+    WS.qs('#backtag').onclick=()=>{WS.openModal(`<div class="modal wide"><button class="m-close" onclick="WS.closeModal()">${WS.icon('x')}</button><div class="modal-head"><h3>Back-tag Employee</h3></div><p class="hint mb-24">Re-tag an employee to <strong>${p.name}</strong> for a past effective period.</p><div class="form-grid"><div class="field col-3"><label>Employee</label><select class="select">${DATA.employees.map(e=>`<option>${e.id} · ${e.name}</option>`).join('')}</select></div><div class="field"><label>Effective Start Date <span class="req">*</span></label><input class="input" type="date"></div><div class="field"><label>Effective End Date <span class="req">*</span></label><input class="input" type="date"></div><div class="field"><label>Shift</label><select class="select"><option>All Shift</option></select></div><div class="field col-3"><label>Remarks</label><textarea class="textarea" placeholder="Reason for back-tagging"></textarea></div></div><div class="m-actions" style="margin-top:22px"><button class="btn btn-ghost" onclick="WS.closeModal()">Cancel</button><button class="btn btn-primary" id="btSubmit">Back-tag Employee</button></div></div>`);WS.qs('#btSubmit').onclick=()=>{WS.closeModal();WS.success('Employee Back-tagged','The employee has been back-tagged to the project for the selected period.',{onClose:render});};};
+  }};
+};
+
+/* ---- ROSTER ---- */
+WS.views.roster=()=>({active:'roster',title:'Roster',crumb:['Roaster'],
+  html:`<div class="roster-toolbar">
+    <select class="select" style="width:150px"><option>May 2023</option><option>June 2023</option></select>
+    <select class="select" style="width:170px"><option>Week 2023/22</option><option>Week 2023/23</option></select>
+    <select class="select" style="width:180px"><option>All Projects</option></select>
+    <div class="grow"></div>
+    <div class="segmented" id="viewSel"><button class="on" data-v="weekly">View Weekly</button><button data-v="monthly">View Monthly</button></div>
+    <button class="btn btn-primary btn-sm" id="save">Save Roster</button></div>
+    <div class="roster-scroll"><table class="roster" id="rtable"></table></div>
+    <div class="legend-bar"><div class="legend" id="legend"></div><button class="btn btn-ghost btn-sm" id="reset">Reset Roster</button></div>`,
+  setup(){
+    const shiftTypes=[{k:'shift-gs',code:'GS',label:'General Shift (GS)',time:'0730-1630'},{k:'shift-morning',code:'M',label:'Morning Shift',time:'0500-0759'},{k:'shift-afternoon',code:'A',label:'Afternoon Shift',time:'1330-2230'},{k:'shift-night',code:'N',label:'Night Shift',time:'2200-0700'},{k:'shift-wo',code:'WO',label:'Weekly Off (WO)',time:''},{k:'shift-h',code:'H',label:'Holiday (H)',time:''},{k:'shift-l',code:'L',label:'Leave (L)',time:''}];
+    const weekDays=[['Sat','26'],['Sun','21'],['Mon','22'],['Tue','23'],['Wed','24'],['Thu','25'],['Fri','26']];
+    const seq=[0,0,0,0,4,5,1,2,3,6,4];
+    const shiftFor=(ei,di)=>shiftTypes[seq[(ei*7+di*3)%seq.length]];
+    let view='weekly';
+    function render(){
+      const days=view==='weekly'?weekDays:Array.from({length:15},(_,i)=>['',String(i+1).padStart(2,'0')]);
+      let head='<thead><tr><th class="emp" style="text-align:left">Employee</th>'+days.map(d=>`<th>${d[0]?d[0]+'<br>':''}${d[1]}</th>`).join('')+'</tr></thead>';
+      let rows=DATA.roster.map((e,ei)=>{const cells=days.map((d,di)=>{const s=shiftFor(ei,di);const label=view==='weekly'?`${s.code}${s.time?'<br><span style="font-weight:600;font-size:9px;opacity:.9">'+s.time+'</span>':''}`:s.code;return `<td class="cell"><div class="shift-chip ${s.k}">${label}</div></td>`;}).join('');return `<tr><td class="emp"><div class="eid">${e.id}</div><div class="enm">${e.name}</div><div class="eproj">Project: ${e.project}</div></td>${cells}</tr>`;}).join('');
+      WS.qs('#rtable').innerHTML=head+'<tbody>'+rows+'</tbody>';
+    }
+    render();
+    WS.qs('#legend').innerHTML=shiftTypes.map(s=>`<div class="lg"><span class="sw ${s.k}"></span>${s.label}${s.time?' ('+s.time+')':''}</div>`).join('');
+    WS.qsa('#viewSel button').forEach(b=>b.onclick=()=>{WS.qsa('#viewSel button').forEach(x=>x.classList.remove('on'));b.classList.add('on');view=b.dataset.v;render();});
+    WS.qs('#save').onclick=()=>WS.success('Roster Saved Successfully','The roster changes for this week have been saved.');
+    WS.qs('#reset').onclick=()=>WS.confirm({title:'Reset roster?',msg:'All unsaved changes to this roster will be discarded.',confirmText:'Reset',danger:true,onConfirm:()=>{render();WS.toast('Roster reset');}});
+  }
+});
+
+/* ---- ALLOWANCE ---- */
+WS.views.allowance=()=>({active:'shift',title:'Allowance Calculation',crumb:['Shift Management','Allowance'],
+  html:`<div class="rate-cards">
+    <div class="rate"><div class="rt shift-morning"></div><h4>Morning Shift</h4><div class="tm">0500-0759</div><div class="amt">INR 250 per shift</div></div>
+    <div class="rate"><div class="rt shift-afternoon"></div><h4>Afternoon Shift</h4><div class="tm">1300-1759</div><div class="amt">INR 250 per shift</div></div>
+    <div class="rate"><div class="rt shift-night"></div><h4>Night Shift</h4><div class="tm">1800-0459</div><div class="amt">INR 400 per shift</div></div></div>
+    <div class="allowance-toolbar"><select class="select" style="width:150px"><option>July 2023</option><option>June 2023</option></select><select class="select" style="width:180px"><option>Company</option></select><div class="grow"></div><button class="btn btn-ghost" id="review">Review Exceptions</button><button class="btn btn-primary" id="calc">Calculate Allowance</button></div>
+    <div class="matrix-scroll"><table class="matrix" id="matrix"></table></div>
+    <div class="note">${WS.icon('alert')}<span>To submit the allowance for this month, please go to the <a href="#/arrears" style="color:#8a5f06;text-decoration:underline">Arrears tab</a>.</span></div>`,
+  setup(){
+    const dow=['S','M','T','W','T','F','S'],days=Array.from({length:31},(_,i)=>i+1);
+    const cellFor=(ei,d)=>{const wd=new Date(2023,6,d).getDay();if(wd===0)return 'shift-wo';const idx=(ei*3+d*7)%10;return idx<3?'shift-morning':idx<6?'shift-afternoon':idx<8?'shift-night':'shift-empty';};
+    let head='<thead><tr><th class="emp" style="text-align:left">Employee</th>'+days.map(d=>`<th>${dow[new Date(2023,6,d).getDay()]}<br>${String(d).padStart(2,'0')}</th>`).join('')+'</tr></thead>';
+    let rows=DATA.roster.slice(0,9).map((e,ei)=>`<tr><td class="emp"><div class="eid">${e.id}</div><div class="enm">${e.name}</div></td>${days.map(d=>`<td class="mc"><div class="mcell ${cellFor(ei,d)}"></div></td>`).join('')}</tr>`).join('');
+    WS.qs('#matrix').innerHTML=head+'<tbody>'+rows+'</tbody>';
+    WS.qs('#calc').onclick=()=>WS.success('Allowance Calculated','Shift allowance for July 2023 has been calculated for 9 employees. Total: 12,750.00 INR.',{cta:'Review',onClose:()=>WS.toast('Go to Arrears tab to submit')});
+    WS.qs('#review').onclick=()=>{
+      const exceptions=[
+        {id:'91135',  emp:'Aditya Verma', type:'Not Complete', detail:'Only 9h logged on 12 Jul (min 9.5h)'},
+        {id:'165894', emp:'Sneha Pillai', type:'Exception',    detail:'Overlapping shifts recorded on 18 Jul'},
+        {id:'125689', emp:'Pooja Menon',  type:'Not Eligible', detail:'Tagged mid-month, below shift threshold'},
+      ];
+      WS.openModal(`<div class="modal wide"><button class="m-close" onclick="WS.closeModal()">${WS.icon('x')}</button>
+        <div class="modal-head"><h3>Work-hour Exceptions</h3><span class="badge badge-amber">${exceptions.length} to review</span></div>
+        <p class="hint mb-16">Resolve these before allowance is finalised for July 2023.</p>
+        <div class="table-wrap"><table class="data"><thead><tr><th>Emp ID</th><th>Employee</th><th>Exception</th><th>Detail</th><th style="text-align:right">Action</th></tr></thead>
+        <tbody>${exceptions.map((e,i)=>`<tr><td class="strong">${e.id}</td><td>${e.emp}</td><td><span class="badge ${e.type==='Not Eligible'?'badge-gray':'badge-amber'}"><span class="bdot"></span>${e.type}</span></td><td class="muted">${e.detail}</td><td style="text-align:right"><button class="btn btn-sm btn-ghost" data-x="${i}">Acknowledge</button></td></tr>`).join('')}</tbody></table></div>
+        <div class="m-actions" style="margin-top:20px"><button class="btn btn-ghost" onclick="WS.closeModal()">Close</button><button class="btn btn-primary" id="ackAll">Acknowledge all &amp; continue</button></div></div>`);
+      WS.qsa('.modal [data-x]').forEach(b=>b.onclick=()=>{const td=b.closest('td');td.innerHTML='<span class="badge badge-green"><span class="bdot"></span>Acknowledged</span>';});
+      WS.qs('#ackAll').onclick=()=>{WS.closeModal();WS.success('Exceptions Cleared','All work-hour exceptions have been acknowledged. You can now calculate allowance for July 2023.');};
+    };
+  }
+});
+
+/* ---- ARREARS ---- */
+WS.views.arrears=()=>({active:'shift',title:'Arrears',crumb:['Shift Management','Arrears'],
+  html:`<div class="between mb-16"><select class="select" style="width:160px"><option>July 2023</option><option>June 2023</option></select><button class="btn btn-primary" id="submit">Submit Allowance</button></div>
+  <div class="table-wrap"><table class="data"><thead><tr><th>Emp ID</th><th>Employee Name</th><th>Month</th><th>Shift Allowance</th><th>Arrears</th><th>Total Payable</th><th>Status</th></tr></thead><tbody id="rows"></tbody></table></div>`,
+  setup(){
+    const rows=DATA.roster.slice(0,7).map((e,i)=>({...e,base:250*(4+i%5),arr:i%3===0?250:0}));
+    WS.qs('#rows').innerHTML=rows.map(r=>`<tr><td class="strong">${r.id}</td><td>${r.name}</td><td>July 2023</td><td>${r.base.toLocaleString('en-IN')} INR</td><td>${r.arr?('+'+r.arr+' INR'):'—'}</td><td class="strong">${(r.base+r.arr).toLocaleString('en-IN')} INR</td><td><span class="badge badge-amber"><span class="bdot"></span>Pending</span></td></tr>`).join('');
+    WS.qs('#submit').onclick=()=>WS.confirm({title:'Submit allowance?',msg:'Submit July 2023 shift allowance for payroll processing? This action cannot be undone.',confirmText:'Submit',onConfirm:()=>WS.success('Allowance Submitted','July 2023 shift allowance has been submitted for payroll processing.')});
+  }
+});
+
+/* ---- REPORTS ---- */
+WS.views.reports=(params)=>{
+  const titles={payroll:'Payroll Report',shift:'Shift-based Report',hr:'HR Report',technical:'Technical Report'};
+  let tab=params.tab&&titles[params.tab]?params.tab:'payroll';
+  return {active:'reports',title:titles[tab],crumb:['Reports',titles[tab].replace(' Report','')],
+  html:`<div class="report-filters">
+    <div class="field"><label>Choose Month</label><select class="select"><option>May 2023</option><option>April 2023</option></select></div>
+    <div class="field"><label>Unit / Division</label><select class="select"><option>All</option></select></div>
+    <div class="field"><label>Legal Entity</label><select class="select"><option>All</option><option>Company</option></select></div>
+    <div class="field"><label>Country</label><select class="select"><option>All</option><option>India</option></select></div>
+    <button class="btn btn-primary" id="repView">View</button></div>
+    <div class="between mb-16"><div class="segmented" id="repTabs"><button data-t="payroll">Payroll</button><button data-t="shift">Shift based</button><button data-t="hr">HR</button><button data-t="technical">Technical</button></div><button class="btn btn-ghost btn-sm" id="dl">Download</button></div>
+    <div class="table-wrap"><div style="overflow:auto"><table class="data"><thead id="thead"></thead><tbody id="rows"></tbody></table></div>
+    <div class="totals"><div class="tt"><label>Total Employees</label><b id="tEmp">0</b></div><div class="tt"><label id="tLabel">Total</label><b id="tAmt">0</b></div></div></div>`,
+  setup(){
+    const defs={
+      payroll:{cols:['Emp ID','Employee Name','Professional Classification','No. of Days','Shift Time','Project Name','Division','Total Allowance','Processed'],rows:DATA.payroll.map(r=>[r.id,r.name,r.cls,r.days,r.shift,r.project,r.div,`${r.allowance} INR`,r.processed?'Yes':'No']),totalLabel:'Total Shift Allowance Amount',total:()=>DATA.payroll.reduce((s,r)=>s+ +r.allowance,0).toLocaleString('en-IN',{minimumFractionDigits:2})+' INR'},
+      shift:{cols:['Emp ID','Employee Name','Shift','Shift Time','Days Worked','Project Name','Legal Entity'],rows:DATA.payroll.map((r,i)=>[r.id,r.name,['Morning','Afternoon','Night'][i%3],r.shift,r.days,r.project,r.entity]),totalLabel:'Total Shift Days',total:()=>DATA.payroll.reduce((s,r)=>s+ +r.days,0)+' days'},
+      hr:{cols:['Emp ID','Employee Name','Role','Business Unit','First Supervisor','Second Supervisor','Legal Entity'],rows:DATA.payroll.map(r=>[r.id,r.name,r.role,'IT & Infrastructure',r.s1,r.s2,r.entity]),totalLabel:'Total Employees Listed',total:()=>DATA.payroll.length+''},
+      technical:{cols:['Emp ID','Employee Name','Project Name','Division','Shift Time','Automation Coverage','Legal Entity'],rows:DATA.payroll.map((r,i)=>[r.id,r.name,r.project,r.div,r.shift,['82%','67%','91%'][i%3],r.entity]),totalLabel:'Avg Automation Coverage',total:()=>'80%'}
+    };
+    function render(){
+      const d=defs[tab];
+      WS.qs('#thead').innerHTML='<tr>'+d.cols.map(c=>`<th>${c}</th>`).join('')+'</tr>';
+      WS.qs('#rows').innerHTML=d.rows.map(row=>'<tr>'+row.map((cell,ci)=>ci===0?`<td class="strong">${cell}</td>`:cell==='Yes'?`<td><span class="badge badge-green">Yes</span></td>`:cell==='No'?`<td><span class="badge badge-gray">No</span></td>`:`<td>${cell}</td>`).join('')+'</tr>').join('');
+      WS.qs('#tEmp').textContent=d.rows.length;WS.qs('#tLabel').textContent=d.totalLabel;WS.qs('#tAmt').textContent=d.total();
+      WS.qsa('#repTabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===tab));
+      const t=titles[tab];WS.qs('.page-head h1').textContent=t;WS.qs('.crumb').innerHTML=`<b>Reports</b><b> / </b>${t.replace(' Report','')}`;
+    }
+    render();
+    WS.qsa('#repTabs button').forEach(b=>b.onclick=()=>{tab=b.dataset.t;render();});
+    WS.qs('#repView').onclick=()=>{render();WS.toast('Report generated for selected filters');};
+    WS.qs('#dl').onclick=()=>WS.toast(`Downloading ${tab}_report_may_2023.xlsx`);
+  }};
+};
+
+/* ---- TICKETS ---- */
+WS.views.tickets=()=>({active:'tickets',title:'Tickets',crumb:['Tickets','My Tickets'],
+  html:`<div class="tk-kpis" id="kpis"></div>
+  <div class="table-wrap"><div class="tbl-toolbar"><div class="row" style="gap:12px"><div class="input-icon" style="width:280px">${WS.icon('search')}<input class="input" placeholder="Search tickets" id="search"></div>
+    <div class="segmented" id="tabs"><button class="on" data-t="open">Open</button><button data-t="resolved">Resolved</button><button data-t="all">All</button></div></div>
+    <button class="btn btn-primary btn-sm" id="raise">Raise a Ticket</button></div>
+    <table class="data"><thead><tr><th>Ticket ID</th><th>Subject</th><th>Category</th><th>Priority</th><th>Raised On</th><th>Status</th></tr></thead><tbody id="rows"></tbody></table></div>`,
+  setup(){
+    const tickets=[{id:'TKT-004821',subject:'Roster not visible for tagged project',cat:'Roster',prio:'High',date:'19 Jul 2023',status:'open'},{id:'TKT-004817',subject:'Shift allowance mismatch for June',cat:'Allowance',prio:'High',date:'17 Jul 2023',status:'open'},{id:'TKT-004805',subject:'Unable to untag employee from project',cat:'Tagging',prio:'Medium',date:'15 Jul 2023',status:'open'},{id:'TKT-004798',subject:'Payroll report export fails',cat:'Reports',prio:'Medium',date:'12 Jul 2023',status:'resolved'},{id:'TKT-004776',subject:'Project code not generating',cat:'Projects',prio:'Low',date:'08 Jul 2023',status:'resolved'},{id:'TKT-004761',subject:'Add night-shift rate for new entity',cat:'Allowance',prio:'Low',date:'03 Jul 2023',status:'resolved'}];
+    const kpis=[{n:tickets.filter(t=>t.status==='open').length,l:'Open Tickets',c:'#ED0988'},{n:tickets.filter(t=>t.prio==='High').length,l:'High Priority',c:'#C63F42'},{n:tickets.filter(t=>t.status==='resolved').length,l:'Resolved',c:'#29A251'},{n:tickets.length,l:'Total Tickets',c:'#7c5cbf'}];
+    WS.qs('#kpis').innerHTML=kpis.map(k=>`<div class="tk-kpi"><b style="color:${k.c}">${k.n}</b><span>${k.l}</span></div>`).join('');
+    const prio=p=>({High:'#C63F42',Medium:'#FDB515',Low:'#29A251'}[p]);
+    let tab='open',term='';
+    const list=()=>tickets.filter(t=>{const q=!term||(t.subject+t.id+t.cat).toLowerCase().includes(term.toLowerCase());return q&&(tab==='all'||t.status===tab);});
+    function render(){const rows=list();WS.qs('#rows').innerHTML=rows.length?rows.map(t=>`<tr><td class="strong">${t.id}</td><td>${t.subject}</td><td class="muted">${t.cat}</td><td><span class="prio"><span class="pd" style="background:${prio(t.prio)}"></span>${t.prio}</span></td><td class="muted">${t.date}</td><td><span class="badge ${t.status==='open'?'badge-amber':'badge-green'}"><span class="bdot"></span>${t.status==='open'?'Open':'Resolved'}</span></td></tr>`).join(''):`<tr><td colspan="6"><div class="empty-state"><div class="ei">${WS.icon('tickets')}</div><h3>No tickets here</h3></div></td></tr>`;}
+    render();
+    WS.qsa('#tabs button').forEach(b=>b.onclick=()=>{WS.qsa('#tabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');tab=b.dataset.t;render();});
+    WS.qs('#search').oninput=e=>{term=e.target.value;render();};
+    WS.qs('#raise').onclick=()=>{WS.openModal(`<div class="modal wide"><button class="m-close" onclick="WS.closeModal()">${WS.icon('x')}</button><div class="modal-head"><h3>Raise a Ticket</h3></div><div class="form-grid"><div class="field col-2"><label>Subject <span class="req">*</span></label><input class="input" placeholder="Briefly describe the issue"></div><div class="field"><label>Category</label><select class="select"><option>Roster</option><option>Allowance</option><option>Tagging</option><option>Reports</option><option>Projects</option></select></div><div class="field"><label>Priority</label><select class="select"><option>Low</option><option>Medium</option><option>High</option></select></div><div class="field col-2"><label>Related Project (optional)</label><select class="select"><option>—</option>${DATA.projects.map(p=>`<option>${p.name}</option>`).join('')}</select></div><div class="field col-3"><label>Description</label><textarea class="textarea" placeholder="Describe what happened and the steps to reproduce"></textarea></div></div><div class="m-actions" style="margin-top:22px"><button class="btn btn-ghost" onclick="WS.closeModal()">Cancel</button><button class="btn btn-primary" id="tkSubmit">Submit Ticket</button></div></div>`);WS.qs('#tkSubmit').onclick=()=>{WS.closeModal();WS.success('Ticket Raised','Your ticket has been created and assigned ID "TKT-004822". Our team will respond shortly.');};};
+  }
+});
+
+/* ---- STYLE GUIDE ---- */
+WS.views.styleguide=()=>({active:null,title:'Style Guide',crumb:['Design System','Style Guide'],
+  html:`
+  <div class="sg-hero"><div class="lg"><span class="mark">W</span> WorkSync Design System</div><p>The single source of truth for the prototype. Every colour, type style and component below is defined once and reused across every screen.</p></div>
+  <div class="sg-section"><h2>Colour tokens</h2><div class="desc">Extracted directly from the source design, exposed as CSS custom properties.</div><div class="swatches" id="swatches"></div></div>
+  <div class="sg-section"><h2>Typography — Montserrat</h2><div class="desc">One family, weighted for hierarchy.</div><div id="type"></div></div>
+  <div class="two-col">
+    <div class="sg-section"><h2>Buttons</h2><div class="comp-block"><h4>Variants</h4><div class="demo-grid"><button class="btn btn-primary">Primary</button><button class="btn btn-ghost">Ghost</button><button class="btn btn-subtle">Subtle</button><button class="btn btn-danger">Danger</button></div></div><div class="comp-block"><h4>Sizes</h4><div class="demo-grid"><button class="btn btn-primary btn-lg">Large</button><button class="btn btn-primary">Default</button><button class="btn btn-primary btn-sm">Small</button></div></div></div>
+    <div class="sg-section"><h2>Status badges</h2><div class="demo-grid"><span class="badge badge-green"><span class="bdot"></span>Tagged</span><span class="badge badge-amber"><span class="bdot"></span>Untagged</span><span class="badge badge-gray"><span class="bdot"></span>Inactive</span><span class="badge badge-red"><span class="bdot"></span>Rejected</span><span class="badge badge-pink">Tag</span></div><div class="comp-block mt-24"><h4>Shift chips (roster)</h4><div class="demo-grid" id="chips"></div></div></div>
+  </div>
+  <div class="sg-section"><h2>Form controls</h2><div class="form-grid"><div class="field"><label>Text input</label><input class="input" placeholder="Project ABC"></div><div class="field"><label>Select</label><select class="select"><option>Technology Services</option></select></div><div class="field"><label>Search</label><div class="input-icon">${WS.icon('search')}<input class="input" placeholder="Search"></div></div><div class="field col-2"><label>Textarea</label><textarea class="textarea" placeholder="Describe the project"></textarea></div><div class="field"><label>Yes / No chips</label><div class="chip-group"><button class="chip on">Yes</button><button class="chip">No</button></div></div></div><div class="comp-block mt-24"><h4>Segmented control</h4><div class="segmented"><button class="on">Weekly</button><button>Monthly</button></div></div></div>
+  <div class="two-col">
+    <div class="sg-section"><h2>Wizard stepper</h2><div class="stepper"><div class="step done"><div class="num">${WS.icon('check')}</div><div class="lbl">Select Project</div></div><div class="bar filled"></div><div class="step active"><div class="num">2</div><div class="lbl">Select Employee</div></div><div class="bar"></div><div class="step"><div class="num">3</div><div class="lbl">Confirm</div></div></div></div>
+    <div class="sg-section"><h2>Interactive components</h2><div class="desc">Live — click to preview.</div><div class="demo-grid"><button class="btn btn-ghost" id="dSuccess">Success modal</button><button class="btn btn-ghost" id="dConfirm">Confirm dialog</button><button class="btn btn-ghost" id="dToast">Toast</button><button class="btn btn-ghost" id="dMenu">Context menu</button></div></div>
+  </div>
+  <div class="sg-section"><h2>Hero stat banner</h2><div class="hero-banner"><h2>Project Management</h2><div class="hero-stats"><div class="stat"><b>32</b><span>Created Projects</span></div><div class="stat"><b>22</b><span>Active Projects</span></div><div class="stat"><b>10</b><span>Inactive Projects</span></div></div><button class="btn btn-primary">Create Project</button></div></div>`,
+  setup(){
+    const tokens=[['brand','#ED0988','Brand / Primary'],['brand-deep','#B82370','Brand Deep'],['brand-700','#8E1A5A','Brand 700'],['pink-light','#EF91C1','Pink Light'],['gold','#FDB515','Gold / Accent'],['green','#29A251','Success'],['red','#C63F42','Error'],['ink','#131318','Ink (header)'],['ink-2','#2D2B43','Banner Navy'],['gray-100','#F3F3F3','Gray 100'],['gray-200','#E7E7EA','Gray 200'],['text','#1d1d24','Text']];
+    WS.qs('#swatches').innerHTML=tokens.map(([,hex,name])=>`<div class="sw-card"><div class="chip" style="background:${hex}"></div><div class="meta"><b>${name}</b><code>${hex}</code></div></div>`).join('');
+    const typeScale=[['Display / H1','22px · 700','Project Management',22,700],['Section / H2','16px · 700','Employee Tagging',16,700],['Card title','15px · 700','Mobile Development & Design',15,700],['Body','14px · 400','Tag or untag employees to projects.',14,400],['Label','12px · 600','PROJECT START DATE',12,600],['Caption','11px · 600','PRCODE003413',11,600]];
+    WS.qs('#type').innerHTML=typeScale.map(([lbl,spec,txt,sz,w])=>`<div class="type-row"><div class="lbl">${lbl}<br><span class="faint" style="font-weight:500">${spec}</span></div><div style="font-size:${sz}px;font-weight:${w}">${txt}</div></div>`).join('');
+    const chipDefs=[['shift-gs','GS'],['shift-morning','M'],['shift-afternoon','A'],['shift-night','N'],['shift-wo','WO'],['shift-h','H'],['shift-l','L']];
+    WS.qs('#chips').innerHTML=chipDefs.map(([k,c])=>`<div class="shift-chip ${k}" style="min-width:44px;text-align:center">${c}</div>`).join('');
+    WS.qs('#dSuccess').onclick=()=>WS.success('Project Created Successfully','Your project is successfully created with Project ID "PRCODE003415".',{cta:'Done'});
+    WS.qs('#dConfirm').onclick=()=>WS.confirm({title:'Are you sure?',msg:'This will untag the project and all its employees.',confirmText:'Untag',danger:true,onConfirm:()=>WS.toast('Untagged')});
+    WS.qs('#dToast').onclick=()=>WS.toast('Roster saved successfully');
+    WS.qs('#dMenu').onclick=e=>WS.contextMenu(e.currentTarget,[{icon:'edit',label:'Edit Project'},{icon:'tagAdd',label:'Project Tag'},'-',{icon:'tagOff',label:'Project Untag',danger:true}]);
+  }
+});
+
+document.addEventListener('DOMContentLoaded',WS.start);
+</script>
+</body>
+</html>
