@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ThreatModeler NEXUS — Case Study · Manoj Gehlot</title>
+<meta name="description" content="ThreatModeler NEXUS: redesigning the end-to-end Security Architect experience around AI — where AI belongs in an enterprise workflow, not bolted on as a chatbot.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14121c; --ink-2:#1e1b2a; --paper:#f4f5f7; --paper-2:#ffffff;
+  --line:#dcdce4; --line-ink:#312d40;
+  --text:#26232f; --muted:#5a5768; --muted-ink:#a49fb5;
+  --accent:#e3357f;         /* portfolio editorial accent */
+  --link:#c02368;           /* text links — higher contrast on light */
+  --amber:#b07d00; --green:#2a8f5f; --slate:#6f748c;
+  /* NEXUS product palette — used only inside product/AI visuals */
+  --nexus:#5E5CEB; --nexus-2:#8f8dff; --nexus-deep:#0d1628; --nexus-sidebar:#171333;
+  --maxw:1080px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0; background:var(--paper); color:var(--text);
+  font-family:"Source Serif 4",Georgia,serif; font-size:18px; line-height:1.65; -webkit-font-smoothing:antialiased}
+h1,h2,h3,.dsp{font-family:"Space Grotesk",sans-serif; letter-spacing:-.02em; line-height:1.1}
+.mono{font-family:"Space Mono",monospace}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px}
+a{color:var(--link)}
+.eyebrow{font-family:"Space Mono",monospace; font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent)}
+
+/* HERO */
+.hero{background:var(--ink); color:#efedf5; padding:30px 0 0; position:relative; overflow:hidden}
+.hero .wrap{position:relative; z-index:2}
+.grid-motif{position:absolute; inset:0; opacity:.13; z-index:1;
+  background-image:linear-gradient(var(--line-ink) 1px,transparent 1px),linear-gradient(90deg,var(--line-ink) 1px,transparent 1px);
+  background-size:34px 34px; mask-image:linear-gradient(180deg,transparent,#000 34%,#000 72%,transparent)}
+.topbar{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 0 34px; position:relative; z-index:2}
+.topbar a{font-family:"Space Mono",monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#d6d2e2; text-decoration:none}
+.topbar a.res{border:1px solid var(--line-ink); border-radius:6px; padding:7px 13px}
+.topbar a:hover{color:#fff}
+.hero .eyebrow{color:#a8a6ff}
+.hero h1{font-size:clamp(30px,4.8vw,54px); font-weight:600; margin:18px 0 0; max-width:19ch}
+.hero h1 em{font-style:normal; color:var(--accent)}
+.hero .sub{font-size:19px; color:#c7c3d6; max-width:64ch; margin:22px 0 0}
+.meta{margin:40px 0 0; padding-top:24px; border-top:1px solid var(--line-ink); display:grid; grid-template-columns:repeat(4,1fr); gap:28px}
+.meta .k{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted-ink)}
+.meta .v{font-family:"Space Grotesk",sans-serif; font-size:16px; color:#fff; margin-top:7px}
+.hero-shot{margin:44px auto -66px; max-width:960px; padding:0 28px; position:relative; z-index:2}
+.hero-shot .frame{border-radius:10px 10px 0 0; box-shadow:0 -2px 0 var(--nexus),0 30px 70px rgba(0,0,0,.45); overflow:hidden}
+
+section{padding:92px 0}
+.section-num{font-family:"Space Mono",monospace; font-size:12px; letter-spacing:.14em; color:var(--accent); text-transform:uppercase}
+h2{font-size:clamp(26px,3.4vw,38px); font-weight:600; margin:12px 0 0}
+.lead{font-size:21px; color:var(--muted); max-width:64ch; margin:18px 0 0}
+p{max-width:66ch}
+
+/* cognitive-load chips */
+.loadgrid{display:flex; flex-wrap:wrap; gap:10px; margin-top:30px}
+.loadgrid span{font-family:"Space Mono",monospace; font-size:12.5px; letter-spacing:.04em; color:var(--muted); border:1px solid var(--line); background:var(--paper-2); border-radius:20px; padding:8px 15px}
+.loadgrid span.ai{border-color:var(--nexus); color:var(--nexus)}
+
+/* reframe */
+.reframe{background:var(--ink-2); color:#efedf5}
+.reframe h2{color:#fff}
+.reframe .lead{color:#bdb8ce}
+.flip{display:grid; grid-template-columns:1fr auto 1fr; gap:26px; align-items:center; margin-top:40px}
+.flip .card{border:1px solid var(--line-ink); border-radius:12px; padding:26px 24px; background:#191622}
+.flip .card .tag{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted-ink)}
+.flip .to{border-color:var(--nexus)} .flip .to .tag{color:var(--nexus-2)}
+.flip .card p{font-family:"Space Grotesk",sans-serif; font-size:19px; line-height:1.38; color:#e9e6f2; margin:12px 0 0; max-width:none}
+.flip .card small{display:block; font-family:"Source Serif 4",serif; font-size:15px; color:#9d99b0; margin-top:12px; line-height:1.5}
+.flip .to small{color:#b6b3d6}
+.flip .arrow{font-family:"Space Grotesk",sans-serif; color:var(--nexus-2); font-size:30px; text-align:center}
+
+/* journey remap */
+.remap{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:34px}
+.flow-col{border:1px solid var(--line-ink); border-radius:14px; background:#171426; padding:24px 22px}
+.flow-col.after{border-color:var(--nexus); background:#181633}
+.flow-col .fh{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted-ink)}
+.flow-col.after .fh{color:var(--nexus-2)}
+.flow-col .goal{font-family:"Space Grotesk",sans-serif; font-size:16px; color:#efedf5; margin:6px 0 0}
+.chain{list-style:none; margin:22px 0 0; padding:0}
+.chain li{position:relative; padding:11px 14px; border:1px solid var(--line-ink); border-radius:9px; font-family:"Space Grotesk",sans-serif; font-size:14.5px; color:#d6d2e2; background:#0f0d1c}
+.chain li + li{margin-top:28px}
+.chain li + li::before{content:"↓"; position:absolute; top:-23px; left:22px; color:var(--slate); font-family:"Space Grotesk",sans-serif; font-size:15px}
+.after .chain li + li::before{color:var(--nexus-2)}
+.after .chain li.ai{border-color:var(--nexus); color:#fff; background:linear-gradient(90deg,rgba(94,92,235,.22),rgba(94,92,235,.05))}
+.after .chain li.ai::after{content:"AI"; position:absolute; right:12px; top:50%; transform:translateY(-50%); font-family:"Space Mono",monospace; font-size:10px; letter-spacing:.08em; color:#fff; background:var(--nexus); border-radius:5px; padding:2px 7px}
+.remap-cap{font-family:"Space Mono",monospace; font-size:13px; color:var(--muted-ink); margin:24px auto 0; max-width:70ch; text-align:center; line-height:1.6}
+.remap-cap b{color:var(--nexus-2); font-weight:400}
+
+/* principles */
+.pgrid{display:grid; grid-template-columns:repeat(2,1fr); gap:0; margin-top:44px; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:var(--paper-2)}
+.pgrid .p{padding:28px 26px; border-right:1px solid var(--line); border-bottom:1px solid var(--line)}
+.pgrid .p:nth-child(2n){border-right:0}
+.pgrid .p:nth-last-child(-n+2){border-bottom:0}
+.pgrid .p h3{font-size:20px; font-weight:600; margin:12px 0 8px}
+.pgrid .p p{font-size:16px; color:var(--muted); margin:0; max-width:44ch}
+.pnum{font-family:"Space Mono",monospace; font-size:12px; color:var(--accent)}
+
+/* decisions */
+.decision{margin-top:60px; border-top:2px solid var(--ink); padding-top:34px}
+.decision:first-of-type{margin-top:48px}
+.dhead{display:flex; align-items:baseline; gap:16px; flex-wrap:wrap}
+.dhead .dn{font-family:"Space Mono",monospace; font-size:13px; letter-spacing:.1em; color:var(--accent)}
+.dhead h3{font-size:clamp(21px,2.5vw,28px); font-weight:600; margin:0; max-width:26ch}
+.dbody{display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:26px; align-items:start}
+.spine .row{border-top:1px solid var(--line); padding:16px 0}
+.spine .row:first-child{border-top:0; padding-top:0}
+.spine .lab{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--slate); margin-bottom:5px}
+.spine .val{font-size:16.5px; line-height:1.5}
+.spine .val.choice{font-family:"Space Grotesk",sans-serif; font-size:18px; color:var(--ink); font-weight:500}
+.opts{list-style:none; padding:0; margin:0}
+.opts li{font-size:15.5px; color:var(--muted); padding:4px 0 4px 22px; position:relative; max-width:none}
+.opts li::before{content:""; position:absolute; left:0; top:9px; width:9px; height:9px; border-radius:2px; background:var(--slate)}
+.opts li.win{color:var(--text)} .opts li.win::before{background:var(--accent)}
+.shot{background:var(--paper-2); border:1px solid var(--line); border-radius:12px; padding:14px; box-shadow:0 14px 34px rgba(20,18,28,.08)}
+.shot figcaption{font-family:"Space Mono",monospace; font-size:12px; color:var(--muted); margin-top:12px; line-height:1.55}
+.shot figcaption b{color:var(--link); font-weight:400}
+
+/* screenshots */
+.shot img{width:100%; border-radius:6px; display:block}
+.hero-shot .frame img{width:100%; display:block}
+
+/* signature: AI-native pipeline */
+.signature{background:var(--ink); color:#efedf5}
+.signature h2{color:#fff}
+.signature .lead{color:#bdb8ce}
+.pipe{margin-top:38px}
+.pipe .stages{display:flex; flex-wrap:wrap; gap:10px}
+.stage{flex:1 1 150px; min-width:150px; border:1px solid var(--line-ink); border-radius:10px; padding:14px 15px; background:#191622}
+.stage .sn{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.08em; color:var(--nexus-2)}
+.stage .st{font-family:"Space Grotesk",sans-serif; font-size:14.5px; color:#efedf5; margin-top:5px; line-height:1.25}
+.pipe .rail{margin-top:14px; display:flex; align-items:center; gap:14px; border:1px solid var(--nexus); border-radius:10px; padding:15px 18px;
+  background:linear-gradient(90deg,rgba(94,92,235,.20),rgba(94,92,235,.04))}
+.pipe .rail .badge{font-family:"Space Mono",monospace; font-size:13px; font-weight:700; letter-spacing:.06em; color:#fff; background:var(--nexus); border-radius:7px; padding:6px 12px; flex:none}
+.pipe .rail p{font-family:"Space Grotesk",sans-serif; font-size:15.5px; color:#d7d5ff; margin:0; max-width:none}
+.annos{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:34px}
+.anno{border-top:2px solid var(--nexus); padding-top:14px}
+.anno .n{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.1em; color:var(--nexus-2); text-transform:uppercase}
+.anno p{font-size:15.5px; color:#cbc7d8; margin:8px 0 0; max-width:none}
+
+/* scope / collaboration */
+.scope{display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:44px}
+.scard{background:var(--paper-2); border:1px solid var(--line); border-radius:12px; padding:26px 24px}
+.scard .lab{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--slate)}
+.scard ul{list-style:none; padding:0; margin:16px 0 0}
+.scard li{font-family:"Space Grotesk",sans-serif; font-size:16px; color:var(--text); padding:9px 0 9px 22px; position:relative; border-top:1px solid var(--line)}
+.scard li:first-child{border-top:0}
+.scard li::before{content:""; position:absolute; left:0; top:16px; width:8px; height:8px; border-radius:2px; background:var(--nexus)}
+.scope-note{font-size:17px; color:var(--muted); margin:26px 0 0; max-width:70ch}
+
+/* outcomes */
+.ogrid{display:grid; grid-template-columns:repeat(2,1fr); gap:22px; margin-top:44px}
+.ocard{background:var(--paper-2); border:1px solid var(--line); border-radius:12px; padding:24px}
+.ocard .lab{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--slate)}
+.ocard p{margin:10px 0 0; font-size:16.5px}
+.ocard.wide{grid-column:1 / -1}
+.honest{margin-top:32px; border-left:3px solid var(--amber); background:#fff8e6; padding:20px 24px; border-radius:0 10px 10px 0}
+.honest .lab{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:#8a6400}
+.honest p{margin:8px 0 0; font-size:16.5px; color:#574512}
+
+/* reflection */
+.refl{display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:44px}
+.refl .r{border-top:1px solid var(--line); padding-top:18px}
+.refl .r .lab{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--link)}
+.refl .r p{font-size:16px; color:var(--muted); margin:8px 0 0}
+.pull{margin-top:48px; border-top:1px solid var(--line); padding-top:34px}
+.pull p{font-family:"Space Grotesk",sans-serif; font-weight:500; font-size:clamp(20px,2.6vw,27px); line-height:1.32; color:var(--ink); max-width:30ch}
+.pull p em{font-style:normal; color:var(--accent)}
+
+footer{background:var(--ink); color:#b9b4c9; padding:64px 0 58px}
+footer h3{color:#fff; font-size:22px; font-weight:600; margin:0 0 12px}
+footer p{font-size:15px; color:#a49fb5; max-width:70ch}
+footer .fnav{margin-top:24px; display:flex; gap:18px; flex-wrap:wrap; font-family:"Space Mono",monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase}
+footer .fnav a{color:#d6d2e2; text-decoration:none} footer .fnav a:hover{color:#fff}
+footer .byline{margin-top:26px; font-family:"Space Mono",monospace; font-size:12px; color:var(--muted-ink)}
+
+@media(max-width:820px){
+  .meta{grid-template-columns:repeat(2,1fr); gap:22px 28px}
+  .flip{grid-template-columns:1fr} .flip .arrow{transform:rotate(90deg)}
+  .pgrid,.dbody,.annos,.ogrid,.refl,.remap,.scope{grid-template-columns:1fr}
+  .pgrid .p{border-right:0}
+}
+@media(max-width:480px){
+  section{padding:64px 0}
+  .wrap{padding:0 20px}
+  .meta{grid-template-columns:1fr; gap:16px}
+  .hero-shot{margin:32px auto -40px; padding:0 20px}
+  .dhead h3{max-width:none}
+}
+:focus-visible{outline:3px solid var(--accent); outline-offset:3px}
+@media(prefers-reduced-motion:no-preference){
+  .reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1; transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="grid-motif"></div>
+  <div class="wrap">
+    <nav class="topbar" aria-label="Case study">
+      <a href="index.html">&larr; Manoj Gehlot · Work</a>
+      <a class="res" href="resume/Manoj_Gehlot_Resume.pdf" download>Résumé &darr;</a>
+    </nav>
+    <p class="eyebrow">AI-native enterprise security · Product strategy</p>
+    <h1>Most teams add AI as a feature. I redesigned the Security Architect experience so AI is <em>where the work begins.</em></h1>
+    <p class="sub">ThreatModeler NEXUS is an enterprise platform Security Architects use to build, review and govern threat models. It's genuinely powerful — and first-time architects had to learn the whole discipline before it returned any value. I redesigned the end-to-end experience — login, onboarding, model creation, workspace and the modeling workflow — around one bet: put AI where users hesitate, and keep expertise, not the tool, in charge.</p>
+    <div class="meta">
+      <div><div class="k">My role</div><div class="v">Senior Product Designer · design lead</div></div>
+      <div><div class="k">Scope</div><div class="v">Login → onboarding → workspace → workflow</div></div>
+      <div><div class="k">Platform</div><div class="v">ThreatModeler NEXUS · Enterprise SaaS</div></div>
+      <div><div class="k">Users</div><div class="v">Security Architects · new &amp; expert</div></div>
+    </div>
+  </div>
+  <div class="hero-shot">
+    <div class="frame">
+      <img src="images/nexus-home.png" alt="The ThreatModeler NEXUS home dashboard after a model is created: an AI &lsquo;Today&rsquo;s Brief&rsquo; with prioritised actions, a Continue Working card, a model-health breakdown and a queue of models awaiting approval.">
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- 01 · PROBLEM -->
+<section>
+  <div class="wrap">
+    <p class="section-num">01 · The problem worth solving</p>
+    <h2>The platform's power was gated behind everything you had to learn first.</h2>
+    <p class="lead">A first-time Security Architect had to understand threat modeling as a discipline — and the platform's expression of it — before the product returned anything useful.</p>
+    <p style="margin-top:26px">Before a new architect could produce a single meaningful threat model, they had to hold a lot in their head at once: threat modeling itself, plus components, trust boundaries, threat libraries, security requirements, reports, governance and the platform's AI. <strong>The tool asked people to learn it before it would help them</strong> — so onboarding was really a curriculum, and time-to-first-value stretched out at exactly the moment confidence was lowest. The enterprise capability was never the problem. The on-ramp was.</p>
+    <div class="loadgrid" aria-label="What a day-one user had to hold at once">
+      <span>Threat modeling</span>
+      <span>Components</span>
+      <span>Trust boundaries</span>
+      <span>Threat libraries</span>
+      <span>Security requirements</span>
+      <span>Reports</span>
+      <span>Governance</span>
+      <span class="ai">AI capabilities</span>
+    </div>
+    <p class="mono" style="font-size:13px; color:var(--muted); margin-top:16px">Eight things to learn — before the first unit of value.</p>
+  </div>
+</section>
+
+<!-- 02 · THE REFRAME -->
+<section class="reframe">
+  <div class="wrap">
+    <p class="section-num" style="color:var(--nexus-2)">02 · The reframe that changed the strategy</p>
+    <h2>I stopped asking where AI should live — and asked where people expect it to help.</h2>
+    <p class="lead">One question produces a feature. The other produces a product. The whole strategy turned on which one I designed against.</p>
+    <div class="flip">
+      <div class="card from">
+        <div class="tag">The placement question</div>
+        <p>“Where should AI live in the product?”</p>
+        <small>Leads to bolting AI onto screens that already exist — an AI panel here, a generate button there. AI-enabled.</small>
+      </div>
+      <div class="arrow">→</div>
+      <div class="card to">
+        <div class="tag">The needs question</div>
+        <p>“Where do users naturally expect AI to help them?”</p>
+        <small>Leads to designing the experience around the moments people hesitate — and letting AI carry them through. AI-native.</small>
+      </div>
+    </div>
+
+    <div class="remap">
+      <div class="flow-col before">
+        <div class="fh">Before · the flow that existed</div>
+        <div class="goal">Goal: learn the product.</div>
+        <ul class="chain">
+          <li>Login</li>
+          <li>Dashboard</li>
+          <li>Hunt for “Create Model”</li>
+          <li>Understand the platform</li>
+          <li>Configure the model</li>
+          <li>Start modeling</li>
+        </ul>
+      </div>
+      <div class="flow-col after">
+        <div class="fh">After · the journey I designed</div>
+        <div class="goal">Goal: accomplish the first meaningful task.</div>
+        <ul class="chain">
+          <li>Login</li>
+          <li>Welcome</li>
+          <li class="ai">AI-guided onboarding</li>
+          <li>Create threat model</li>
+          <li class="ai">AI generates the initial model</li>
+          <li>Review &amp; accept</li>
+          <li class="ai">Workspace · continue with AI</li>
+        </ul>
+      </div>
+    </div>
+    <p class="remap-cap">The goal moved from <b>learning the product</b> to <b>reaching first success</b>. Everything downstream — onboarding, model creation, the workspace — followed from that single shift.</p>
+  </div>
+</section>
+
+<!-- 03 · PRINCIPLES -->
+<section>
+  <div class="wrap">
+    <p class="section-num">03 · Principles I designed against</p>
+    <h2>Four rules for putting AI inside an expert's workflow.</h2>
+    <div class="pgrid">
+      <div class="p"><span class="pnum">01</span><h3>AI reduces uncertainty</h3><p>It shows up where users hesitate — not on every screen. Ubiquitous AI is just noise experts have to route around.</p></div>
+      <div class="p"><span class="pnum">02</span><h3>AI accelerates experts — it doesn't replace them</h3><p>Experienced architects keep full manual control. The AI is a faster path, never the only one.</p></div>
+      <div class="p"><span class="pnum">03</span><h3>AI teaches while it helps</h3><p>Every interaction leaves the user understanding the product — and the discipline — a little more than before.</p></div>
+      <div class="p"><span class="pnum">04</span><h3>The workflow stays transparent</h3><p>Users always see what AI created, why it created it, and how to change it. No black boxes in a governed product.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 · DECISIONS -->
+<section style="background:var(--paper-2); border-top:1px solid var(--line)">
+  <div class="wrap">
+    <p class="section-num">04 · Product decisions</p>
+    <h2>The calls that made it AI-native instead of AI-enabled.</h2>
+    <p class="lead">Four decisions, each shown as problem → options weighed → choice → the trade-off I accepted — anchored to the surface it produced.</p>
+
+    <!-- D1 -->
+    <article class="decision">
+      <div class="dhead"><span class="dn">DECISION 01</span><h3>Onboarding solves the first problem — it doesn't teach the software</h3></div>
+      <div class="dbody">
+        <div class="spine">
+          <div class="row"><div class="lab">Problem</div><div class="val">Traditional enterprise onboarding walks through menus, navigation, documentation and configuration. For a discipline this dense, that's a curriculum standing between the user and any value.</div></div>
+          <div class="row"><div class="lab">Options weighed</div>
+            <ul class="opts">
+              <li>Guided product tour — familiar, but front-loads the entire platform.</li>
+              <li>Documentation-first — thorough, and ignored under deadline.</li>
+              <li class="win">AI-guided onboarding built around “let's build your first threat model.”</li>
+            </ul>
+          </div>
+          <div class="row"><div class="lab">Choice &amp; why</div><div class="val choice">Merge onboarding with first success. The conversation changes from “here's how ThreatModeler works” to “let's build your first threat model” — because <b>first success is the fastest teacher</b>.</div></div>
+          <div class="row"><div class="lab">Trade-off I accepted</div><div class="val">Advanced configuration is delayed, not surfaced up front — handled with progressive disclosure so experts can still reach it directly.</div></div>
+        </div>
+        <figure class="shot reveal">
+          <img src="images/nexus-login.png" alt="The ThreatModeler NEXUS sign-in screen: username and password with an SSO option and links to documentation and onboarding resources — the front door already framing an AI-guided experience.">
+          <img src="images/nexus-onboarding.png" alt="The onboarding choice screen, &lsquo;What would you like to do?&rsquo;, with &lsquo;Create my first Threat Model&rsquo; recommended and a Nexus AI note that it takes about five minutes with AI assistance." style="margin-top:12px">
+          <figcaption><b>Result.</b> From the front door to the first meaningful choice — the entrance sets an AI-guided expectation, onboarding points straight at building a first model, and experts get an obvious way to skip.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- D2 -->
+    <article class="decision">
+      <div class="dhead"><span class="dn">DECISION 02</span><h3>Users describe their system — they don't fill in configuration forms</h3></div>
+      <div class="dbody">
+        <div class="spine">
+          <div class="row"><div class="lab">Problem</div><div class="val">The first real interaction was configuration: multiple forms to complete before the product produced anything at all.</div></div>
+          <div class="row"><div class="lab">Options weighed</div>
+            <ul class="opts">
+              <li>Multi-step configuration forms — precise, but pure friction up front.</li>
+              <li>Template gallery — faster, but generic to each team's architecture.</li>
+              <li class="win">Describe the application, architecture and technology — or upload documentation — and let AI draft the model.</li>
+            </ul>
+          </div>
+          <div class="row"><div class="lab">Choice &amp; why</div><div class="val choice">Make the first action <b>describing your system</b>, not configuring software. AI turns that description — or uploaded docs — into an initial threat model the architect can react to.</div></div>
+          <div class="row"><div class="lab">Trade-off I accepted</div><div class="val">AI-drafted output can't be trusted blindly — which is exactly the problem the next decision exists to solve.</div></div>
+        </div>
+        <figure class="shot reveal">
+          <img src="images/nexus-describe.png" alt="The &lsquo;Tell me about your application&rsquo; screen with the architect&rsquo;s own words typed in — &lsquo;Create a payment application running on AWS with API Gateway, Lambda, RDS and S3&rsquo; — plus quick-start chips and a Skip to Workspace link.">
+          <img src="images/nexus-understanding.png" alt="Nexus AI&rsquo;s read-back of the description: a structured summary of application type, environment, architecture pattern, detected components and data flows, with a Preview Model action." style="margin-top:12px">
+          <figcaption><b>Result.</b> The first action is a description in plain language; AI reads it back as structured understanding — application type, environment, components, data flows — before anything gets built.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- D3 -->
+    <article class="decision">
+      <div class="dhead"><span class="dn">DECISION 03</span><h3>AI generates; the architect approves — never the reverse</h3></div>
+      <div class="dbody">
+        <div class="spine">
+          <div class="row"><div class="lab">Problem</div><div class="val">Enterprise customers require auditability, governance, review and compliance. AI can't be a black box that silently commits changes into a model people are accountable for.</div></div>
+          <div class="row"><div class="lab">Options weighed</div>
+            <ul class="opts">
+              <li>Auto-apply AI output — fast, but unauditable and untrusted.</li>
+              <li>No automation — safe, but slow, and it forfeits the whole point.</li>
+              <li class="win">Generate, then review — nothing enters the model until a person accepts it.</li>
+            </ul>
+          </div>
+          <div class="row"><div class="lab">Choice &amp; why</div><div class="val choice">AI proposes the components, trust boundaries, security requirements and threats; <b>the architect reviews and accepts before any of it becomes part of the model</b>. Automation with a human decision gate.</div></div>
+          <div class="row"><div class="lab">Trade-off I accepted</div><div class="val">A review step on every generation — the price of a model an enterprise can actually stand behind in an audit.</div></div>
+        </div>
+        <figure class="shot reveal">
+          <img src="images/nexus-loading.png" alt="A generation screen — &lsquo;Nexus AI is assembling your model for you&rsquo; — showing the steps it works through, such as reading the AWS architecture.">
+          <img src="images/nexus-preview.png" alt="The model preview before commit: a draft &lsquo;Payment Service - AWS&rsquo; diagram with User, CloudFront, Lambda and RDS components, and two clear choices — &lsquo;Ask AI to modify&rsquo; or &lsquo;Accept &amp; Build Model&rsquo;." style="margin-top:12px">
+          <figcaption><b>Result.</b> AI assembles, then stops. Nothing enters the model until the architect asks AI to modify it or accepts and builds — the review gate that keeps an AI-drafted model auditable.</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <!-- D4 -->
+    <article class="decision">
+      <div class="dhead"><span class="dn">DECISION 04</span><h3>AI is a collaborator across the workflow — not a chatbot in the corner</h3></div>
+      <div class="dbody">
+        <div class="spine">
+          <div class="row"><div class="lab">Problem</div><div class="val">The easy version of “add AI” is a chat panel bolted onto the existing screens. That's AI-enabled — it doesn't change how the work is done.</div></div>
+          <div class="row"><div class="lab">Options weighed</div>
+            <ul class="opts">
+              <li>Bolt-on chatbot — cheap to ship, shallow in practice.</li>
+              <li>A dedicated AI console — contained, and easy to ignore.</li>
+              <li class="win">AI woven into the surfaces where modelling actually happens.</li>
+            </ul>
+          </div>
+          <div class="row"><div class="lab">Choice &amp; why</div><div class="val choice">Reorganise the workspace around <b>active modelling</b> — continue modelling, AI suggestions, pending actions, recent activity, model health — instead of exposing every capability equally, and let AI generate threats, suggest components, recommend requirements, explain vulnerabilities and summarise changes in place.</div></div>
+          <div class="row"><div class="lab">Trade-off I accepted</div><div class="val">More integration surface and a higher consistency bar across screens — worth it to make AI part of the work instead of a detour from it.</div></div>
+        </div>
+        <figure class="shot reveal">
+          <img src="images/nexus-workspace.png" alt="The modelling workspace right after creation: the model on the canvas with an AI companion panel beside it — a plain-language summary of what was mapped, prioritised next actions like reviewing the first critical threat, an Ask box, and shortcuts such as &lsquo;Explain this threat&rsquo; and &lsquo;Generate trust boundaries&rsquo;.">
+          <figcaption><b>Result.</b> AI sits beside the canvas where modelling happens — summarising the model, surfacing the one critical threat to review first, and taking requests in plain language — so the interaction is conversation plus canvas, not a hunt through menus.</figcaption>
+        </figure>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- 05 · SIGNATURE -->
+<section class="signature">
+  <div class="wrap">
+    <p class="section-num" style="color:var(--nexus-2)">05 · The idea it lives or dies on</p>
+    <h2>AI-native means AI is present at every stage — not parked in one.</h2>
+    <p class="lead">The difference between an AI feature and an AI-native product is coverage. AI doesn't sit at model creation and stop; it supports the whole journey, from discovery to continuous guidance.</p>
+    <div class="pipe reveal">
+      <div class="stages">
+        <div class="stage"><div class="sn">01</div><div class="st">Discovery</div></div>
+        <div class="stage"><div class="sn">02</div><div class="st">Model creation</div></div>
+        <div class="stage"><div class="sn">03</div><div class="st">Diagram generation</div></div>
+        <div class="stage"><div class="sn">04</div><div class="st">Threat identification</div></div>
+        <div class="stage"><div class="sn">05</div><div class="st">Security requirements</div></div>
+        <div class="stage"><div class="sn">06</div><div class="st">Model review</div></div>
+        <div class="stage"><div class="sn">07</div><div class="st">Approval prep</div></div>
+        <div class="stage"><div class="sn">08</div><div class="st">Reports</div></div>
+        <div class="stage"><div class="sn">09</div><div class="st">Continuous guidance</div></div>
+      </div>
+      <div class="rail"><span class="badge">AI</span><p>Present at every stage — generating, suggesting, explaining and summarising — with the architect approving as it goes.</p></div>
+    </div>
+    <div class="annos">
+      <div class="anno"><div class="n">AI vs manual control</div><p>AI recommends; the architect decides. Generation speeds the work without ever removing authorship.</p></div>
+      <div class="anno"><div class="n">Guidance vs flexibility</div><p>Beginners get structured guidance. Experts skip onboarding and go straight to the model — same product, different depth.</p></div>
+      <div class="anno"><div class="n">Automation vs trust</div><p>Every AI output is explainable, reviewable and editable before it counts. Trust is built into the mechanics, not promised in copy.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 · SCOPE / COLLABORATION -->
+<section>
+  <div class="wrap">
+    <p class="section-num">06 · The scope beyond the screens</p>
+    <h2>This was a product-direction problem, not a UI one.</h2>
+    <p class="lead">Making AI native to an enterprise workflow meant deciding how AI should behave — and getting several disciplines to agree on it — long before any single screen was final.</p>
+    <div class="scope">
+      <div class="scard">
+        <div class="lab">What the work defined</div>
+        <ul>
+          <li>AI interaction principles</li>
+          <li>The AI-first onboarding vision</li>
+          <li>Workspace strategy</li>
+          <li>AI integration across the workflow</li>
+          <li>Information architecture</li>
+          <li>Feature prioritisation</li>
+          <li>Inputs to release planning</li>
+          <li>Long-term product direction</li>
+        </ul>
+      </div>
+      <div class="scard">
+        <div class="lab">Who it was aligned with</div>
+        <ul>
+          <li>Product leadership — direction &amp; priorities</li>
+          <li>Engineering — technical feasibility</li>
+          <li>AI stakeholders — model capability &amp; limits</li>
+          <li>Security experts — the discipline's real workflow</li>
+        </ul>
+        <p style="font-family:'Source Serif 4',serif; font-size:15.5px; color:var(--muted); margin:18px 0 0; max-width:none">Reconciling enterprise workflows, technical feasibility, release priorities and what AI could actually do.</p>
+      </div>
+    </div>
+    <p class="scope-note">The design's job here wasn't a set of screens — it was giving a cross-functional group one coherent bet to build against, and a set of principles specific enough to settle the next hundred smaller decisions.</p>
+  </div>
+</section>
+
+<!-- 07 · OUTCOMES -->
+<section style="background:var(--paper-2); border-top:1px solid var(--line)">
+  <div class="wrap">
+    <p class="section-num">07 · What the work established</p>
+    <h2>Stated as what it set up — not as numbers it didn't measure.</h2>
+    <div class="ogrid">
+      <div class="ocard"><div class="lab">Vision</div><p>An AI-native direction for the Security Architect experience, end to end — a clear answer to what “AI in this product” should mean.</p></div>
+      <div class="ocard"><div class="lab">Onboarding</div><p>First-time complexity reduced through progressive guidance instead of a full-platform tour, aimed at reaching first success.</p></div>
+      <div class="ocard"><div class="lab">Framework</div><p>A way to integrate AI across the whole journey rather than feature by feature — reusable as new capabilities arrive.</p></div>
+      <div class="ocard"><div class="lab">Governance</div><p>Automation balanced against enterprise review, auditability and user trust, with a human decision gate on every generation.</p></div>
+      <div class="ocard wide"><div class="lab">Foundation</div><p>A scalable base the product can add future AI capabilities onto — because the principles, not the individual screens, are what carry forward.</p></div>
+    </div>
+    <div class="honest">
+      <p class="lab">The honest part</p>
+      <p>This was a strategy and experience-design initiative — the frame was product direction and AI interaction principles, not a shipped A/B result. I've deliberately left post-launch numbers out because, for this work, they'd be invented. The metrics I'd hold it to are concrete: time to a first successful threat model, and onboarding drop-off before first value. Instrumenting those is the first thing I'd do to turn this vision into proof.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 08 · REFLECTION -->
+<section>
+  <div class="wrap">
+    <p class="section-num">08 · What it taught me</p>
+    <h2>You don't get an AI product by adding AI to the workflow.</h2>
+    <div class="refl">
+      <div class="r"><div class="lab">The reframe was the project</div><p>Changing the question from “where does AI go?” to “where do people expect help?” reorganised every screen that came after it.</p></div>
+      <div class="r"><div class="lab">Trust was the real feature</div><p>The review gate mattered more than the generation. In enterprise, an AI you can't audit is an AI you can't ship.</p></div>
+      <div class="r"><div class="lab">Prove it next</div><p>Instrument time-to-first-model and onboarding drop-off, so the next version of this story is measured rather than argued.</p></div>
+    </div>
+    <div class="pull">
+      <p>Successful AI products aren't built by adding AI to existing workflows. They're built by finding where people feel uncertainty — and removing it <em>without removing control.</em></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <h3>ThreatModeler NEXUS — AI-native Security Architect experience</h3>
+    <p>An end-to-end redesign of an enterprise threat-modeling platform: reframing where AI belongs in an expert workflow, then designing login, onboarding, model creation, review, and the workspace around it — told here through the decisions that mattered most.</p>
+    <nav class="fnav" aria-label="Site">
+      <a href="index.html">← All work</a>
+      <a href="worksync.html">WorkSync case study</a>
+      <a href="engagehub.html">EngageHub case study</a>
+      <a href="resume/Manoj_Gehlot_Resume.pdf" download>Résumé ↓</a>
+    </nav>
+    <p class="byline">Case study · ThreatModeler NEXUS · Manoj Gehlot</p>
+  </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  if(!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+});
+</script>
+</body>
+</html>
