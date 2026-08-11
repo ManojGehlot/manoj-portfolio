@@ -155,6 +155,25 @@ p{max-width:66ch}
 /* outcomes */
 .ogrid{display:grid; grid-template-columns:repeat(2,1fr); gap:22px; margin-top:44px}
 .ocard{background:var(--paper-2); border:1px solid var(--line); border-radius:12px; padding:24px}
+.ocard .stat{font-family:inherit; font-weight:700; font-size:34px; color:var(--accent); line-height:1; margin-bottom:8px; letter-spacing:-.02em}
+.metric-cap{font-family:"Space Mono",monospace; font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin:44px 0 18px}
+.scope-band{background:var(--paper-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
+.scope-band h2{font-weight:500; letter-spacing:-.02em; margin:14px 0 0}
+.scope-list{display:flex; flex-wrap:wrap; gap:10px; margin:26px 0 0}
+.scope-list span{font-size:14px; color:var(--text); background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:9px 14px}
+.scope-note{font-family:"Source Serif 4",Georgia,serif; color:var(--muted); margin:24px 0 0; font-size:16px}
+.tiers{display:grid; gap:10px; margin:20px 0 4px; max-width:780px}
+.tier{display:grid; grid-template-columns:132px 1fr; gap:16px; align-items:baseline; background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:13px 16px}
+.tier .tname{font-family:"Space Mono",monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent)}
+.tier .tdesc{font-size:15px; color:var(--text); line-height:1.5}
+@media(max-width:560px){.tier{grid-template-columns:1fr; gap:4px}}
+.bcards{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:32px}
+@media(max-width:760px){.bcards{grid-template-columns:1fr}}
+.bcard{background:var(--paper-2); border:1px solid var(--line); border-radius:12px; padding:22px}
+.bcard .bk{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin-bottom:10px}
+.bcard h4{margin:0 0 8px; font-size:17px; font-weight:600; color:var(--ink); letter-spacing:-.01em}
+.bcard .bstat{font-weight:700; font-size:26px; color:var(--ink); letter-spacing:-.02em; display:block; margin-bottom:6px}
+.bcard p{margin:0; font-size:14.5px; color:var(--muted); line-height:1.55}
 .ocard .lab{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--slate)}
 .ocard p{margin:10px 0 0; font-size:16.5px}
 .ocard.wide{grid-column:1 / -1}
@@ -210,10 +229,10 @@ footer .byline{margin-top:26px; font-family:"Space Mono",monospace; font-size:12
     </nav>
     <p class="eyebrow">AI-native enterprise security · Product strategy</p>
     <h1>Most teams add AI as a feature. I redesigned the Security Architect experience so AI is <em>where the work begins.</em></h1>
-    <p class="sub">ThreatModeler NEXUS is an enterprise platform Security Architects use to build, review and govern threat models. It's genuinely powerful — and first-time architects had to learn the whole discipline before it returned any value. I redesigned the end-to-end experience — login, onboarding, model creation, workspace and the modeling workflow — around one bet: put AI where users hesitate, and keep expertise, not the tool, in charge.</p>
+    <p class="sub">ThreatModeler NEXUS is an enterprise platform Security Architects use to build, review and govern threat models. Over two years I've owned design across the product and led its shift to an AI-native experience. This case study goes deepest where the decisions were hardest — the AI-native first run in full — then shows the wider product system behind it.</p>
     <div class="meta">
-      <div><div class="k">My role</div><div class="v">Senior Product Designer · design lead</div></div>
-      <div><div class="k">Scope</div><div class="v">Login → onboarding → workspace → workflow</div></div>
+      <div><div class="k">My role</div><div class="v">Senior UX Designer · Design owner for NEXUS</div></div>
+      <div><div class="k">Scope</div><div class="v">End-to-end product design across NEXUS</div></div>
       <div><div class="k">Platform</div><div class="v">ThreatModeler NEXUS · Enterprise SaaS</div></div>
       <div><div class="k">Users</div><div class="v">Security Architects · new &amp; expert</div></div>
     </div>
@@ -226,6 +245,28 @@ footer .byline{margin-top:26px; font-family:"Space Mono",monospace; font-size:12
 </header>
 
 <main>
+
+<!-- SCOPE OF OWNERSHIP -->
+<section class="scope-band">
+  <div class="wrap">
+    <p class="section-num">Scope of ownership</p>
+    <h2>I own design across NEXUS — this study goes deepest where the decisions were hardest.</h2>
+    <p class="sub">Across two years I've owned the surfaces the product actually runs on. Rather than document every one, this case study tells the highest-value decisions in depth: the AI-native first run in full, then shorter deep dives into the product system.</p>
+    <div class="scope-list">
+      <span>Onboarding &amp; first-run</span>
+      <span>RBAC &amp; governance</span>
+      <span>Rules engine · workflow automation</span>
+      <span>Modeling &amp; diagramming canvas</span>
+      <span>Secure Design Graph</span>
+      <span>Template builders</span>
+      <span>Configurations &amp; integrations</span>
+      <span>Threat &amp; security-requirement panels</span>
+      <span>Reporting</span>
+      <span>The core action model — primary / secondary / tertiary</span>
+    </div>
+  </div>
+</section>
+
 
 <!-- 01 · PROBLEM -->
 <section>
@@ -480,11 +521,100 @@ footer .byline{margin-top:26px; font-family:"Space Mono",monospace; font-size:12
   </div>
 </section>
 
-<!-- 07 · OUTCOMES -->
+<!-- 07 · BEYOND FIRST RUN -->
 <section style="background:var(--paper-2); border-top:1px solid var(--line)">
   <div class="wrap">
-    <p class="section-num">07 · What the work established</p>
-    <h2>Stated as what it set up — not as numbers it didn't measure.</h2>
+    <p class="section-num">07 · Beyond first run</p>
+    <h2>Designing the NEXUS product system.</h2>
+    <p class="lead">The first-run work is the deepest example, not the whole job. Three more decisions show what owning the product meant across expert workflows, enterprise governance, and platform quality — each in the same problem → decision → trade-off → consequence shape.</p>
+
+    <article class="decision">
+      <div class="dhead"><span class="dn">A · Model &amp; Analyze</span><h3>Bringing analysis to the diagram — without crowding it.</h3></div>
+      <div class="spine" style="max-width:900px; margin-top:22px">
+        <div class="row"><div class="lab">Problem</div><div class="val">In the workspace a Security Architect moves constantly between the architecture diagram, the threats it generates, the security requirements those imply, model health, and AI assistance. Show all of it at once and the canvas becomes noise; hide too much and experts lose their place.</div></div>
+        <div class="row"><div class="lab">Decision</div><div class="val">I anchored the workspace on the diagram as the one constant, and treated threats, requirements, health and AI as layers the architect brings in beside it — disclosed progressively based on what they're doing, not five always-on panels. AI sits next to the canvas, summarising the model and surfacing the first threat worth reviewing, rather than living in a separate mode.</div></div>
+        <div class="row"><div class="lab">Trade-off</div><div class="val">Fewer things on screen at once means an expert occasionally opens a layer they'd rather keep pinned. I took that cost to keep the model — not the chrome — the centre of attention.</div></div>
+        <div class="row"><div class="lab">Consequence</div><div class="val">One workspace that holds up from a first simple model to a dense one: the architect stays in the diagram and pulls analysis toward it, instead of tabbing between disconnected screens.</div></div>
+      </div>
+    </article>
+
+    <article class="decision">
+      <div class="dhead"><span class="dn">B · Govern &amp; Configure</span><h3>Making permissions, rules and configuration predictable.</h3></div>
+      <div class="spine" style="max-width:900px; margin-top:22px">
+        <div class="row"><div class="lab">Problem</div><div class="val">Enterprise security software has to flex — roles, permissions, automation rules, integrations — without becoming unpredictable. The real risk isn't a missing setting; it's a change whose blast radius nobody can see: who can now do what, which models a rule will touch.</div></div>
+        <div class="row"><div class="lab">Decision</div><div class="val">I designed governance around visible consequence. Role and permission changes show what they grant, and to whom, before they're saved; automation rules preview what they'll act on; configuration surfaces the downstream effect, not just the toggle. The system's behaviour is legible at the moment of change.</div></div>
+        <div class="row"><div class="lab">Trade-off</div><div class="val">Showing consequence adds a step and some weight to actions that could be one click. In a governed product, predictability beats speed here — an admin who can see the blast radius is worth the extra moment.</div></div>
+        <div class="row"><div class="lab">Consequence</div><div class="val">RBAC, the rules engine and configuration read as one predictable system an enterprise admin can trust, rather than a scatter of independent switches.</div></div>
+      </div>
+    </article>
+
+    <article class="decision">
+      <div class="dhead"><span class="dn">C · Scale &amp; Standardize</span><h3>Improving the system the product is built from.</h3></div>
+      <div class="spine" style="max-width:900px; margin-top:22px">
+        <div class="row"><div class="lab">Problem</div><div class="val">As NEXUS grew, screens kept re-solving the same spacing, colour, hierarchy and action patterns — inconsistency users felt and engineering paid for in slow handoff. There was no shared language for something as basic as primary vs. secondary vs. tertiary actions.</div></div>
+        <div class="row"><div class="lab">Decision</div><div class="val">I built and scaled a token-based design system — a tiered architecture where components reference semantic tokens and semantic tokens reference primitives — so a decision changes in one place and propagates everywhere. On top of it I defined the platform's action model and drove the accessibility the product had been missing.</div></div>
+        <div class="row"><div class="lab">The shape of it</div><div class="val">
+          <div class="tiers">
+            <div class="tier"><span class="tname">Primitive</span><span class="tdesc">raw values — the colour, spacing and type scales the product draws from</span></div>
+            <div class="tier"><span class="tname">Semantic</span><span class="tdesc">role-based tokens (action, surface, danger, muted) that point at primitives</span></div>
+            <div class="tier"><span class="tname">Component</span><span class="tdesc">component tokens that point at semantic ones — so change flows down, never sideways</span></div>
+          </div>
+        </div></div>
+        <div class="row"><div class="lab">Trade-off</div><div class="val">A token system trades some case-by-case freedom for consistency and speed. For a platform this size that's the right call — the constraint is what keeps twenty-odd surfaces feeling like one product.</div></div>
+        <div class="row"><div class="lab">Consequence</div><div class="val">40%+ fewer UI inconsistencies and faster design-to-engineering handoff — and NEXUS moved to WCAG A (AA in progress), resolving contrast issues and defining keyboard-navigation patterns where there were none. I didn't only design the workflows; I improved the system used to build them.</div></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- 08 · BEYOND THE CORE PRODUCT -->
+<section>
+  <div class="wrap">
+    <p class="section-num">08 · Beyond the core product</p>
+    <h2>Where the design work met the business.</h2>
+    <p class="lead">Three places the work reached past the product surface — kept factual, without claiming ownership I didn't have.</p>
+    <div class="bcards">
+      <div class="bcard">
+        <div class="bk">Go-to-market</div>
+        <span class="bstat">150+</span>
+        <h4>Branding &amp; launch</h4>
+        <p>Partnered on NEXUS branding and launch; 150+ prospect demo sessions were pre-booked around it.</p>
+      </div>
+      <div class="bcard">
+        <div class="bk">Post-merger</div>
+        <h4>Platform consolidation</h4>
+        <p>Led the UX of migrating key capabilities across ThreatModeler and IriusRisk after the two merged, so users of each could work in one experience.</p>
+      </div>
+      <div class="bcard">
+        <div class="bk">Product scope</div>
+        <h4>Community Edition</h4>
+        <p>Contribute to feature-scope decisions for the Community tier — what it includes and leaves out — informed by customer needs, product metrics, and conversion/lead-generation context.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 · OUTCOMES -->
+<section style="background:var(--paper-2); border-top:1px solid var(--line)">
+  <div class="wrap">
+    <p class="section-num">09 · What the work established</p>
+    <h2>What it set up — and what the numbers showed after release.</h2>
+
+    <p class="metric-cap">First-time journey · measured in PostHog after release</p>
+    <div class="ogrid">
+      <div class="ocard"><div class="stat">+12%</div><div class="lab">onboarding completion</div><p>More first-time architects reached the end of onboarding.</p></div>
+      <div class="ocard"><div class="stat">+25%</div><div class="lab">model creation</div><p>More users created their first threat model.</p></div>
+      <div class="ocard"><div class="stat">+34%</div><div class="lab">AI-feature adoption</div><p>Materially higher uptake of the AI capabilities.</p></div>
+      <div class="ocard"><div class="stat">+28%</div><div class="lab">journey progression</div><p>More users moved all the way through the redesigned first-time-user journey.</p></div>
+    </div>
+
+    <p class="metric-cap">Separately scoped — different work, measured differently</p>
+    <div class="ogrid">
+      <div class="ocard"><div class="stat">40%+</div><div class="lab">fewer UI inconsistencies · design system</div><p>Platform quality — from the token-based design system, not the first-run redesign.</p></div>
+      <div class="ocard"><div class="stat">150+</div><div class="lab">pre-booked prospect demos · GTM launch</div><p>Launch signal — demo sessions booked around the NEXUS launch I helped brand.</p></div>
+    </div>
+
+    <p class="metric-cap">Beyond the numbers, what it established</p>
     <div class="ogrid">
       <div class="ocard"><div class="lab">Vision</div><p>An AI-native direction for the Security Architect experience, end to end — a clear answer to what “AI in this product” should mean.</p></div>
       <div class="ocard"><div class="lab">Onboarding</div><p>First-time complexity reduced through progressive guidance instead of a full-platform tour, aimed at reaching first success.</p></div>
@@ -494,7 +624,7 @@ footer .byline{margin-top:26px; font-family:"Space Mono",monospace; font-size:12
     </div>
     <div class="honest">
       <p class="lab">The honest part</p>
-      <p>This was a strategy and experience-design initiative — the frame was product direction and AI interaction principles, not a shipped A/B result. I've deliberately left post-launch numbers out because, for this work, they'd be invented. The metrics I'd hold it to are concrete: time to a first successful threat model, and onboarding drop-off before first value. Instrumenting those is the first thing I'd do to turn this vision into proof.</p>
+      <p>When I first shaped this, the frame was product direction and AI interaction principles — not a shipped result — and I said the first thing to do was instrument the journey and measure it. That has since happened. The four first-time-journey figures are post-release movement in PostHog, read as strong directional signal rather than a controlled A/B. The design-system and launch numbers are separately scoped — different work, measured differently — not outputs of the same redesign. I trust them as evidence, and keep watching onboarding completion and time-to-first-value as the product evolves.</p>
     </div>
   </div>
 </section>
@@ -502,12 +632,12 @@ footer .byline{margin-top:26px; font-family:"Space Mono",monospace; font-size:12
 <!-- 08 · REFLECTION -->
 <section>
   <div class="wrap">
-    <p class="section-num">08 · What it taught me</p>
+    <p class="section-num">10 · What it taught me</p>
     <h2>You don't get an AI product by adding AI to the workflow.</h2>
     <div class="refl">
       <div class="r"><div class="lab">The reframe was the project</div><p>Changing the question from “where does AI go?” to “where do people expect help?” reorganised every screen that came after it.</p></div>
       <div class="r"><div class="lab">Trust was the real feature</div><p>The review gate mattered more than the generation. In enterprise, an AI you can't audit is an AI you can't ship.</p></div>
-      <div class="r"><div class="lab">Prove it next</div><p>Instrument time-to-first-model and onboarding drop-off, so the next version of this story is measured rather than argued.</p></div>
+      <div class="r"><div class="lab">Then I measured it</div><p>The instrumentation I promised got wired up — onboarding, model creation, AI adoption and journey progression all rose after release. The lesson: measure the story rather than argue it.</p></div>
     </div>
     <div class="pull">
       <p>Successful AI products aren't built by adding AI to existing workflows. They're built by finding where people feel uncertainty — and removing it <em>without removing control.</em></p>
