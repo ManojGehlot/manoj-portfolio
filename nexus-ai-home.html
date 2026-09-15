@@ -18,8 +18,8 @@
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   body{ margin:0; background:var(--paper); color:var(--text);
-    font-family:"Space Grotesk",sans-serif; font-size:17px; line-height:1.6;
-    -webkit-font-smoothing:antialiased; letter-spacing:-.005em; }
+    font-family:"Source Serif 4",Georgia,serif; font-size:18px; line-height:1.65;
+    -webkit-font-smoothing:antialiased; }
   .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
   a{color:inherit; text-decoration:none}
   h1,h2,h3{ font-family:"Space Grotesk",sans-serif; color:var(--ink); letter-spacing:-.02em; line-height:1.08; margin:0; }
@@ -51,7 +51,7 @@
   .hero-shot{ margin-top:46px; }
 
   h2.sec{ font-size:clamp(26px,3.6vw,36px); font-weight:600; max-width:24ch; margin-top:14px; }
-  .lead{ font-size:20px; color:var(--muted); max-width:62ch; margin:18px 0 0; }
+  .lead{ font-size:21px; color:var(--muted); max-width:62ch; margin:18px 0 0; }
   .block{ margin-top:46px; }
   h3.dec{ font-size:20px; font-weight:600; color:var(--ink); margin:0 0 10px; }
   .block p{ max-width:60ch; margin:0 0 14px; color:var(--text); }
@@ -112,44 +112,56 @@
   footer .wrap{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
   footer .nm{ font-weight:700; color:var(--ink); font-size:14px; }
   footer a.cta{ color:var(--accent); font-weight:500; font-size:14px; }
+
+/* ---- case-study hero: matches WorkSync / EngageHub ---- */
+.hero{ background:#14121c; color:#efedf5; padding:30px 0 0; position:relative; overflow:hidden; }
+.hero .wrap{ position:relative; z-index:2; }
+.topbar{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 0 34px; }
+.topbar a{ font-family:"Space Mono",monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#d6d2e2; text-decoration:none; }
+.topbar a:hover{ color:#fff; }
+.topbar a.res{ border:1px solid #3a3550; border-radius:6px; padding:7px 13px; }
+.hero .eyebrow{ color:var(--accent); }
+.hero h1{ color:#fff; font-size:clamp(30px,4.8vw,52px); max-width:20ch; }
+.hero h1 em{ font-style:normal; color:var(--accent); }
+.hero .sub, .hero .intro{ font-family:"Source Serif 4",Georgia,serif; font-size:19px; color:#c7c3d6; max-width:62ch; margin:22px 0 0; }
+.hero .sub b, .hero .intro b{ color:#fff; font-weight:600; }
+.hero .meta{ border-top:1px solid #312d40; }
+.hero .meta .k{ color:var(--muted-ink); }
+.hero .meta .v{ font-family:"Space Grotesk",sans-serif; color:#fff; }
+.hero-shot{ margin:40px auto -66px; max-width:960px; padding:0 28px; }
+.hero-shot .shot{ box-shadow:0 30px 64px rgba(0,0,0,.34); }
+.hero-shot figcaption{ color:#a49fb5; }
+.firstsec{ border-top:none; padding-top:106px; }
+
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="wrap">
-    <a href="index.html" class="nm">Manoj Gehlot</a>
-    <div class="links">
-      <a href="#shift">The shift</a>
-      <a href="#does">What it does</a>
-      <a href="#build">Deep dive</a>
-      <a href="#change">Before → after</a>
-      <a href="#contact" class="on">Let's talk ↗</a>
-    </div>
-  </div>
-</nav>
 <a id="top"></a>
-
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow">ThreatModeler NEXUS · AI-native · Home experience</div>
-    <h1>From a list you look at — to a home that acts.</h1>
-    <p class="intro">I reworked ThreatModeler's Home from a static list of threat models into an intent-driven surface. <b>Security architects</b>, <b>developers</b>, <b>DevOps engineers</b> and <b>administrators</b> each open it to do different things — so instead of one list for everyone, I designed a single surface that responds to what a person is trying to do: create a model, find work, generate content, or connect a source. The AI proposes; the person stays in control of every consequential step.</p>
+    <nav class="topbar" aria-label="Case study">
+      <a href="index.html">&larr; Manoj Gehlot &middot; Work</a>
+      <a class="res" href="resume/Manoj_Gehlot_Resume.pdf" download>R&eacute;sum&eacute; &darr;</a>
+    </nav>
+    <p class="eyebrow">ThreatModeler NEXUS &middot; AI-native &middot; Home experience</p>
+    <h1>From a list you look at &mdash; <em>to a home that acts.</em></h1>
+    <p class="sub">I reworked ThreatModeler's Home from a static list of threat models into an intent-driven surface. <b>Security architects</b>, <b>developers</b>, <b>DevOps engineers</b> and <b>administrators</b> each open it to do different things &mdash; so instead of one list for everyone, I designed a single surface that responds to what a person is trying to do: create a model, find work, generate content, or connect a source. The AI proposes; the person stays in control of every consequential step.</p>
     <div class="meta">
-      <div><div class="k">Role</div><div class="v">Senior UX Designer<br>Design owner on NEXUS</div></div>
-      <div><div class="k">Focus</div><div class="v">AI-native UX<br>Interaction &amp; design system</div></div>
-      <div><div class="k">Platform</div><div class="v">ThreatModeler NEXUS<br>Enterprise SaaS</div></div>
-      <div><div class="k">What I owned</div><div class="v">End-to-end UX · AI interaction model<br>Design-system delivery</div></div>
+      <div><div class="k">Role</div><div class="v">Senior UX Designer &middot; Design owner on NEXUS</div></div>
+      <div><div class="k">Focus</div><div class="v">AI-native UX &middot; Interaction &amp; design system</div></div>
+      <div><div class="k">Platform</div><div class="v">ThreatModeler NEXUS &middot; Enterprise SaaS</div></div>
+      <div><div class="k">What I owned</div><div class="v">End-to-end UX &middot; AI interaction model &middot; Design-system delivery</div></div>
     </div>
-    <figure class="hero-shot">
-      <div class="shot"><img src="images/aih-home.jpg" alt="The AI-native Home: an intent box asking How can I help you, with projects, pinned chats, and suggested actions."></div>
-      <figcaption>The new Home — an intent input in place of the list. Shipped.</figcaption>
-    </figure>
+  </div>
+  <div class="hero-shot">
+    <div class="shot"><img src="images/aih-home.jpg" alt="The AI-native Home: an intent box asking How can I help you, with connectors and suggested actions."></div>
+    <figcaption>The new Home &mdash; an intent input in place of the list. Shipped.</figcaption>
   </div>
 </header>
 
 <!-- OVERVIEW CARDS -->
-<section class="divide">
+<section class="divide firstsec">
   <div class="wrap">
     <div class="section-num">At a glance</div>
     <div class="ovcards">
