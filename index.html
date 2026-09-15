@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Manoj Gehlot — Senior Product Designer</title>
-<meta name="description" content="Senior product designer, 10 years in enterprise SaaS — cybersecurity, workforce platforms, and AI-assisted tools.">
+<meta name="description" content="Senior product designer, 9+ years in enterprise SaaS — cybersecurity, workforce platforms, and AI-assisted tools.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
@@ -121,6 +121,35 @@ footer .cr{font-family:"Space Mono",monospace; font-size:12px; color:var(--faint
   .rv{opacity:0; transform:translateY(10px); transition:opacity .7s ease, transform .7s ease}
   .rv.in{opacity:1; transform:none}
 }
+
+/* wide editorial case-study cards */
+.work2{ max-width:1240px; margin:0 auto; padding:0 32px; }
+@media(max-width:1000px){ .work2{ padding:0 24px } }
+.cs-head{ display:flex; align-items:baseline; justify-content:space-between; border-top:1px solid var(--line-2); padding-top:24px; margin-bottom:6px; flex-wrap:wrap; gap:10px; }
+.cs-head h2{ font-family:"Space Grotesk",sans-serif; font-size:19px; font-weight:600; color:var(--ink); margin:0; letter-spacing:-.01em; }
+.cs-head h2 .cnt{ color:var(--faint); font-family:"Space Mono",monospace; font-size:14px; font-weight:400; margin-left:6px; }
+.cs-head .cs-tag{ font-family:"Space Mono",monospace; font-size:13px; color:var(--muted); }
+.cs{ display:flex; align-items:center; gap:56px; padding:66px 0; border-top:1px solid var(--line); text-decoration:none; color:inherit; }
+.cs .cs-text{ flex:0 0 42%; } .cs .cs-media{ flex:1 1 auto; min-width:0; }
+.cs:first-of-type{ border-top:none; padding-top:44px; }
+@media(max-width:880px){ .cs{ flex-direction:column; align-items:stretch; gap:30px; padding:48px 0 } .cs .cs-text{ flex:none } }
+.cs .eyebrow2{ font-family:"Space Mono",monospace; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--faint); }
+.cs h3{ font-family:"Space Grotesk",sans-serif; font-size:clamp(29px,3.2vw,40px); font-weight:500; letter-spacing:-.025em; line-height:1.05; margin:16px 0 0; color:var(--ink); max-width:15ch; }
+.cs .desc{ font-family:"Source Serif 4",Georgia,serif; font-size:18px; color:var(--muted); margin:18px 0 0; max-width:46ch; line-height:1.5; }
+.cs .callout{ border-left:3px solid var(--accent); padding-left:16px; margin:26px 0 0; }
+.cs .callout .big{ font-family:"Space Grotesk",sans-serif; font-size:clamp(19px,2.1vw,24px); font-weight:500; color:var(--accent); letter-spacing:-.01em; line-height:1.15; }
+.cs .callout .sub{ font-size:15px; color:var(--muted); margin-top:9px; }
+.cs .csmeta{ margin-top:28px; display:grid; grid-template-columns:1fr 1fr; gap:16px 20px; max-width:460px; }
+@media(max-width:520px){ .cs .csmeta{ grid-template-columns:1fr } }
+.cs .csmeta .k{ font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); }
+.cs .csmeta .v{ font-size:15px; color:var(--ink); margin-top:5px; line-height:1.35; }
+.cs .read{ display:inline-flex; align-items:center; gap:14px; margin-top:30px; font-weight:600; color:var(--ink); font-size:16px; }
+.cs:hover .read{ color:var(--accent); }
+.cs .read .time{ font-family:"Space Mono",monospace; font-size:12px; color:var(--faint); border-left:1px solid var(--line-2); padding-left:14px; font-weight:400; }
+.cs .shot{ background:#ece9f4; border-radius:16px; padding:26px; }
+.cs .shot img{ width:100%; display:block; border-radius:8px; box-shadow:0 22px 48px rgba(20,18,28,.16); background:#fff; }
+.cs .shotlabel{ display:flex; justify-content:space-between; margin-top:18px; font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#8b88a0; }
+
 </style>
 </head>
 <body>
@@ -145,7 +174,7 @@ footer .cr{font-family:"Space Mono",monospace; font-size:12px; color:var(--faint
     <div class="eyebrow">Senior Product Designer · Complex Products</div>
     <h1>The best complex products don't feel complex. <span class="q">That's the work.</span></h1>
     <p class="intro">I'm <b>Manoj Gehlot</b>. I work on products with real complexity underneath them — dense workflows, high-stakes decisions, systems that have to hold up as they scale — and make them feel straightforward to the people using them. I think in systems and trade-offs before screens, and I've applied that across cybersecurity, workforce operations, and AI-assisted products.</p>
-    <p class="cred">10 years turning complex products into clear ones.</p>
+    <p class="cred">9+ years turning complex products into clear ones.</p>
     <div class="cta-row">
       <a href="#work" class="btn btn-primary">View case studies →</a>
       <a href="resume/Manoj_Gehlot_Resume.pdf" class="btn btn-ghost" download>Download résumé</a>
@@ -155,45 +184,63 @@ footer .cr{font-family:"Space Mono",monospace; font-size:12px; color:var(--faint
 
 <!-- FEATURED WORK -->
 <section id="work">
-  <div class="wrap">
-    <div class="sec-label"><h2>Selected work</h2><span class="aside">Complex products</span></div>
+  <div class="work2">
+    <div class="cs-head">
+      <h2>Selected work <span class="cnt">(03)</span></h2>
+      <span class="cs-tag">The challenge. My decisions. The difference.</span>
+    </div>
 
-    <!-- PROJECT 01 — ThreatModeler NEXUS (real, AI-native) -->
-    <a href="nexus.html" class="proj rv">
-      <div class="thumb">
-        <span class="flag"><span class="dot"></span>AI-native</span>
-        <img src="images/nexus-home.png" alt="ThreatModeler NEXUS home dashboard — an AI-generated daily brief, prioritised security actions and model health">
+    <a href="nexus-ai-home.html" class="cs">
+      <div class="cs-text">
+        <div class="eyebrow2">01 / ThreatModeler &middot; Enterprise security</div>
+        <h3>Start with intent. Keep control of the model.</h3>
+        <p class="desc">Reworked ThreatModeler's Home from a static list into an intent-driven surface &mdash; consolidating scattered AI agents into one place, with the expert reviewing everything the AI proposes.</p>
+        <div class="callout"><div class="big">AI assistance. Human decisions.</div><div class="sub">Describe &rarr; confirm components &rarr; review security content</div></div>
+        <div class="csmeta">
+          <div><div class="k">My role</div><div class="v">Senior UX Designer &middot; Oct 2024&ndash;present</div></div>
+          <div><div class="k">The shift</div><div class="v">A shared AI entry point with review and confirmation</div></div>
+        </div>
+        <span class="read">Read case study <span style="color:var(--accent)">&#8599;</span> <span class="time">8 min + selected screens</span></span>
       </div>
-      <div class="pmeta">
-        <div class="kv">Enterprise Security Platform · <span class="ai">AI-native across key Security Architect workflows</span></div>
-        <h3>ThreatModeler NEXUS</h3>
-        <p class="challenge">Threat modeling so powerful that first-time architects had to learn it before it helped them.</p>
-        <p class="contrib">I own design across NEXUS — modeling and analysis, governance and configuration, reporting, the design system and accessibility — and led its shift to an AI-native experience, told through the highest-value product decisions in depth.</p>
-        <span class="view">View case study →</span>
-      </div>
-    </a>
-
-    <!-- PROJECT 02 — WorkSync (real) -->
-    <a href="worksync.html" class="proj rv">
-      <div class="thumb"><img src="images/worksync-allowance-grid.png" alt="WorkSync allowance calculation matrix"></div>
-      <div class="pmeta">
-        <div class="kv">Workforce Operations Platform · Sole product designer</div>
-        <h3>WorkSync</h3>
-        <p class="challenge">A pay-affecting workflow where mistakes stayed invisible until payday.</p>
-        <p class="contrib">Reframed it around correctness and decisions, and designed the control surface four roles now work from.</p>
-        <span class="view">View case study →</span>
+      <div class="cs-media">
+        <div class="shot"><img src="images/aih-home.jpg" alt="ThreatModeler Nexus AI-native Home"></div>
+        <div class="shotlabel"><span>ThreatModeler Nexus</span><span>AI-native Home</span></div>
       </div>
     </a>
 
-    <!-- PROJECT 03 — EngageHub (real) -->
-    <a href="engagehub.html" class="proj rv">
-      <div class="thumb"><img src="images/engagehub-home.png" alt="EngageHub employee experience platform dashboard"></div>
-      <div class="pmeta">
-        <div class="kv">Employee Experience Platform · Product designer</div>
-        <h3>EngageHub</h3>
-        <p class="challenge">Engagement a 25,000-person company couldn't see — or measure.</p>
-        <p class="contrib">Made taking part findable and one-tap, with accessibility built in, so participation became signal HR could act on.</p>
-        <span class="view">View case study →</span>
+    <a href="worksync.html" class="cs">
+      <div class="cs-text">
+        <div class="eyebrow2">02 / Amdocs &middot; Workforce operations</div>
+        <h3>A pay-affecting workflow, correct by design.</h3>
+        <p class="desc">Reframed a workforce-management flow around correctness and decisions &mdash; the control surface four roles now work from, where a mistake used to stay invisible until payday.</p>
+        <div class="callout"><div class="big">Correctness over speed.</div><div class="sub">Every cell can affect someone's pay</div></div>
+        <div class="csmeta">
+          <div><div class="k">My role</div><div class="v">Sole product designer</div></div>
+          <div><div class="k">The shift</div><div class="v">From data entry to reviewable decisions</div></div>
+        </div>
+        <span class="read">Read case study <span style="color:var(--accent)">&#8599;</span> <span class="time">Case study + screens</span></span>
+      </div>
+      <div class="cs-media">
+        <div class="shot"><img src="images/worksync-allowance-grid.png" alt="Amdocs WorkSync"></div>
+        <div class="shotlabel"><span>Amdocs</span><span>WorkSync</span></div>
+      </div>
+    </a>
+
+    <a href="engagehub.html" class="cs">
+      <div class="cs-text">
+        <div class="eyebrow2">03 / Amdocs &middot; Employee experience</div>
+        <h3>Engagement a 25,000-person company could see.</h3>
+        <p class="desc">Made taking part findable and one-tap, with accessibility built in &mdash; so participation became a signal HR could act on, at enterprise scale.</p>
+        <div class="callout"><div class="big">Participation as signal.</div><div class="sub">Across ~25,000 employees</div></div>
+        <div class="csmeta">
+          <div><div class="k">My role</div><div class="v">Product designer</div></div>
+          <div><div class="k">The shift</div><div class="v">From invisible activity to measurable participation</div></div>
+        </div>
+        <span class="read">Read case study <span style="color:var(--accent)">&#8599;</span> <span class="time">Case study + screens</span></span>
+      </div>
+      <div class="cs-media">
+        <div class="shot"><img src="images/engagehub-home.png" alt="Amdocs EngageHub"></div>
+        <div class="shotlabel"><span>Amdocs</span><span>EngageHub</span></div>
       </div>
     </a>
   </div>

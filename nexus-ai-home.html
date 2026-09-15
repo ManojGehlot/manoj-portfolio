@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexus AI Home — Manoj Gehlot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14121c; --ink-2:#1e1b2a; --paper:#f4f5f7; --paper-2:#ffffff;
+    --line:#dcdce4; --line-ink:#312d40;
+    --text:#26232f; --muted:#605c6e; --muted-ink:#a49fb5;
+    --accent:#e3357f; --amber:#e0a100; --green:#2fa36b; --slate:#8a90a6;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{ margin:0; background:var(--paper); color:var(--text);
+    font-family:"Space Grotesk",sans-serif; font-size:17px; line-height:1.6;
+    -webkit-font-smoothing:antialiased; letter-spacing:-.005em; }
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 28px; }
+  a{color:inherit; text-decoration:none}
+  h1,h2,h3{ font-family:"Space Grotesk",sans-serif; color:var(--ink); letter-spacing:-.02em; line-height:1.08; margin:0; }
+  .serif{ font-family:"Source Serif 4",Georgia,serif; letter-spacing:0; }
+  .eyebrow{ font-family:"Space Mono",monospace; font-size:12.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); }
+  .section-num{ font-family:"Space Mono",monospace; font-size:12px; letter-spacing:.14em; color:var(--accent); text-transform:uppercase; }
+
+  nav{ position:sticky; top:0; z-index:30; background:rgba(244,245,247,.86); backdrop-filter:blur(12px); border-bottom:1px solid var(--line); }
+  nav .wrap{ display:flex; align-items:center; justify-content:space-between; height:62px; }
+  nav .nm{ font-weight:700; color:var(--ink); font-size:15px; }
+  nav .links{ display:flex; gap:26px; font-size:13.5px; color:var(--muted); }
+  nav .links a:hover, nav .links a.on{ color:var(--ink); }
+
+  section{ padding:82px 0; }
+  .divide{ border-top:1px solid var(--line); }
+
+  .hero{ padding:84px 0 20px; }
+  .hero h1{ font-size:clamp(34px,5.4vw,58px); font-weight:600; margin:20px 0 0; max-width:18ch; }
+  .hero .intro{ font-family:"Source Serif 4",Georgia,serif; font-size:clamp(18px,2.1vw,21px); line-height:1.5; color:var(--muted); max-width:60ch; margin:24px 0 0; }
+  .meta{ margin:44px 0 0; padding-top:24px; border-top:1px solid var(--line-ink); display:grid; grid-template-columns:repeat(4,1fr); gap:28px; }
+  @media(max-width:720px){ .meta{grid-template-columns:repeat(2,1fr); gap:20px} }
+  .meta .k{ font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted-ink); }
+  .meta .v{ font-size:15px; color:var(--ink); font-weight:500; margin-top:7px; line-height:1.35; }
+
+  .shot{ position:relative; background:var(--paper-2); border:1px solid var(--line); border-radius:12px; padding:12px; box-shadow:0 14px 34px rgba(20,18,28,.08); }
+  .shot img{ width:100%; display:block; border-radius:6px; }
+  figure{ margin:0; }
+  figcaption{ font-family:"Space Mono",monospace; font-size:12px; color:var(--muted); margin-top:12px; line-height:1.5; }
+  .hero-shot{ margin-top:46px; }
+
+  h2.sec{ font-size:clamp(26px,3.6vw,36px); font-weight:600; max-width:24ch; margin-top:14px; }
+  .lead{ font-size:20px; color:var(--muted); max-width:62ch; margin:18px 0 0; }
+  .block{ margin-top:46px; }
+  h3.dec{ font-size:20px; font-weight:600; color:var(--ink); margin:0 0 10px; }
+  .block p{ max-width:60ch; margin:0 0 14px; color:var(--text); }
+  .note{ border-left:3px solid var(--accent); padding:4px 0 4px 16px; margin:16px 0 0; font-size:15px; color:var(--muted); }
+  .note b{ color:var(--accent); font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; }
+
+  .pq{ font-family:"Source Serif 4",Georgia,serif; font-size:clamp(23px,3.1vw,31px); line-height:1.28; color:var(--ink); max-width:27ch; margin:60px auto; text-align:center; }
+  .pq .a{ color:var(--accent); }
+
+  /* capability list */
+  .caps{ display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:34px; }
+  @media(max-width:720px){ .caps{grid-template-columns:1fr} }
+  .cap{ background:var(--paper-2); border:1px solid var(--line); border-radius:12px; padding:20px 22px; }
+  .cap .n{ font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); }
+  .cap h4{ font-family:"Space Grotesk",sans-serif; font-size:16px; color:var(--ink); margin:9px 0 6px; letter-spacing:-.01em; }
+  .cap p{ font-size:14px; color:var(--muted); margin:0; line-height:1.5; }
+  .ovcards{ display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:26px; }
+  @media(max-width:720px){ .ovcards{grid-template-columns:1fr} }
+  .ovcard{ background:var(--paper-2); border:1px solid var(--line); border-radius:14px; padding:24px 26px; }
+  .ovcard .n{ font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); }
+  .ovcard p{ font-size:15px; color:var(--text); margin:12px 0 0; line-height:1.55; }
+  .finds{ margin-top:30px; }
+  .find{ border-top:1px solid var(--line); padding:20px 0; }
+  .find:last-child{ border-bottom:1px solid var(--line); }
+  .find .n{ font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); }
+  .find p{ font-size:16px; color:var(--text); margin:8px 0 0; line-height:1.55; max-width:66ch; }
+  .blist{ margin:14px 0 4px; padding-left:20px; } .blist li{ margin:0 0 10px; color:var(--text); font-size:16px; line-height:1.55; max-width:64ch; }
+  .pair{ display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:24px; }
+  @media(max-width:720px){ .pair{grid-template-columns:1fr} }
+  .tag{ font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.13em; text-transform:uppercase; margin-bottom:10px; display:inline-block; }
+  .tag.before{ color:var(--muted-ink); } .tag.after{ color:var(--accent); }
+
+  /* before/after */
+  .ba{ width:100%; border-collapse:collapse; margin-top:30px; }
+  .ba th, .ba td{ border-bottom:1px solid var(--line); padding:15px 14px; text-align:left; vertical-align:top; font-size:15px; }
+  .ba th{ font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted-ink); font-weight:400; }
+  .ba td.dim{ color:var(--muted); width:24%; }
+  .ba td.before{ color:var(--muted); }
+  .ba td.after{ color:var(--ink); font-weight:500; }
+  .ba .aftercol{ color:var(--accent); }
+  .metricslot{ margin-top:18px; border:1px dashed var(--muted-ink); border-radius:10px; padding:13px 16px; font-family:"Space Mono",monospace; font-size:12px; color:var(--muted); }
+  .subh{ font-family:"Space Grotesk",sans-serif; font-weight:600; font-size:19px; color:var(--ink); margin:46px 0 2px; letter-spacing:-.01em; }
+  .mt{ width:100%; border-collapse:collapse; margin-top:16px; }
+  .mt th,.mt td{ padding:13px 12px; text-align:left; font-size:15px; border-bottom:1px solid var(--line); vertical-align:top; }
+  .mt th{ font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--muted-ink); font-weight:400; }
+  .mt td.metric{ color:var(--ink); font-weight:500; width:34%; }
+  .mt td.before{ color:var(--muted); }
+  .mt td.chg{ color:var(--accent); font-weight:600; }
+  .mt tr.cav td{ border-bottom:1px solid var(--line); padding-top:0; padding-bottom:15px; font-size:13px; color:var(--muted); line-height:1.5; }
+  .mnote{ font-family:"Space Mono",monospace; font-size:12px; color:var(--muted); margin-top:16px; line-height:1.5; }
+
+  .cols{ display:grid; grid-template-columns:1fr 1fr; gap:44px; margin-top:34px; }
+  @media(max-width:720px){ .cols{grid-template-columns:1fr; gap:24px} }
+  .cols ul{ margin:0; padding-left:20px; } .cols li{ margin:0 0 10px; color:var(--text); }
+  .rlab{ font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--accent); margin:0 0 10px; }
+
+  footer{ border-top:1px solid var(--line); padding:34px 0 46px; }
+  footer .wrap{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+  footer .nm{ font-weight:700; color:var(--ink); font-size:14px; }
+  footer a.cta{ color:var(--accent); font-weight:500; font-size:14px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="index.html" class="nm">Manoj Gehlot</a>
+    <div class="links">
+      <a href="#shift">The shift</a>
+      <a href="#does">What it does</a>
+      <a href="#build">Deep dive</a>
+      <a href="#change">Before → after</a>
+      <a href="#contact" class="on">Let's talk ↗</a>
+    </div>
+  </div>
+</nav>
+<a id="top"></a>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">ThreatModeler NEXUS · AI-native · Home experience</div>
+    <h1>From a list you look at — to a home that acts.</h1>
+    <p class="intro">I reworked ThreatModeler's Home from a static list of threat models into an intent-driven surface. <b>Security architects</b>, <b>developers</b>, <b>DevOps engineers</b> and <b>administrators</b> each open it to do different things — so instead of one list for everyone, I designed a single surface that responds to what a person is trying to do: create a model, find work, generate content, or connect a source. The AI proposes; the person stays in control of every consequential step.</p>
+    <div class="meta">
+      <div><div class="k">Role</div><div class="v">Senior UX Designer<br>Design owner on NEXUS</div></div>
+      <div><div class="k">Focus</div><div class="v">AI-native UX<br>Interaction &amp; design system</div></div>
+      <div><div class="k">Platform</div><div class="v">ThreatModeler NEXUS<br>Enterprise SaaS</div></div>
+      <div><div class="k">What I owned</div><div class="v">End-to-end UX · AI interaction model<br>Design-system delivery</div></div>
+    </div>
+    <figure class="hero-shot">
+      <div class="shot"><img src="images/aih-home.jpg" alt="The AI-native Home: an intent box asking How can I help you, with projects, pinned chats, and suggested actions."></div>
+      <figcaption>The new Home — an intent input in place of the list. Shipped.</figcaption>
+    </figure>
+  </div>
+</header>
+
+<!-- OVERVIEW CARDS -->
+<section class="divide">
+  <div class="wrap">
+    <div class="section-num">At a glance</div>
+    <div class="ovcards">
+      <div class="ovcard">
+        <div class="n">The product</div>
+        <p>ThreatModeler NEXUS is an enterprise threat-modeling platform — where security architects, developers, DevOps and admins map how a system can be attacked and define the requirements to defend it. The Home is the entry point every role starts from.</p>
+      </div>
+      <div class="ovcard">
+        <div class="n">The problem</div>
+        <p>The old Home was a static list of ~900 threat models — a place you scrolled, sorted and filtered. The product's real power (create, find, generate, connect) sat behind menus, and four very different roles all landed on the same generic list. Reaching value was slow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DISCOVERY -->
+<section class="divide">
+  <div class="wrap">
+    <div class="section-num">Discovery</div>
+    <h2 class="sec">I researched before I designed.</h2>
+    <p class="lead">Before touching the interface, I ran discovery with the people closest to the problem — customer success, the onboarding team, product, engineering, and several customers — asking where the product lost people and what they actually wanted from AI. Four findings shaped everything after.</p>
+    <div class="finds">
+      <div class="find"><div class="n">Finding 01</div><p><b>AI existed, but scattered.</b> Each screen ran its own agent — a report agent on reports, a separate assistant for help and resources, generation reachable only from the Secure Design Graph, another AI on the diagram, and its own search on the model list. It was inconsistent, and most people never found half of it.</p></div>
+      <div class="find"><div class="n">Finding 02</div><p><b>The Home was passive.</b> A project list with no next steps — pending approvals and assigned models were buried in rows, so people logged in unsure where to go.</p></div>
+      <div class="find"><div class="n">Finding 03</div><p><b>People wanted answers, not noise.</b> Developers, in particular, wanted actionable results and a guided, conversational way to build — not manual diagramming and long, unprioritised lists of threats.</p></div>
+      <div class="find"><div class="n">Finding 04</div><p><b>One generic UI served three very different roles.</b> Developer, security architect and CISO all landed on the same screen, though each needs a different starting point.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- THE SHIFT -->
+<section id="shift" class="divide">
+  <div class="wrap">
+    <div class="section-num">The shift</div>
+    <h2 class="sec">The home was a filing cabinet. I made it a starting line.</h2>
+    <p class="lead">Two things were true: the Home was a passive list, and the AI behind the product was scattered across screens. The redesign addresses both — it consolidates those separate agents into one surface, and turns the entry point into a place where you state intent and get an outcome, whatever your role.</p>
+    <div class="pair">
+      <figure><span class="tag before">Before</span><div class="shot"><img src="images/aih-oldhome.jpg" alt="The old Home: a dense table of hundreds of threat models with name, version, risk, status, author and modified columns."></div><figcaption>The old Home — ~900 models in a table you scrolled and filtered. Capable, but passive.</figcaption></figure>
+      <figure><span class="tag after">After</span><div class="shot"><img src="images/aih-home.jpg" alt="The new AI-native Home: an intent box asking How can I help you, with suggested actions."></div><figcaption>The new Home — a single input that routes to create, find, generate or connect.</figcaption></figure>
+    </div>
+    <p class="note"><b>Trade-off</b> &nbsp;Putting every capability behind one surface risks turning the Home into a control panel. I leaned on intent and progressive disclosure so it stays a simple starting point — the surface responds to what you ask, rather than showing everything at once.</p>
+  </div>
+</section>
+
+<!-- ROAD NOT TAKEN -->
+<section class="divide">
+  <div class="wrap">
+    <div class="section-num">The road not taken</div>
+    <h2 class="sec">I tested a second direction — a home that decides for you.</h2>
+    <p class="lead">Before the chat surface, I designed and tested a proactive briefing home: a ranked "Today's Brief," prioritised actions, model health and an approval queue. It's opinionated — it tells you what to do first.</p>
+    <figure style="margin-top:30px"><div class="shot"><img src="images/aih-dashboard.jpg" alt="Alternative home concept: a briefing dashboard with Today's Brief, prioritized actions, model health and an approval queue."></div><figcaption>The alternative — a dashboard that ranks your day for you. Tested with the same customers and stakeholders; not shipped.</figcaption></figure>
+    <p style="max-width:62ch; margin-top:22px">Both went in front of the same people. The chat home won, for reasons that matter in a security product:</p>
+    <ul class="blist">
+      <li><b>It keeps the user in control of intent</b> — the dashboard assumes the system already knows your priority; chat lets the person say what they need. Truer to the human-in-the-loop principle the product runs on.</li>
+      <li><b>It adapts to the role</b> — one ranked layout can't serve a developer and a CISO equally; a chat surface responds differently to each.</li>
+      <li><b>It consolidates the scattered agents more naturally</b> than a wall of widgets — one input, every capability.</li>
+    </ul>
+    <p class="note"><b>The honest read</b> &nbsp;The dashboard was strong, well-received work. But betting the entry point on the AI's ranking felt wrong for a security tool, where trust and control matter most — putting intent in the user's hands was the more defensible call.</p>
+  </div>
+</section>
+
+<div class="pq serif">The Home shouldn't be a list you look at. <span class="a">It should respond to what you're trying to do.</span></div>
+
+<!-- WHAT IT DOES -->
+<section id="does" class="divide">
+  <div class="wrap">
+    <div class="section-num">One surface, many jobs</div>
+    <h2 class="sec">One surface, driven by intent instead of navigation.</h2>
+    <p class="lead">Four roles open the same Home to do different jobs. Rather than build a separate screen for each, I made one surface respond to intent — everything below starts from a single input.</p>
+    <div class="caps">
+      <div class="cap"><div class="n">Create &amp; manage</div><h4>Build and run threat models</h4><p>Start a model from a plain-language description through a guided AI build, and manage the whole portfolio from one place.</p></div>
+      <div class="cap"><div class="n">Find by intent</div><h4>Ask, don't hunt</h4><p>"Models missing mitigations," "my pending approvals," "models with login components" — natural language across the entire workspace.</p></div>
+      <div class="cap"><div class="n">Generate</div><h4>Threats, requirements, reports</h4><p>Generate components, threats, security requirements and compliance reports — each as a reviewable proposal, not a silent action.</p></div>
+      <div class="cap"><div class="n">Build</div><h4>Custom dashboard widgets</h4><p>Spin up widgets — "threats by department," "unmitigated very-high risks" — so the workspace answers each role's question.</p></div>
+      <div class="cap"><div class="n">Connect</div><h4>External sources for continuous modeling</h4><p>Link Atlassian, GitHub and GitLab so a model stays tied to the system it describes as that system changes.</p></div>
+      <div class="cap"><div class="n">Stay in control</div><h4>Human-in-the-loop by design</h4><p>AI proposes; the expert accepts, adjusts or rejects. Nothing consequential is committed without a person.</p></div>
+    </div>
+    <figure style="margin-top:30px"><div class="shot"><img src="images/aih-connectors.jpg" alt="Connectors menu on the Home showing Atlassian, GitHub and GitLab that can be linked as sources."></div>
+      <figcaption>Connect external sources (Atlassian, GitHub, GitLab) from the Home, so a model can stay linked to the system it describes.</figcaption></figure>
+    <div class="block" style="margin-top:34px">
+      <h3 class="dec">Connect once — and govern what users see</h3>
+      <p>The user just picks a source; behind it, an admin connects it once and controls availability — per-user OAuth, ready / hidden status, and an "available to users" toggle — so security teams govern what's exposed. Designing the admin side is part of designing the capability, not an afterthought.</p>
+      <div class="pair">
+        <figure><div class="shot"><img src="images/aih-config.jpg" alt="Admin External Sources list: Atlassian, GitHub, GitLab with server URLs, credential type, status and available-to-users toggles."></div><figcaption>Admin side — connected sources with per-source credentials, status and an available-to-users control.</figcaption></figure>
+        <figure><div class="shot"><img src="images/aih-creds.jpg" alt="Set up Atlassian connection dialog: name, server URL, credentials as per-user OAuth, and available-to-users toggle."></div><figcaption>Connecting a source — name, server, credential mode, and whether users can see it.</figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEEP DIVE -->
+<section id="build" class="divide">
+  <div class="wrap">
+    <div class="section-num">01 · Deep dive — building a model the AI-native way</div>
+    <h2 class="sec">Guided, not magic. The human stays the author.</h2>
+    <p class="lead">The clearest test of "AI-native" is what happens after you ask for something. Building a model runs as a guided flow where every AI step is a decision the user owns.</p>
+
+    <div class="block">
+      <h3 class="dec">Ask a few sharp questions instead of facing a blank canvas</h3>
+      <p>A blank modeling canvas paralyses a newcomer; full auto-generation produces a plausible-but-wrong model. So the build opens with a short, skippable interview — where it runs, who's outside the trust boundary, what data moves through, how data gets in — capturing just enough to make the analysis accurate.</p>
+      <p class="note"><b>Trade-off</b> &nbsp;A few questions up front — placed where they set the accuracy of everything downstream, and skippable for experts.</p>
+      <figure><div class="shot"><img src="images/aih-setup.jpg" alt="Guided setup asking questions like where does it run, who talks to it from outside the trust boundary, what data moves through it, with quick-pick options."></div><figcaption>Guided setup — plain-language questions with quick-pick answers, capped and skippable.</figcaption></figure>
+    </div>
+
+    <div class="block">
+      <h3 class="dec">Turn AI suggestions into a reviewable proposal, not a done deal</h3>
+      <p>The AI matches what you described against the component library and shows its confidence — <b>exact</b>, <b>close</b>, and <b>no match</b> — so you accept a suggestion or create a new component deliberately. The match quality is visible, so trust is earned rather than assumed.</p>
+      <p class="note"><b>Trade-off</b> &nbsp;A confirmation step — placed exactly where suggested content becomes part of a real security model.</p>
+      <figure><div class="shot"><img src="images/aih-match.jpg" alt="Confirm components screen with close matches, confidence bars, and Use suggested or Create new for each."></div><figcaption>Component matching with visible confidence — exact / close / no-match, each with "use suggested" or "create new."</figcaption></figure>
+    </div>
+
+    <div class="block">
+      <h3 class="dec">Keep the expert in charge of consequential security content</h3>
+      <p>Generated threats and security requirements arrive per component as proposals — STRIDE-tagged, severity-rated — that the user accepts or rejects one by one, or in bulk. In a security product, a confidently-wrong auto-commit is worse than no automation, so the decision always stays human.</p>
+      <figure><div class="shot"><img src="images/aih-threats.jpg" alt="Review of generated threats per component with STRIDE tags, severity, and accept or reject controls."></div><figcaption>Generated threats and requirements as accept/reject proposals — STRIDE-tagged and severity-rated.</figcaption></figure>
+    </div>
+
+    <div class="block">
+      <h3 class="dec">Land on a real, editable model — not a dead end</h3>
+      <p>The flow that began with one sentence ends on the canvas with a drafted model, an always-on Nexus AI panel for further changes, and a short get-started checklist. The home didn't just answer a question; it produced working artifacts the team can build on.</p>
+      <figure><div class="shot"><img src="images/aih-canvas.jpg" alt="The canvas showing a drafted diagram of entities and data flows, with a note that Nexus drafted 13 entities and 27 threats, plus a get-started checklist."></div><figcaption>From one description to a working model — entities, data flows and threats drafted on the canvas, ready to refine.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<div class="pq serif">AI proposes; the expert decides. <span class="a">Every generation is a reviewable step — never a silent commit.</span></div>
+
+<!-- HOW I WORKED -->
+<section class="divide">
+  <div class="wrap">
+    <div class="section-num">How I worked</div>
+    <div class="cols">
+      <div>
+        <h2 class="sec">Found the real friction. Shipped it cleanly.</h2>
+        <p class="lead">This wasn't designed in a vacuum — it came from the people who watch users struggle, and it shipped through a system so engineering could build it fast.</p>
+      </div>
+      <div>
+        <ul>
+          <li><b>Ideated with AI tools</b> to explore directions quickly and pressure-test the intent-driven model before committing.</li>
+          <li><b>Ran discovery across the org</b> — customer success, TPMs, engineering, the customer-onboarding team, and customers — to find exactly where the old home lost people.</li>
+          <li><b>Designed for four roles at once</b> — security architect, developer, DevOps, admin — one surface serving different jobs.</li>
+          <li><b>Validated before building</b> — 5–6 usability sessions with the same customers and internal stakeholders, who gave it a green light — then partnered with a developer for about a month to implement it and fix adjacent UX issues.</li>
+          <li><b>Shipped efficiently through the design system</b> — tokens and components — so the new home was consistent and quick to hand to development.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE / AFTER -->
+<section id="change" class="divide">
+  <div class="wrap">
+    <div class="section-num">Before → after</div>
+    <h2 class="sec">What changed, in the product.</h2>
+    <table class="ba">
+      <tr><th>&nbsp;</th><th>Before</th><th class="aftercol">After</th></tr>
+      <tr><td class="dim">Entry point</td><td class="before">A static list of threat models</td><td class="after">An intent box: "How can I help you?"</td></tr>
+      <tr><td class="dim">Finding work</td><td class="before">Hunt through menus and filters</td><td class="after">Ask in plain language across the workspace</td></tr>
+      <tr><td class="dim">Creating a model</td><td class="before">Blank canvas, manual build</td><td class="after">Guided AI build → real editable model</td></tr>
+      <tr><td class="dim">AI's role</td><td class="before">Scattered, feature-by-feature</td><td class="after">Native across create, find, generate, connect</td></tr>
+      <tr><td class="dim">Fit across roles</td><td class="before">One list for everyone</td><td class="after">One surface, driven by each role's intent</td></tr>
+    </table>
+    <p class="subh">Measured after launch</p>
+    <table class="mt">
+      <tr><th>Metric</th><th>Before</th><th>After</th><th>Change</th></tr>
+      <tr><td class="metric">Time to first threat model (median)</td><td class="before">23.7 hrs</td><td>2.2 hrs</td><td class="chg">−91%</td></tr>
+      <tr class="cav"><td colspan="4">Holds across all percentiles, not just the median. The "before" cohort included long-tenured users who hadn't built yet — so I read this as movement after launch, not proven causation.</td></tr>
+      <tr><td class="metric">Reached a first model in ≤ 1 hour</td><td class="before">31%</td><td>43%</td><td class="chg">+12 pp</td></tr>
+      <tr><td class="metric">Search results returned · AI chat (median)</td><td class="before">1</td><td>18</td><td class="chg">+1,700%</td></tr>
+      <tr class="cav"><td colspan="4">Chat use also grew ~75% as people migrated off the old searchbar. This counts results <i>returned</i>, not confirmed "found what they needed" — there's no result-opened event yet.</td></tr>
+      <tr><td class="metric">AI security-requirement suggestions accepted</td><td class="before">88% · 860</td><td>66% · 1,972</td><td class="chg">rate −22 pp · volume +129%</td></tr>
+      <tr><td class="metric">AI threat suggestions accepted</td><td class="before">91% · 270</td><td>64% · 601</td><td class="chg">rate −27 pp · volume +123%</td></tr>
+      <tr class="cav"><td colspan="4">Acceptance <i>rate</i> dipped as the audience widened from a handful of power users to a larger, more diverse pool — while accepted <i>volume</i> roughly doubled. I show both on purpose.</td></tr>
+    </table>
+    <p class="mnote">Measured in PostHog · 30 days before vs. after the new Home shipped · internal orgs excluded · directional movement, not a controlled test.</p>
+  </div>
+</section>
+
+<!-- REFLECTION -->
+<section class="divide">
+  <div class="wrap">
+    <div class="section-num">Reflection</div>
+    <h2 class="sec">Where I'd take it next.</h2>
+    <div class="cols">
+      <div><p class="rlab">What shipped</p><p>An AI-native Home and a guided, human-in-the-loop model build — live, and serving four roles from one surface, connected to real external sources for continuous modeling.</p></div>
+      <div><p class="rlab">What I'd measure next</p><p>Close the instrumentation gaps this surfaced: a "result opened" event so find-success is real usage, not just results returned; a "connector connected" event so adoption is measurable beyond page visits; and AI-acceptance tracked by cohort, since rate and audience move together as the user base grows.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <span class="nm">Manoj Gehlot · Senior UX &amp; Product Designer</span>
+    <a href="mailto:manojgehlot294@gmail.com" class="cta">Start a conversation ↗</a>
+  </div>
+</footer>
+
+</body>
+</html>
