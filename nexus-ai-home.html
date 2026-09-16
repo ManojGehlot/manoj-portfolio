@@ -133,6 +133,13 @@
 .hero-shot figcaption{ color:#a49fb5; }
 .firstsec{ border-top:none; padding-top:106px; }
 
+
+.tldr-band{ padding:106px 0 30px; }
+.tldr{ font-family:"Source Serif 4",Georgia,serif; font-size:21px; line-height:1.5; color:var(--ink); max-width:64ch; margin:0; }
+.tldr .tl-lab{ font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:12px; }
+.tldr b{ color:var(--ink); font-weight:600; }
+.tldr .tl-note{ font-family:"Space Mono",monospace; font-size:12px; color:var(--muted); }
+
 </style>
 </head>
 <body>
@@ -146,7 +153,7 @@
     </nav>
     <p class="eyebrow">ThreatModeler NEXUS &middot; AI-native &middot; Home experience</p>
     <h1>From a list you look at &mdash; <em>to a home that acts.</em></h1>
-    <p class="sub">I reworked ThreatModeler's Home from a static list of threat models into an intent-driven surface. <b>Security architects</b>, <b>developers</b>, <b>DevOps engineers</b> and <b>administrators</b> each open it to do different things &mdash; so instead of one list for everyone, I designed a single surface that responds to what a person is trying to do: create a model, find work, generate content, or connect a source. The AI proposes; the person stays in control of every consequential step.</p>
+    <p class="sub">ThreatModeler is a security tool where teams map out how an app could be attacked. Its home screen used to be a long list of past work, so you'd land there and have to go hunting. I turned it into a simple "what do you need?" screen: you say what you need &mdash; start a model, find something, pull a report &mdash; and it responds. Because <b>security architects</b>, <b>developers</b>, <b>DevOps engineers</b> and <b>administrators</b> all use it for different things, one shared list never fit anyone well, so this adapts to the person. The AI does the heavy lifting, but the person always makes the important calls.</p>
     <div class="meta">
       <div><div class="k">Role</div><div class="v">Senior UX Designer &middot; Design owner on NEXUS</div></div>
       <div><div class="k">Focus</div><div class="v">AI-native UX &middot; Interaction &amp; design system</div></div>
@@ -160,18 +167,25 @@
   </div>
 </header>
 
+<!-- SUMMARY -->
+<section class="tldr-band">
+  <div class="wrap">
+    <p class="tldr"><span class="tl-lab">In short</span>The old home screen was a list you had to dig through, and the product's AI help was scattered across different pages. I brought it into one simple screen: you say what you need and it responds, with the expert always checking what the AI suggests. <b>After it shipped, the median time to a first threat model fell from about a day to about two hours.</b> <span class="tl-note">(Directional &mdash; measured in PostHog, not a controlled test.)</span></p>
+  </div>
+</section>
+
 <!-- OVERVIEW CARDS -->
-<section class="divide firstsec">
+<section class="divide">
   <div class="wrap">
     <div class="section-num">At a glance</div>
     <div class="ovcards">
       <div class="ovcard">
         <div class="n">The product</div>
-        <p>ThreatModeler NEXUS is an enterprise threat-modeling platform — where security architects, developers, DevOps and admins map how a system can be attacked and define the requirements to defend it. The Home is the entry point every role starts from.</p>
+        <p>ThreatModeler NEXUS helps security teams map how an app could be attacked, and work out how to defend it. Whoever you are — architect, developer, DevOps, admin — you start on the Home screen.</p>
       </div>
       <div class="ovcard">
         <div class="n">The problem</div>
-        <p>The old Home was a static list of ~900 threat models — a place you scrolled, sorted and filtered. The product's real power (create, find, generate, connect) sat behind menus, and four very different roles all landed on the same generic list. Reaching value was slow.</p>
+        <p>The old Home was just a long list of past work — nearly 900 items — that you scrolled and filtered to find anything. The best features were tucked away in menus, and one generic list had to serve four very different people. Getting anywhere took a while.</p>
       </div>
     </div>
   </div>
@@ -197,7 +211,7 @@
   <div class="wrap">
     <div class="section-num">The shift</div>
     <h2 class="sec">The home was a filing cabinet. I made it a starting line.</h2>
-    <p class="lead">Two things were true: the Home was a passive list, and the AI behind the product was scattered across screens. The redesign addresses both — it consolidates those separate agents into one surface, and turns the entry point into a place where you state intent and get an outcome, whatever your role.</p>
+    <p class="lead">Two things were wrong: the Home just sat there as a list, and the AI help was split across different pages. The redesign fixes both. It pulls that scattered help into one place, and turns the screen into somewhere you say what you want and actually get it, whoever you are.</p>
     <div class="pair">
       <figure><span class="tag before">Before</span><div class="shot"><img src="images/aih-oldhome.jpg" alt="The old Home: a dense table of hundreds of threat models with name, version, risk, status, author and modified columns."></div><figcaption>The old Home — ~900 models in a table you scrolled and filtered. Capable, but passive.</figcaption></figure>
       <figure><span class="tag after">After</span><div class="shot"><img src="images/aih-home.jpg" alt="The new AI-native Home: an intent box asking How can I help you, with suggested actions."></div><figcaption>The new Home — a single input that routes to create, find, generate or connect.</figcaption></figure>
@@ -256,10 +270,10 @@
 <section class="divide">
   <div class="wrap">
     <div class="section-num">The flow</div>
-    <h2 class="sec">One input, four paths &mdash; a review gate on each.</h2>
-    <p class="lead">Every request starts from the same intent input and branches into create, find, generate or connect. The paths that produce security content don't commit anything on their own &mdash; each passes through a point where the person accepts, adjusts or rejects. The loops matter as much as the happy path: a no-match becomes "create new," a rejected suggestion returns to generation, an empty search refines the query.</p>
-    <figure style="margin-top:30px"><div class="shot"><img src="images/aih-flow.png" alt="User flow: the Home's intent input branches into create, find, generate and connect, each ending in a human review gate, with loops for no-match, reject-and-retry and refine-query."></div>
-      <figcaption>The Home as a flow &mdash; one intent input, four paths, and a human decision on everything the AI proposes.</figcaption></figure>
+    <h2 class="sec">The build, end to end &mdash; a review gate at each AI step.</h2>
+    <p class="lead">Creating a model runs as a guided flow. Every step where the AI produces something &mdash; matching components, generating threats &mdash; is a point where the person accepts, adjusts or rejects before it becomes part of the model. Nothing commits on its own, and the loops matter as much as the happy path: a no-match becomes "create new," a rejected suggestion returns to generation.</p>
+    <figure style="margin-top:30px"><div class="shot" style="padding:26px 22px"><svg viewBox="0 0 1150 172" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto" role="img" aria-label="Create-a-model flow: describe the system, guided setup, match components (you decide), generate threats and requirements, review each (you decide), model on canvas, with an adjust/reject loop back to generate."><defs><marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#8a8797"/></marker><marker id="arm" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#e3357f"/></marker></defs><style>.node{fill:#fff;stroke:#dcdce4;stroke-width:1.5}.gate{fill:#fff;stroke:#e3357f;stroke-width:2}.end{fill:#14121c;stroke:#14121c}.lbl{font-family:"Space Grotesk",sans-serif;font-size:14px;fill:#14121c;font-weight:500}.lblw{font-family:"Space Grotesk",sans-serif;font-size:14px;fill:#fff;font-weight:500}.mono{font-family:"Space Mono",monospace;font-size:10px;fill:#605c6e}.monom{font-family:"Space Mono",monospace;font-size:10px;fill:#e3357f}.flow{stroke:#8a8797;stroke-width:1.5;fill:none}.floop{stroke:#e3357f;stroke-width:1.5;fill:none;stroke-dasharray:4 3}</style><line class="flow" x1="165" y1="85.0" x2="202" y2="85.0" marker-end="url(#ar)"/><line class="flow" x1="355" y1="85.0" x2="392" y2="85.0" marker-end="url(#ar)"/><line class="flow" x1="545" y1="85.0" x2="582" y2="85.0" marker-end="url(#ar)"/><line class="flow" x1="735" y1="85.0" x2="772" y2="85.0" marker-end="url(#ar)"/><line class="flow" x1="925" y1="85.0" x2="962" y2="85.0" marker-end="url(#ar)"/><text class="mono" x="945.0" y="78.0" text-anchor="middle">accept</text><path class="floop" d="M 850.0 118 C 850.0 158, 660.0 158, 660.0 122" marker-end="url(#arm)"/><text class="monom" x="755.0" y="172" text-anchor="middle">adjust / reject</text><rect class="node" x="15" y="52" width="150" height="66" rx="10"/><text class="lbl" x="90.0" y="80" text-anchor="middle">Describe the</text><text class="lbl" x="90.0" y="98" text-anchor="middle">system</text><rect class="node" x="205" y="52" width="150" height="66" rx="10"/><text class="lbl" x="280.0" y="80" text-anchor="middle">Guided</text><text class="lbl" x="280.0" y="98" text-anchor="middle">setup</text><rect class="gate" x="395" y="52" width="150" height="66" rx="10"/><text class="lbl" x="470.0" y="80" text-anchor="middle">Match</text><text class="lbl" x="470.0" y="98" text-anchor="middle">components</text><rect class="node" x="585" y="52" width="150" height="66" rx="10"/><text class="lbl" x="660.0" y="80" text-anchor="middle">Generate threats</text><text class="lbl" x="660.0" y="98" text-anchor="middle">&amp; requirements</text><rect class="gate" x="775" y="52" width="150" height="66" rx="10"/><text class="lbl" x="850.0" y="80" text-anchor="middle">Review</text><text class="lbl" x="850.0" y="98" text-anchor="middle">each</text><rect class="end" x="965" y="52" width="150" height="66" rx="10"/><text class="lblw" x="1040.0" y="80" text-anchor="middle">Model on</text><text class="lblw" x="1040.0" y="98" text-anchor="middle">canvas</text><text class="mono" x="470.0" y="133" text-anchor="middle">exact / close &#8594; use suggested</text><text class="mono" x="470.0" y="146" text-anchor="middle">no match &#8594; create new</text><rect class="gate" x="957" y="14" width="16" height="12" rx="3"/><text class="monom" x="979" y="24" text-anchor="start">= you review &amp; decide</text></svg></div>
+      <figcaption>The create path &mdash; describe &rarr; guided setup &rarr; component match &rarr; threat review &rarr; model. Magenta marks where you review and decide.</figcaption></figure>
   </div>
 </section>
 
