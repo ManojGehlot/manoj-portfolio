@@ -177,216 +177,103 @@
     <figcaption>The new Home &mdash; an intent input in place of the list. Shipped.</figcaption>
   </div>
 </header>
+<!-- OVERVIEW -->
+<section class="divide firstsec"><div class="wrap">
+  <div class="section-num">Overview</div>
+  <h2 class="sec">What this is</h2>
+  <p class="lead">ThreatModeler is a tool security teams use to map out how an app could be attacked, and plan how to defend it. The Home screen is where everyone lands and starts. I redesigned it &mdash; from a plain list of past work into a screen you can simply talk to: say what you need (start something, find something, get a report), and it responds.</p>
+  <figure style="margin-top:30px"><div class="shot"><img src="images/aih-home.jpg" alt="The new AI Home"></div><figcaption>The new Home &mdash; you say what you need, and it helps. Shipped.</figcaption></figure>
+</div></section>
 
-<!-- SUMMARY -->
-<section class="tldr-band">
-  <div class="wrap">
-    <p class="tldr"><span class="tl-lab">In short</span>The old home screen was a list you had to dig through, and the product's AI help was scattered across different pages. I brought it into one simple screen: you say what you need and it responds, with the expert always checking what the AI suggests. <b>After it shipped, the median time to a first threat model fell from about a day to about two hours.</b> <span class="tl-note">(Directional &mdash; measured in PostHog, not a controlled test.)</span></p>
+<!-- PROBLEM -->
+<section class="divide"><div class="wrap">
+  <div class="section-num">Problem</div>
+  <h2 class="sec">The old Home made people hunt.</h2>
+  <p class="lead">You landed on a long list of past work and had to dig for anything. The best features were buried in menus. And the AI help was scattered &mdash; a different assistant on each screen, so most people never found half of it. On top of that, four very different roles all got the same generic screen.</p>
+  <figure style="margin-top:30px"><div class="shot"><img src="images/aih-oldhome.jpg" alt="The old Home, a long list"></div><figcaption>Before &mdash; a table of ~900 past models you scrolled and filtered. Powerful, but passive.</figcaption></figure>
+</div></section>
+
+<!-- EXPECTED OUTCOME -->
+<section class="divide"><div class="wrap">
+  <div class="section-num">Expected outcome</div>
+  <h2 class="sec">What we hoped to change.</h2>
+  <p class="lead">Three things: get new people to a real result faster; pull the scattered AI into one place; and let the screen adapt to whoever's using it, instead of one list for everyone. With one rule underneath it all &mdash; the AI helps, but a person always makes the security decisions.</p>
+</div></section>
+
+<!-- RESEARCH -->
+<section class="divide"><div class="wrap">
+  <div class="section-num">Research I did</div>
+  <h2 class="sec">I talked to people before I designed.</h2>
+  <p class="lead">I spoke with the people who watch users struggle &mdash; customer success, the onboarding team, product and engineering &mdash; and with several customers. Four things came up again and again.</p>
+  <div class="finds">
+    <div class="find"><div class="n">Finding 01</div><p><b>The AI was scattered.</b> Each screen had its own assistant, tucked in a different spot, so people rarely found it.</p></div>
+    <div class="find"><div class="n">Finding 02</div><p><b>The Home just sat there.</b> A list with no next step, so people logged in unsure where to go.</p></div>
+    <div class="find"><div class="n">Finding 03</div><p><b>People wanted a quick way in.</b> A guided start, not a blank canvas and long lists of things to read.</p></div>
+    <div class="find"><div class="n">Finding 04</div><p><b>One screen, very different people.</b> A developer, a security architect and a security leader all landed on the same page &mdash; each needs a different starting point.</p></div>
   </div>
-</section>
+</div></section>
 
-<!-- OVERVIEW CARDS -->
-<section class="divide">
-  <div class="wrap">
-    <div class="section-num">At a glance</div>
-    <div class="ovcards">
-      <div class="ovcard">
-        <div class="n">The product</div>
-        <p>ThreatModeler NEXUS helps security teams map how an app could be attacked, and work out how to defend it. Whoever you are — architect, developer, DevOps, admin — you start on the Home screen.</p>
-      </div>
-      <div class="ovcard">
-        <div class="n">The problem</div>
-        <p>The old Home was just a long list of past work — nearly 900 items — that you scrolled and filtered to find anything. The best features were tucked away in menus, and one generic list had to serve four very different people. Getting anywhere took a while.</p>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- FLOWS -->
+<section class="divide"><div class="wrap">
+  <div class="section-num">Flows I made</div>
+  <h2 class="sec">One path, with a checkpoint at every AI step.</h2>
+  <p class="lead">I mapped the whole journey as a single flow. You describe your system, the AI asks a few quick questions, matches the parts to its library, drafts the risks &mdash; and you check its work before anything becomes part of your model.</p>
+  <figure style="margin-top:30px"><div class="shot" style="padding:26px 22px"><svg viewBox="0 0 1150 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto" role="img" aria-label="Build flow: describe the system, guided setup, match components (you decide), draft the risks, review each (you decide), working model."><defs><marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#8a8797"/></marker><marker id="arm" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#e3357f"/></marker></defs><style>.node{fill:#fff;stroke:#dcdce4;stroke-width:1.5}.gate{fill:#fff;stroke:#e3357f;stroke-width:2}.end{fill:#14121c;stroke:#14121c}.lbl{font-family:"Space Grotesk",sans-serif;font-size:14px;fill:#14121c;font-weight:500}.lblw{font-family:"Space Grotesk",sans-serif;font-size:14px;fill:#fff;font-weight:500}.mono{font-family:"Space Mono",monospace;font-size:10px;fill:#605c6e}.monom{font-family:"Space Mono",monospace;font-size:10px;fill:#e3357f}.flow{stroke:#8a8797;stroke-width:1.5;fill:none}.floop{stroke:#e3357f;stroke-width:1.5;fill:none;stroke-dasharray:4 3}</style><line class="flow" x1="165" y1="105.0" x2="202" y2="105.0" marker-end="url(#ar)"/><line class="flow" x1="355" y1="105.0" x2="392" y2="105.0" marker-end="url(#ar)"/><line class="flow" x1="545" y1="105.0" x2="582" y2="105.0" marker-end="url(#ar)"/><line class="flow" x1="735" y1="105.0" x2="772" y2="105.0" marker-end="url(#ar)"/><line class="flow" x1="925" y1="105.0" x2="962" y2="105.0" marker-end="url(#ar)"/><path class="floop" d="M 1040.0 72 C 1040.0 18, 660.0 18, 660.0 69" marker-end="url(#arm)"/><text class="monom" x="850.0" y="30" text-anchor="middle">changes &#8594; re-checks</text><rect class="node" x="15" y="72" width="150" height="66" rx="10"/><text class="lbl" x="90.0" y="100" text-anchor="middle">Describe the</text><text class="lbl" x="90.0" y="118" text-anchor="middle">system</text><rect class="node" x="205" y="72" width="150" height="66" rx="10"/><text class="lbl" x="280.0" y="100" text-anchor="middle">Guided</text><text class="lbl" x="280.0" y="118" text-anchor="middle">setup</text><rect class="gate" x="395" y="72" width="150" height="66" rx="10"/><text class="lbl" x="470.0" y="100" text-anchor="middle">Match</text><text class="lbl" x="470.0" y="118" text-anchor="middle">components</text><rect class="node" x="585" y="72" width="150" height="66" rx="10"/><text class="lbl" x="660.0" y="100" text-anchor="middle">Draft the</text><text class="lbl" x="660.0" y="118" text-anchor="middle">risks</text><rect class="gate" x="775" y="72" width="150" height="66" rx="10"/><text class="lbl" x="850.0" y="100" text-anchor="middle">Review</text><text class="lbl" x="850.0" y="118" text-anchor="middle">each</text><rect class="end" x="965" y="72" width="150" height="66" rx="10"/><text class="lblw" x="1040.0" y="100" text-anchor="middle">Working</text><text class="lblw" x="1040.0" y="118" text-anchor="middle">model</text><text class="mono" x="470.0" y="154" text-anchor="middle">strong / close / none</text><text class="mono" x="850.0" y="154" text-anchor="middle">accept / adjust / reject</text><rect class="gate" x="965" y="145" width="15" height="11" rx="3"/><text class="monom" x="986" y="154" text-anchor="start">= you decide</text></svg></div><figcaption>The build path &mdash; describe, set up, match parts, review, done. Magenta marks where you decide.</figcaption></figure>
+</div></section>
 
-<!-- DISCOVERY -->
-<section class="divide">
-  <div class="wrap">
-    <div class="section-num">Discovery</div>
-    <h2 class="sec">I researched before I designed.</h2>
-    <p class="lead">Before touching the interface, I ran discovery with the people closest to the problem — customer success, the onboarding team, product, engineering, and several customers — asking where the product lost people and what they actually wanted from AI. Four findings shaped everything after.</p>
-    <div class="finds">
-      <div class="find"><div class="n">Finding 01</div><p><b>AI existed, but scattered.</b> Each screen ran its own agent — a report agent on reports, a separate assistant for help and resources, generation reachable only from the Secure Design Graph, another AI on the diagram, and its own search on the model list. It was inconsistent, and most people never found half of it.</p></div>
-      <div class="find"><div class="n">Finding 02</div><p><b>The Home was passive.</b> A project list with no next steps — pending approvals and assigned models were buried in rows, so people logged in unsure where to go.</p></div>
-      <div class="find"><div class="n">Finding 03</div><p><b>People wanted answers, not noise.</b> Developers, in particular, wanted actionable results and a guided, conversational way to build — not manual diagramming and long, unprioritised lists of threats.</p></div>
-      <div class="find"><div class="n">Finding 04</div><p><b>One generic UI served three very different roles.</b> Developer, security architect and CISO all landed on the same screen, though each needs a different starting point.</p></div>
-    </div>
-  </div>
-</section>
+<!-- IDEATION / DESIGN -->
+<section class="divide"><div class="wrap">
+  <div class="section-num">Ideation &amp; screens</div>
+  <h2 class="sec">The AI suggests. You confirm.</h2>
+  <p class="lead">Rather than a blank canvas or full auto-magic, I designed a short, guided build where the AI proposes and the person stays in charge.</p>
+  <div class="block"><h3 class="dec">A few quick questions first</h3><p>The build opens with a short, skippable set of questions &mdash; where the app runs, what data it handles, who can reach it &mdash; so the result is accurate from the start.</p><figure style="margin-top:22px"><div class="shot"><img src="images/aih-setup.jpg" alt="Guided setup questions"></div><figcaption>A short, skippable setup.</figcaption></figure></div>
+  <div class="block"><h3 class="dec">Suggestions you can accept or fix</h3><p>The AI matches the parts you described to its library and shows how sure it is &mdash; a strong match, a close one, or none &mdash; so you accept it or make your own. The risks it drafts work the same way: accept, adjust, or reject each one.</p>
+    <div class="pair"><figure><div class="shot"><img src="images/aih-match.jpg" alt="Component matching with confidence"></div><figcaption>Matches, with how sure the AI is.</figcaption></figure><figure><div class="shot"><img src="images/aih-threats.jpg" alt="Risk review, accept or reject"></div><figcaption>Risks as accept / reject suggestions.</figcaption></figure></div></div>
+  <div class="block"><h3 class="dec">You end with a real, editable model</h3><p>What began with one sentence lands as a working model on the canvas, ready to keep building on &mdash; and you can connect outside sources (like GitHub or Jira) so it stays in step with the real system.</p><figure style="margin-top:22px"><div class="shot"><img src="images/aih-canvas.jpg" alt="The generated model on the canvas"></div><figcaption>From one description to a working model.</figcaption></figure></div>
+</div></section>
 
-<!-- THE SHIFT -->
-<section id="shift" class="divide">
-  <div class="wrap">
-    <div class="section-num">The shift</div>
-    <h2 class="sec">The home was a filing cabinet. I made it a starting line.</h2>
-    <p class="lead">Two things were wrong: the Home just sat there as a list, and the AI help was split across different pages. The redesign fixes both. It pulls that scattered help into one place, and turns the screen into somewhere you say what you want and actually get it, whoever you are.</p>
-    <div class="pair">
-      <figure><span class="tag before">Before</span><div class="shot"><img src="images/aih-oldhome.jpg" alt="The old Home: a dense table of hundreds of threat models with name, version, risk, status, author and modified columns."></div><figcaption>The old Home — ~900 models in a table you scrolled and filtered. Capable, but passive.</figcaption></figure>
-      <figure><span class="tag after">After</span><div class="shot"><img src="images/aih-home.jpg" alt="The new AI-native Home: an intent box asking How can I help you, with suggested actions."></div><figcaption>The new Home — a single input that routes to create, find, generate or connect.</figcaption></figure>
-    </div>
-    <p class="note"><b>Trade-off</b> &nbsp;Putting every capability behind one surface risks turning the Home into a control panel. I leaned on intent and progressive disclosure so it stays a simple starting point — the surface responds to what you ask, rather than showing everything at once.</p>
-  </div>
-</section>
+<!-- TRADE-OFFS -->
+<section class="divide"><div class="wrap">
+  <div class="section-num">Trade-offs</div>
+  <h2 class="sec">A different direction I tried &mdash; and dropped.</h2>
+  <p class="lead">Before the chat-style Home, I designed and tested another idea: a dashboard that ranks your day for you and tells you what to do first.</p>
+  <figure style="margin-top:30px"><div class="shot"><img src="images/aih-dashboard.jpg" alt="A dashboard alternative"></div><figcaption>The alternative &mdash; a dashboard that decides for you. Tested, not shipped.</figcaption></figure>
+  <p style="max-width:62ch;margin-top:22px">I showed both to the same people. The chat Home won, for reasons that matter in a security tool:</p>
+  <ul class="blist">
+    <li><b>It keeps the person in control.</b> The dashboard assumes the AI already knows your priority; the chat lets you say what you need &mdash; safer when trust is everything.</li>
+    <li><b>It fits every role.</b> One ranked layout can't serve a developer and a security leader equally; the chat responds differently to each.</li>
+  </ul>
+  <p class="note"><b>The honest read</b> &nbsp;The dashboard was good, well-liked work. But betting the front door on the AI being right felt wrong here, so I let it go.</p>
+  <p class="note" style="margin-top:14px"><b>One more trade-off</b> &nbsp;The guided questions add a little effort up front. I kept them because that's what makes the result accurate &mdash; and made them skippable for experts.</p>
+</div></section>
 
-<!-- ROAD NOT TAKEN -->
-<section class="divide">
-  <div class="wrap">
-    <div class="section-num">The road not taken</div>
-    <h2 class="sec">I tested a second direction — a home that decides for you.</h2>
-    <p class="lead">Before the chat surface, I designed and tested a proactive briefing home: a ranked "Today's Brief," prioritised actions, model health and an approval queue. It's opinionated — it tells you what to do first.</p>
-    <figure style="margin-top:30px"><div class="shot"><img src="images/aih-dashboard.jpg" alt="Alternative home concept: a briefing dashboard with Today's Brief, prioritized actions, model health and an approval queue."></div><figcaption>The alternative — a dashboard that ranks your day for you. Tested with the same customers and stakeholders; not shipped.</figcaption></figure>
-    <p style="max-width:62ch; margin-top:22px">Both went in front of the same people. The chat home won, for reasons that matter in a security product:</p>
-    <ul class="blist">
-      <li><b>It keeps the user in control of intent</b> — the dashboard assumes the system already knows your priority; chat lets the person say what they need. Truer to the human-in-the-loop principle the product runs on.</li>
-      <li><b>It adapts to the role</b> — one ranked layout can't serve a developer and a CISO equally; a chat surface responds differently to each.</li>
-      <li><b>It consolidates the scattered agents more naturally</b> than a wall of widgets — one input, every capability.</li>
-    </ul>
-    <p class="note"><b>The honest read</b> &nbsp;The dashboard was strong, well-received work. But betting the entry point on the AI's ranking felt wrong for a security tool, where trust and control matter most — putting intent in the user's hands was the more defensible call.</p>
-  </div>
-</section>
+<!-- USABILITY TEST -->
+<section class="divide"><div class="wrap">
+  <div class="section-num">Usability test</div>
+  <h2 class="sec">Tested it before building it.</h2>
+  <p class="lead">I ran the direction past the same customers and internal stakeholders in a handful of sessions, watching them try real tasks. They backed it &mdash; and I then built it with a developer over about a month, fixing other rough edges along the way. Worth being precise: that was hands-on testing plus a green light to ship, not a large controlled study.</p>
+</div></section>
 
-<div class="pq serif">The Home shouldn't be a list you look at. <span class="a">It should respond to what you're trying to do.</span></div>
+<!-- OUTCOMES -->
+<section class="divide"><div class="wrap">
+  <div class="section-num">Outcomes</div>
+  <h2 class="sec">What the numbers say.</h2>
+  <p class="lead">Measured in the product after launch. I read these as strong signals, not proof of cause &mdash; so I'm careful with them.</p>
+  <table class="mt">
+    <tr><th>Metric</th><th>Before</th><th>After</th><th>Change</th></tr>
+    <tr><td class="metric">Time for a new user to build their first model (typical)</td><td class="before">~24 hours</td><td>~2 hours</td><td class="chg">much faster</td></tr>
+    <tr class="cav"><td colspan="4">A big, consistent drop. One caveat: the "before" group included long-time users who'd never built one, which stretches the old number &mdash; so I call it strong movement, not a clean 12&times;.</td></tr>
+    <tr><td class="metric">In use across</td><td class="before">&mdash;</td><td>59 organizations</td><td class="chg">shipped &amp; adopted</td></tr>
+  </table>
+  <p class="mnote">Measured in PostHog after launch &middot; strong directional signal, not a controlled test.</p>
+</div></section>
 
-<!-- WHAT IT DOES -->
-<section id="does" class="divide">
-  <div class="wrap">
-    <div class="section-num">One surface, many jobs</div>
-    <h2 class="sec">One surface, driven by intent instead of navigation.</h2>
-    <p class="lead">Four roles open the same Home to do different jobs. Rather than build a separate screen for each, I made one surface respond to intent — everything below starts from a single input.</p>
-    <div class="caps">
-      <div class="cap"><div class="n">Create &amp; manage</div><h4>Build and run threat models</h4><p>Start a model from a plain-language description through a guided AI build, and manage the whole portfolio from one place.</p></div>
-      <div class="cap"><div class="n">Find by intent</div><h4>Ask, don't hunt</h4><p>"Models missing mitigations," "my pending approvals," "models with login components" — natural language across the entire workspace.</p></div>
-      <div class="cap"><div class="n">Generate</div><h4>Threats, requirements, reports</h4><p>Generate components, threats, security requirements and compliance reports — each as a reviewable proposal, not a silent action.</p></div>
-      <div class="cap"><div class="n">Build</div><h4>Custom dashboard widgets</h4><p>Spin up widgets — "threats by department," "unmitigated very-high risks" — so the workspace answers each role's question.</p></div>
-      <div class="cap"><div class="n">Connect</div><h4>External sources for continuous modeling</h4><p>Link Atlassian, GitHub and GitLab so a model stays tied to the system it describes as that system changes.</p></div>
-      <div class="cap"><div class="n">Stay in control</div><h4>Human-in-the-loop by design</h4><p>AI proposes; the expert accepts, adjusts or rejects. Nothing consequential is committed without a person.</p></div>
-    </div>
-    <figure style="margin-top:30px"><div class="shot"><img src="images/aih-connectors.jpg" alt="Connectors menu on the Home showing Atlassian, GitHub and GitLab that can be linked as sources."></div>
-      <figcaption>Connect external sources (Atlassian, GitHub, GitLab) from the Home, so a model can stay linked to the system it describes.</figcaption></figure>
-    <div class="block" style="margin-top:34px">
-      <h3 class="dec">Connect once — and govern what users see</h3>
-      <p>The user just picks a source; behind it, an admin connects it once and controls availability — per-user OAuth, ready / hidden status, and an "available to users" toggle — so security teams govern what's exposed. Designing the admin side is part of designing the capability, not an afterthought.</p>
-      <div class="pair">
-        <figure><div class="shot"><img src="images/aih-config.jpg" alt="Admin External Sources list: Atlassian, GitHub, GitLab with server URLs, credential type, status and available-to-users toggles."></div><figcaption>Admin side — connected sources with per-source credentials, status and an available-to-users control.</figcaption></figure>
-        <figure><div class="shot"><img src="images/aih-creds.jpg" alt="Set up Atlassian connection dialog: name, server URL, credentials as per-user OAuth, and available-to-users toggle."></div><figcaption>Connecting a source — name, server, credential mode, and whether users can see it.</figcaption></figure>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- THE FLOW -->
-<section class="divide">
-  <div class="wrap">
-    <div class="section-num">The flow</div>
-    <h2 class="sec">The build, end to end &mdash; a review gate at each AI step.</h2>
-    <p class="lead">Creating a model runs as a guided flow. Every step where the AI produces something &mdash; matching components, generating threats &mdash; is a point where the person accepts, adjusts or rejects before it becomes part of the model. Nothing commits on its own, and the loops matter as much as the happy path: a no-match becomes "create new," a rejected suggestion returns to generation.</p>
-    <figure style="margin-top:30px"><div class="shot" style="padding:26px 22px"><svg viewBox="0 0 1150 172" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto" role="img" aria-label="Create-a-model flow: describe the system, guided setup, match components (you decide), generate threats and requirements, review each (you decide), model on canvas, with an adjust/reject loop back to generate."><defs><marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#8a8797"/></marker><marker id="arm" markerWidth="9" markerHeight="9" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#e3357f"/></marker></defs><style>.node{fill:#fff;stroke:#dcdce4;stroke-width:1.5}.gate{fill:#fff;stroke:#e3357f;stroke-width:2}.end{fill:#14121c;stroke:#14121c}.lbl{font-family:"Space Grotesk",sans-serif;font-size:14px;fill:#14121c;font-weight:500}.lblw{font-family:"Space Grotesk",sans-serif;font-size:14px;fill:#fff;font-weight:500}.mono{font-family:"Space Mono",monospace;font-size:10px;fill:#605c6e}.monom{font-family:"Space Mono",monospace;font-size:10px;fill:#e3357f}.flow{stroke:#8a8797;stroke-width:1.5;fill:none}.floop{stroke:#e3357f;stroke-width:1.5;fill:none;stroke-dasharray:4 3}</style><line class="flow" x1="165" y1="85.0" x2="202" y2="85.0" marker-end="url(#ar)"/><line class="flow" x1="355" y1="85.0" x2="392" y2="85.0" marker-end="url(#ar)"/><line class="flow" x1="545" y1="85.0" x2="582" y2="85.0" marker-end="url(#ar)"/><line class="flow" x1="735" y1="85.0" x2="772" y2="85.0" marker-end="url(#ar)"/><line class="flow" x1="925" y1="85.0" x2="962" y2="85.0" marker-end="url(#ar)"/><text class="mono" x="945.0" y="78.0" text-anchor="middle">accept</text><path class="floop" d="M 850.0 118 C 850.0 158, 660.0 158, 660.0 122" marker-end="url(#arm)"/><text class="monom" x="755.0" y="172" text-anchor="middle">adjust / reject</text><rect class="node" x="15" y="52" width="150" height="66" rx="10"/><text class="lbl" x="90.0" y="80" text-anchor="middle">Describe the</text><text class="lbl" x="90.0" y="98" text-anchor="middle">system</text><rect class="node" x="205" y="52" width="150" height="66" rx="10"/><text class="lbl" x="280.0" y="80" text-anchor="middle">Guided</text><text class="lbl" x="280.0" y="98" text-anchor="middle">setup</text><rect class="gate" x="395" y="52" width="150" height="66" rx="10"/><text class="lbl" x="470.0" y="80" text-anchor="middle">Match</text><text class="lbl" x="470.0" y="98" text-anchor="middle">components</text><rect class="node" x="585" y="52" width="150" height="66" rx="10"/><text class="lbl" x="660.0" y="80" text-anchor="middle">Generate threats</text><text class="lbl" x="660.0" y="98" text-anchor="middle">&amp; requirements</text><rect class="gate" x="775" y="52" width="150" height="66" rx="10"/><text class="lbl" x="850.0" y="80" text-anchor="middle">Review</text><text class="lbl" x="850.0" y="98" text-anchor="middle">each</text><rect class="end" x="965" y="52" width="150" height="66" rx="10"/><text class="lblw" x="1040.0" y="80" text-anchor="middle">Model on</text><text class="lblw" x="1040.0" y="98" text-anchor="middle">canvas</text><text class="mono" x="470.0" y="133" text-anchor="middle">exact / close &#8594; use suggested</text><text class="mono" x="470.0" y="146" text-anchor="middle">no match &#8594; create new</text><rect class="gate" x="957" y="14" width="16" height="12" rx="3"/><text class="monom" x="979" y="24" text-anchor="start">= you review &amp; decide</text></svg></div>
-      <figcaption>The create path &mdash; describe &rarr; guided setup &rarr; component match &rarr; threat review &rarr; model. Magenta marks where you review and decide.</figcaption></figure>
-  </div>
-</section>
-
-<!-- DEEP DIVE -->
-<section id="build" class="divide">
-  <div class="wrap">
-    <div class="section-num">01 · Deep dive — building a model the AI-native way</div>
-    <h2 class="sec">Guided, not magic. The human stays the author.</h2>
-    <p class="lead">The clearest test of "AI-native" is what happens after you ask for something. Building a model runs as a guided flow where every AI step is a decision the user owns.</p>
-
-    <div class="block">
-      <h3 class="dec">Ask a few sharp questions instead of facing a blank canvas</h3>
-      <p>A blank modeling canvas paralyses a newcomer; full auto-generation produces a plausible-but-wrong model. So the build opens with a short, skippable interview — where it runs, who's outside the trust boundary, what data moves through, how data gets in — capturing just enough to make the analysis accurate.</p>
-      <p class="note"><b>Trade-off</b> &nbsp;A few questions up front — placed where they set the accuracy of everything downstream, and skippable for experts.</p>
-      <figure><div class="shot"><img src="images/aih-setup.jpg" alt="Guided setup asking questions like where does it run, who talks to it from outside the trust boundary, what data moves through it, with quick-pick options."></div><figcaption>Guided setup — plain-language questions with quick-pick answers, capped and skippable.</figcaption></figure>
-    </div>
-
-    <div class="block">
-      <h3 class="dec">Turn AI suggestions into a reviewable proposal, not a done deal</h3>
-      <p>The AI matches what you described against the component library and shows its confidence — <b>exact</b>, <b>close</b>, and <b>no match</b> — so you accept a suggestion or create a new component deliberately. The match quality is visible, so trust is earned rather than assumed.</p>
-      <p class="note"><b>Trade-off</b> &nbsp;A confirmation step — placed exactly where suggested content becomes part of a real security model.</p>
-      <figure><div class="shot"><img src="images/aih-match.jpg" alt="Confirm components screen with close matches, confidence bars, and Use suggested or Create new for each."></div><figcaption>Component matching with visible confidence — exact / close / no-match, each with "use suggested" or "create new."</figcaption></figure>
-    </div>
-
-    <div class="block">
-      <h3 class="dec">Keep the expert in charge of consequential security content</h3>
-      <p>Generated threats and security requirements arrive per component as proposals — STRIDE-tagged, severity-rated — that the user accepts or rejects one by one, or in bulk. In a security product, a confidently-wrong auto-commit is worse than no automation, so the decision always stays human.</p>
-      <figure><div class="shot"><img src="images/aih-threats.jpg" alt="Review of generated threats per component with STRIDE tags, severity, and accept or reject controls."></div><figcaption>Generated threats and requirements as accept/reject proposals — STRIDE-tagged and severity-rated.</figcaption></figure>
-    </div>
-
-    <div class="block">
-      <h3 class="dec">Land on a real, editable model — not a dead end</h3>
-      <p>The flow that began with one sentence ends on the canvas with a drafted model, an always-on Nexus AI panel for further changes, and a short get-started checklist. The home didn't just answer a question; it produced working artifacts the team can build on.</p>
-      <figure><div class="shot"><img src="images/aih-canvas.jpg" alt="The canvas showing a drafted diagram of entities and data flows, with a note that Nexus drafted 13 entities and 27 threats, plus a get-started checklist."></div><figcaption>From one description to a working model — entities, data flows and threats drafted on the canvas, ready to refine.</figcaption></figure>
-    </div>
-  </div>
-</section>
-
-<div class="pq serif">AI proposes; the expert decides. <span class="a">Every generation is a reviewable step — never a silent commit.</span></div>
-
-<!-- HOW I WORKED -->
-<section class="divide">
-  <div class="wrap">
-    <div class="section-num">How I worked</div>
-    <div class="cols">
-      <div>
-        <h2 class="sec">Found the real friction. Shipped it cleanly.</h2>
-        <p class="lead">This wasn't designed in a vacuum — it came from the people who watch users struggle, and it shipped through a system so engineering could build it fast.</p>
-      </div>
-      <div>
-        <ul>
-          <li><b>Ideated with AI tools</b> to explore directions quickly and pressure-test the intent-driven model before committing.</li>
-          <li><b>Ran discovery across the org</b> — customer success, TPMs, engineering, the customer-onboarding team, and customers — to find exactly where the old home lost people.</li>
-          <li><b>Designed for four roles at once</b> — security architect, developer, DevOps, admin — one surface serving different jobs.</li>
-          <li><b>Validated before building</b> — 5–6 usability sessions with the same customers and internal stakeholders, who gave it a green light — then partnered with a developer for about a month to implement it and fix adjacent UX issues.</li>
-          <li><b>Shipped efficiently through the design system</b> — tokens and components — so the new home was consistent and quick to hand to development.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BEFORE / AFTER -->
-<section id="change" class="divide">
-  <div class="wrap">
-    <div class="section-num">Before → after</div>
-    <h2 class="sec">What changed, in the product.</h2>
-    <table class="ba">
-      <tr><th>&nbsp;</th><th>Before</th><th class="aftercol">After</th></tr>
-      <tr><td class="dim">Entry point</td><td class="before">A static list of threat models</td><td class="after">An intent box: "How can I help you?"</td></tr>
-      <tr><td class="dim">Finding work</td><td class="before">Hunt through menus and filters</td><td class="after">Ask in plain language across the workspace</td></tr>
-      <tr><td class="dim">Creating a model</td><td class="before">Blank canvas, manual build</td><td class="after">Guided AI build → real editable model</td></tr>
-      <tr><td class="dim">AI's role</td><td class="before">Scattered, feature-by-feature</td><td class="after">Native across create, find, generate, connect</td></tr>
-      <tr><td class="dim">Fit across roles</td><td class="before">One list for everyone</td><td class="after">One surface, driven by each role's intent</td></tr>
-    </table>
-    <p class="subh">Measured after launch</p>
-    <table class="mt">
-      <tr><th>Metric</th><th>Before</th><th>After</th><th>Change</th></tr>
-      <tr><td class="metric">Time to first threat model (median)</td><td class="before">23.7 hrs</td><td>2.2 hrs</td><td class="chg">−91%</td></tr>
-      <tr class="cav"><td colspan="4">Holds across all percentiles, not just the median. The "before" cohort included long-tenured users who hadn't built yet — so I read this as movement after launch, not proven causation.</td></tr>
-      <tr><td class="metric">Reached a first model in ≤ 1 hour</td><td class="before">31%</td><td>43%</td><td class="chg">+12 pp</td></tr>
-      <tr><td class="metric">Search results returned · AI chat (median)</td><td class="before">1</td><td>18</td><td class="chg">+1,700%</td></tr>
-      <tr class="cav"><td colspan="4">Chat use also grew ~75% as people migrated off the old searchbar. This counts results <i>returned</i>, not confirmed "found what they needed" — there's no result-opened event yet.</td></tr>
-      <tr><td class="metric">AI security-requirement suggestions accepted</td><td class="before">88% · 860</td><td>66% · 1,972</td><td class="chg">rate −22 pp · volume +129%</td></tr>
-      <tr><td class="metric">AI threat suggestions accepted</td><td class="before">91% · 270</td><td>64% · 601</td><td class="chg">rate −27 pp · volume +123%</td></tr>
-      <tr class="cav"><td colspan="4">Acceptance <i>rate</i> dipped as the audience widened from a handful of power users to a larger, more diverse pool — while accepted <i>volume</i> roughly doubled. I show both on purpose.</td></tr>
-    </table>
-    <p class="mnote">Measured in PostHog · 30 days before vs. after the new Home shipped · internal orgs excluded · directional movement, not a controlled test.</p>
-  </div>
-</section>
-
-<!-- REFLECTION -->
-<section class="divide">
-  <div class="wrap">
-    <div class="section-num">Reflection</div>
-    <h2 class="sec">Where I'd take it next.</h2>
-    <div class="cols">
-      <div><p class="rlab">What shipped</p><p>An AI-native Home and a guided, human-in-the-loop model build — live, and serving four roles from one surface, connected to real external sources for continuous modeling.</p></div>
-      <div><p class="rlab">What I'd measure next</p><p>Close the instrumentation gaps this surfaced: a "result opened" event so find-success is real usage, not just results returned; a "connector connected" event so adoption is measurable beyond page visits; and AI-acceptance tracked by cohort, since rate and audience move together as the user base grows.</p></div>
-    </div>
-  </div>
-</section>
+<!-- IMPACT -->
+<section class="divide"><div class="wrap">
+  <div class="section-num">Impact</div>
+  <h2 class="sec">One place, driven by what you need.</h2>
+  <p class="lead">The Home is now a single place where any role &mdash; architect, developer, DevOps, admin &mdash; says what they need and gets it, with the AI helping and the person always making the security calls. It pulled the product's scattered AI into one surface, and it's live across dozens of organizations.</p>
+</div></section>
 
 <footer id="contact">
   <div class="wrap">
