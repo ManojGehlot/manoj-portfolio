@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>document.documentElement.classList.add('js-reveal')</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>WorkSync — Case Study</title>
@@ -169,6 +170,12 @@ footer .note b{color:#ec5a97; font-family:"Space Mono",monospace; font-size:12px
   .reveal.in{opacity:1; transform:none}
 }
 .hero .eyebrow,.hero h1 em,.hero-metrics .hm b{color:var(--accent-hero)}
+
+@media (prefers-reduced-motion: no-preference){
+  html.js-reveal section > .wrap, html.js-reveal header > .wrap, html.js-reveal .hero-shot{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,.72,.28,1),transform .7s cubic-bezier(.16,.72,.28,1)}
+  html.js-reveal section > .wrap.in, html.js-reveal header > .wrap.in, html.js-reveal .hero-shot.in{opacity:1;transform:none}
+}
+
 </style>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiNmZmZmZmYiLz48dGV4dCB4PSIzMiIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJjZW50cmFsIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNDQiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNiMzI0NWYiPk08L3RleHQ+PC9zdmc+">
 </head>
@@ -403,5 +410,16 @@ document.addEventListener('DOMContentLoaded',function(){
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
 });
 </script>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('section > .wrap, header > .wrap, .hero-shot');
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){els.forEach(function(el){el.classList.add('in')});return;}
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -6% 0px'});
+  els.forEach(function(el){io.observe(el)});
+  addEventListener('load',function(){setTimeout(function(){els.forEach(function(el){var r=el.getBoundingClientRect();if(r.top<innerHeight&&r.bottom>0)el.classList.add('in')})},60)});
+})();
+</script>
+
 </body>
 </html>
