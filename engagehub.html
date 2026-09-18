@@ -13,7 +13,7 @@
   --ink:#14121c; --ink-2:#1e1b2a; --paper:#f4f5f7; --paper-2:#ffffff;
   --line:#dcdce4; --line-ink:#312d40;
   --text:#26232f; --muted:#5a5768; --muted-ink:#a49fb5;
-  --accent:#e3357f;         /* decorative / large text */
+  --accent:#c2185b; --accent-hero:#ec5a97;         /* decorative / large text */
   --link:#c02368;           /* text links — higher contrast on light */
   --amber:#b07d00; --green:#2a8f5f; --slate:#6f748c;
   --maxw:1080px;
@@ -37,7 +37,7 @@ a{color:var(--link)}
 .topbar a{font-family:"Space Mono",monospace; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:#d6d2e2; text-decoration:none}
 .topbar a.res{border:1px solid var(--line-ink); border-radius:6px; padding:7px 13px}
 .topbar a:hover{color:#fff}
-.hero .eyebrow{color:#f5a7cd}
+.hero .eyebrow{color:#ec5a97}
 .hero h1{font-size:clamp(30px,4.8vw,52px); font-weight:600; margin:18px 0 0; max-width:20ch}
 .hero h1 em{font-style:normal; color:var(--accent)}
 .hero .sub{font-size:19px; color:#c7c3d6; max-width:62ch; margin:22px 0 0}
@@ -60,7 +60,7 @@ p{max-width:66ch}
 .flip{display:grid; grid-template-columns:1fr auto 1fr; gap:26px; align-items:center; margin-top:40px}
 .flip .card{border:1px solid var(--line-ink); border-radius:12px; padding:26px 24px; background:#191622}
 .flip .card .tag{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.13em; text-transform:uppercase; color:var(--muted-ink)}
-.flip .to{border-color:var(--accent)} .flip .to .tag{color:#f5a7cd}
+.flip .to{border-color:var(--accent)} .flip .to .tag{color:#ec5a97}
 .flip .card p{font-family:"Space Grotesk",sans-serif; font-size:18px; line-height:1.4; color:#e9e6f2; margin:12px 0 0; max-width:none}
 .flip .arrow{font-family:"Space Grotesk",sans-serif; color:var(--accent); font-size:30px; text-align:center}
 
@@ -109,7 +109,7 @@ p{max-width:66ch}
 .sig-shot figcaption{font-family:"Space Mono",monospace; font-size:12px; color:var(--muted-ink); margin-top:12px}
 .annos{display:grid; grid-template-columns:repeat(2,1fr); gap:22px; margin-top:30px}
 .anno{border-top:2px solid var(--accent); padding-top:14px}
-.anno .n{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.1em; color:#f5a7cd; text-transform:uppercase}
+.anno .n{font-family:"Space Mono",monospace; font-size:11px; letter-spacing:.1em; color:#ec5a97; text-transform:uppercase}
 .anno .wcag{color:var(--muted-ink)}
 .anno p{font-size:15.5px; color:#cbc7d8; margin:8px 0 0; max-width:none}
 
@@ -163,7 +163,9 @@ footer .byline{margin-top:26px; font-family:"Space Mono",monospace; font-size:12
   .reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease,transform .6s ease}
   .reveal.in{opacity:1; transform:none}
 }
+.hero .eyebrow,.hero h1 em,.hero-metrics .hm b{color:var(--accent-hero)}
 </style>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiNmZmZmZmYiLz48dGV4dCB4PSIzMiIgeT0iMzUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGRvbWluYW50LWJhc2VsaW5lPSJjZW50cmFsIiBmb250LWZhbWlseT0iSGVsdmV0aWNhLEFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNDQiIGZvbnQtd2VpZ2h0PSI3MDAiIGZpbGw9IiNiMzI0NWYiPk08L3RleHQ+PC9zdmc+">
 </head>
 <body>
 
@@ -326,7 +328,7 @@ footer .byline{margin-top:26px; font-family:"Space Mono",monospace; font-size:12
 <!-- ACCESSIBILITY SIGNATURE -->
 <section class="signature" aria-labelledby="a11y-title">
   <div class="wrap">
-    <p class="section-num" style="color:#f5a7cd">05 · Accessibility, by design</p>
+    <p class="section-num" style="color:#ec5a97">05 · Accessibility, by design</p>
     <h2 id="a11y-title">Built in from the first screen — not audited in at the end.</h2>
     <p class="lead" style="color:#bdb8ce">In a 25,000-person organisation, accessibility isn't a finishing pass. Here's where it shaped the design.</p>
     <figure class="sig-shot reveal">
