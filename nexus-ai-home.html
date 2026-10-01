@@ -190,23 +190,23 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
 <section class="divide firstsec"><div class="wrap">
   <div class="section-num">Overview</div>
   <h2 class="sec">What this is</h2>
-  <p class="lead">ThreatModeler is a tool security teams use to map out how an app could be attacked, and plan how to defend it. The Home screen is where everyone lands and starts. I redesigned it &mdash; from a plain list of past work into a screen you can simply talk to: say what you need (start something, find something, get a report), and it responds.</p>
+  <p class="lead">ThreatModeler is a tool security teams use to map out how an app could be attacked, and plan how to defend it. The Home screen is where everyone lands and starts. The product had genuinely useful AI, but it was scattered across the app, and the Home was just a passive list of past models. I redesigned it into a screen with the AI front and centre &mdash; say what you need (start a model, find something, get a report, or ask anything about your models) and it responds.</p>
   <figure style="margin-top:30px"><div class="shot"><img src="images/aih-home.jpg" alt="The new AI Home"></div><figcaption>The new Home &mdash; you say what you need, and it helps. Shipped.</figcaption></figure>
 </div></section>
 
 <!-- PROBLEM -->
 <section class="divide"><div class="wrap">
   <div class="section-num">Problem</div>
-  <h2 class="sec">The old Home made people hunt.</h2>
-  <p class="lead">You landed on a long list of past work and had to dig for anything. The best features were buried in menus. And the AI help was scattered &mdash; a different assistant on each screen, so most people never found half of it. On top of that, five very different roles all got the same generic screen.</p>
-  <figure style="margin-top:30px"><div class="shot"><img src="images/aih-oldhome.jpg" alt="The old Home, a long list"></div><figcaption>Before &mdash; a table of ~900 past models you scrolled and filtered. Powerful, but passive.</figcaption></figure>
+  <h2 class="sec">The real struggle: the AI was scattered.</h2>
+  <p class="lead">ThreatModeler already had genuinely useful AI &mdash; but it was scattered. It lived in a different place on every screen: one assistant here, another there, help buried in a menu somewhere else. People struggled to find it, rarely used half of it, and had nowhere to simply ask for help with their models. The Home didn't help: it was just the threat-model listing page &mdash; a long, passive list of past work you landed on and had to dig through. And building a model from scratch was long and manual, enough hand-work that a new user could take about a day to reach their first one.</p>
+  <figure style="margin-top:30px"><div class="shot"><img src="images/aih-oldhome.jpg" alt="The old Home, a long list"></div><figcaption>Before &mdash; the Home was the threat-model list: a passive table of past work you landed on and had to hunt through, while the AI that could help sat scattered across other screens.</figcaption></figure>
 </div></section>
 
 <!-- EXPECTED OUTCOME -->
 <section class="divide"><div class="wrap">
   <div class="section-num">Expected outcome</div>
   <h2 class="sec">What we hoped to change.</h2>
-  <p class="lead">This wasn't only a usability fix. The time it takes a new user to reach a first real result is where they decide the tool is worth it &mdash; and the AI the company had already built was too scattered to be found, so that investment wasn't landing. So I set three goals: get new people to a result faster; pull the scattered AI into one place; and let the screen adapt to whoever's using it. Underneath all of it, one rule &mdash; the AI helps, but a person always makes the security decisions.</p>
+  <p class="lead">This wasn't only a usability fix. The AI the company had already built was too scattered to be found, so that investment wasn't landing; and reaching a first model was slow and manual &mdash; which is exactly where a new user decides the tool is worth it. So I set three goals: bring the scattered AI into one place, front and centre, so anyone can get help with their models; get new people to a first model faster; and let the screen adapt to whoever's using it. Underneath all of it, one rule &mdash; the AI helps, but a person always makes the security decisions.</p>
 </div></section>
 
 <!-- RESEARCH -->
@@ -215,9 +215,9 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid 
   <h2 class="sec">I talked to people before I designed.</h2>
   <p class="lead">I spoke with the people who watch users struggle &mdash; customer success, the onboarding team, product and engineering &mdash; and with several customers. Four things came up again and again.</p>
   <div class="finds">
-    <div class="find"><div class="n">Finding 01</div><p><b>The AI was scattered.</b> Each screen had its own assistant, tucked in a different spot, so people rarely found it.</p></div>
-    <div class="find"><div class="n">Finding 02</div><p><b>The Home just sat there.</b> A list with no next step, so people logged in unsure where to go.</p></div>
-    <div class="find"><div class="n">Finding 03</div><p><b>People wanted a quick way in.</b> A guided start, not a blank canvas and long lists of things to read.</p></div>
+    <div class="find"><div class="n">Finding 01</div><p><b>The AI was scattered.</b> Genuinely useful AI, but a different piece on every screen, so people rarely found it or used half of it.</p></div>
+    <div class="find"><div class="n">Finding 02</div><p><b>The Home was a passive list.</b> The threat-model list doubled as the landing page, with no next step &mdash; so people logged in unsure where to go.</p></div>
+    <div class="find"><div class="n">Finding 03</div><p><b>Creating a model was long and manual.</b> People wanted a quick, guided way in &mdash; not a blank canvas and a lot of hand-work.</p></div>
     <div class="find"><div class="n">Finding 04</div><p><b>One screen, very different people.</b> A developer, a security architect, a DevOps engineer and a CISO all landed on the same page &mdash; each needs a different starting point.</p></div>
   </div>
 </div></section>
